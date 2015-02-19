@@ -4,8 +4,9 @@ FactoryGirl.define do
     site "site"
     facilities "facilities"
     address "address"
-    implement_time "implement_time"
-    implement_date "implement_date"
+    sequence(:p_serial){|n| "SCCSA_#{n}"}
+    implement_time Time.now
+    implement_date Date.today
     association :user
     association :project
     association :category

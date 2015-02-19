@@ -4,15 +4,15 @@ RSpec.describe VerifiesController, type: :routing do
   describe "routing" do
 
     it "routes to #index" do
-      expect(:get => "/verifies").to route_to("verifies#index")
+      expect(:get => "/verifies").to route_to("welcome#error_404",path: "verifies")
     end
 
     it "routes to #new" do
-      expect(:get => "/verifies/new").to route_to("verifies#new")
+      expect(:get => "/verifies/new").to route_to("welcome#error_404",path: "verifies/new")
     end
 
     it "routes to #show" do
-      expect(:get => "/verifies/1").to route_to("verifies#show", :id => "1")
+      expect(:get => "/verifies/1").to route_to("welcome#error_404",path: "verifies/1")
     end
 
     it "routes to #edit" do
@@ -28,7 +28,7 @@ RSpec.describe VerifiesController, type: :routing do
     end
 
     it "routes to #destroy" do
-      expect(:delete => "/verifies/1").to route_to("verifies#destroy", :id => "1")
+      expect(:delete => "/verifies/1").to route_to("welcome#error_404",path: "verifies/1")
     end
 
   end

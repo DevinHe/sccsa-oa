@@ -23,136 +23,47 @@ RSpec.describe DistributesController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Distribute. As you add validations to Distribute, be sure to
   # adjust the attributes here as well.
+  let(:distributor) { Factory :distributor }
+  let(:apply) { Factory :apply }
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {is_distribute: true, user_id: distributor.id, apply_id: apply.id}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {is_distribute: '', user_id: distributor.id, apply_id: apply.id}
   }
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # DistributesController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
-
-  describe "GET #index" do
-    it "assigns all distributes as @distributes" do
-      distribute = Distribute.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:distributes)).to eq([distribute])
-    end
-  end
-
-  describe "GET #show" do
-    it "assigns the requested distribute as @distribute" do
-      distribute = Distribute.create! valid_attributes
-      get :show, {:id => distribute.to_param}, valid_session
-      expect(assigns(:distribute)).to eq(distribute)
-    end
-  end
-
-  describe "GET #new" do
-    it "assigns a new distribute as @distribute" do
-      get :new, {}, valid_session
-      expect(assigns(:distribute)).to be_a_new(Distribute)
-    end
-  end
-
-  describe "GET #edit" do
-    it "assigns the requested distribute as @distribute" do
-      distribute = Distribute.create! valid_attributes
-      get :edit, {:id => distribute.to_param}, valid_session
-      expect(assigns(:distribute)).to eq(distribute)
-    end
-  end
+  before(:each){ sign_in distributor }
 
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Distribute" do
         expect {
-          post :create, {:distribute => valid_attributes}, valid_session
+          post :create, {:distribute => valid_attributes}
         }.to change(Distribute, :count).by(1)
       end
 
       it "assigns a newly created distribute as @distribute" do
-        post :create, {:distribute => valid_attributes}, valid_session
+        post :create, {:distribute => valid_attributes}
         expect(assigns(:distribute)).to be_a(Distribute)
         expect(assigns(:distribute)).to be_persisted
       end
 
       it "redirects to the created distribute" do
-        post :create, {:distribute => valid_attributes}, valid_session
-        expect(response).to redirect_to(Distribute.last)
+        post :create, {:distribute => valid_attributes}
+        expect(response).to redirect_to(apply_path(Distribute.last.apply))
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved distribute as @distribute" do
-        post :create, {:distribute => invalid_attributes}, valid_session
+        post :create, {:distribute => invalid_attributes}
         expect(assigns(:distribute)).to be_a_new(Distribute)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:distribute => invalid_attributes}, valid_session
+        post :create, {:distribute => invalid_attributes}
         expect(response).to render_template("new")
       end
-    end
-  end
-
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested distribute" do
-        distribute = Distribute.create! valid_attributes
-        put :update, {:id => distribute.to_param, :distribute => new_attributes}, valid_session
-        distribute.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "assigns the requested distribute as @distribute" do
-        distribute = Distribute.create! valid_attributes
-        put :update, {:id => distribute.to_param, :distribute => valid_attributes}, valid_session
-        expect(assigns(:distribute)).to eq(distribute)
-      end
-
-      it "redirects to the distribute" do
-        distribute = Distribute.create! valid_attributes
-        put :update, {:id => distribute.to_param, :distribute => valid_attributes}, valid_session
-        expect(response).to redirect_to(distribute)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the distribute as @distribute" do
-        distribute = Distribute.create! valid_attributes
-        put :update, {:id => distribute.to_param, :distribute => invalid_attributes}, valid_session
-        expect(assigns(:distribute)).to eq(distribute)
-      end
-
-      it "re-renders the 'edit' template" do
-        distribute = Distribute.create! valid_attributes
-        put :update, {:id => distribute.to_param, :distribute => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested distribute" do
-      distribute = Distribute.create! valid_attributes
-      expect {
-        delete :destroy, {:id => distribute.to_param}, valid_session
-      }.to change(Distribute, :count).by(-1)
-    end
-
-    it "redirects to the distributes list" do
-      distribute = Distribute.create! valid_attributes
-      delete :destroy, {:id => distribute.to_param}, valid_session
-      expect(response).to redirect_to(distributes_url)
     end
   end
 

@@ -1,15 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "projects/edit", type: :view do
-  before(:each) do
-    @project = assign(:project, Project.create!(
-      :name => "MyString",
-      :serial => "MyString",
-      :category => nil
-    ))
-  end
+  let(:admin) { Factory :admin }
 
   it "renders the edit project form" do
+    sign_in admin
+    category = Factory :category
+    @project = Factory :project, category_id: category.id
     render
 
     assert_select "form[action=?][method=?]", project_path(@project), "post" do
@@ -18,7 +15,6 @@ RSpec.describe "projects/edit", type: :view do
 
       assert_select "input#project_serial[name=?]", "project[serial]"
 
-      assert_select "input#project_category_id[name=?]", "project[category_id]"
     end
   end
 end

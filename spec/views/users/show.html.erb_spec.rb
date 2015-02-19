@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "users/show", type: :view do
+  let(:admin) { Factory :admin }
   before(:each) do
     @user = assign(:user, User.create!(
       :name => "Name",
@@ -14,6 +15,8 @@ RSpec.describe "users/show", type: :view do
   end
 
   it "renders attributes in <p>" do
+    sign_in admin
+
     render
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/Unit/)

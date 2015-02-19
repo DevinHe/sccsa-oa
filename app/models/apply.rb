@@ -1,6 +1,6 @@
 class Apply < ActiveRecord::Base
 
-  validates :user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :implement_time, presence: true
+  validates :user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :implement_time, :implement_date, presence: true
 
   default_scope { order("applies.created_at DESC") }
 

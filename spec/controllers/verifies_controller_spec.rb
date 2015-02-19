@@ -23,101 +23,98 @@ RSpec.describe VerifiesController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Verify. As you add validations to Verify, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # VerifiesController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
 
   let(:distributor) { Factory :distributor }
   let(:verify) { Factory :verify }
+  let(:apply) { Factory :apply }
 
+  let(:valid_attributes) {
+    {is_pass: false,content: "time is over",user_id: distributor.id,apply_id: apply.id}
+  }
+
+  let(:invalid_attributes) {
+    {user_id: '',apply_id: ''}
+  }
   describe "GET #edit" do
     it "assigns the requested verify as @verify" do
+      sign_in distributor
       get :edit, {:id => verify.to_param}
       expect(assigns(:verify)).to eq(verify)
     end
   end
 
-  # describe "POST #create" do
-  #   context "with valid params" do
-  #     it "creates a new Verify" do
-  #       expect {
-  #         post :create, {:verify => valid_attributes}, valid_session
-  #       }.to change(Verify, :count).by(1)
-  #     end
+  describe "POST #create" do
+    before(:each){ sign_in distributor }
+    context "with valid params" do
+      it "creates a new Verify" do
+        expect {
+          post :create, {:verify => valid_attributes}
+        }.to change(Verify, :count).by(1)
+      end
 
-  #     it "assigns a newly created verify as @verify" do
-  #       post :create, {:verify => valid_attributes}, valid_session
-  #       expect(assigns(:verify)).to be_a(Verify)
-  #       expect(assigns(:verify)).to be_persisted
-  #     end
+      it "assigns a newly created verify as @verify" do
+        post :create, {:verify => valid_attributes}
+        expect(assigns(:verify)).to be_a(Verify)
+        expect(assigns(:verify)).to be_persisted
+      end
 
-  #     it "redirects to the created verify" do
-  #       post :create, {:verify => valid_attributes}, valid_session
-  #       expect(response).to redirect_to(Verify.last)
-  #     end
-  #   end
+      it "redirects to the created verify's apply show page" do
+        post :create, {:verify => valid_attributes}
+        expect(response).to redirect_to(apply_path(Verify.first.apply))
+      end
+    end
 
-  #   context "with invalid params" do
-  #     it "assigns a newly created but unsaved verify as @verify" do
-  #       post :create, {:verify => invalid_attributes}, valid_session
-  #       expect(assigns(:verify)).to be_a_new(Verify)
-  #     end
+    context "with invalid params" do
+      it "assigns a newly created but unsaved verify as @verify" do
+        post :create, {:verify => invalid_attributes}
+        expect(assigns(:verify)).to be_a_new(Verify)
+      end
 
-  #     it "re-renders the 'new' template" do
-  #       post :create, {:verify => invalid_attributes}, valid_session
-  #       expect(response).to render_template("new")
-  #     end
-  #   end
-  # end
+      it "re-renders the 'applies/show' template" do
+        post :create, {:verify => invalid_attributes}
+        expect(response).to render_template("applies/show")
+      end
+    end
+  end
 
-  # describe "PUT #update" do
-  #   context "with valid params" do
-  #     let(:new_attributes) {
-  #       skip("Add a hash of attributes valid for your model")
-  #     }
+  describe "PUT #update" do
+    before(:each){ sign_in distributor }
 
-  #     it "updates the requested verify" do
-  #       verify = Verify.create! valid_attributes
-  #       put :update, {:id => verify.to_param, :verify => new_attributes}, valid_session
-  #       verify.reload
-  #       skip("Add assertions for updated state")
-  #     end
+    context "with valid params" do
+      let(:new_attributes) {
+         {content: "time is over test"}
+      }
 
-  #     it "assigns the requested verify as @verify" do
-  #       verify = Verify.create! valid_attributes
-  #       put :update, {:id => verify.to_param, :verify => valid_attributes}, valid_session
-  #       expect(assigns(:verify)).to eq(verify)
-  #     end
+      it "updates the requested verify" do
+        put :update, {:id => verify.to_param, :verify => new_attributes}
+        verify.reload
+        expect(verify.content).to eq("time is over test")
+      end
 
-  #     it "redirects to the verify" do
-  #       verify = Verify.create! valid_attributes
-  #       put :update, {:id => verify.to_param, :verify => valid_attributes}, valid_session
-  #       expect(response).to redirect_to(verify)
-  #     end
-  #   end
+      it "assigns the requested verify as @verify" do
+        put :update, {:id => verify.to_param, :verify => valid_attributes}
+        expect(assigns(:verify)).to eq(verify)
+        verify.reload
+        expect(verify.content).to eq("time is over")
+      end
 
-  #   context "with invalid params" do
-  #     it "assigns the verify as @verify" do
-  #       verify = Verify.create! valid_attributes
-  #       put :update, {:id => verify.to_param, :verify => invalid_attributes}, valid_session
-  #       expect(assigns(:verify)).to eq(verify)
-  #     end
+      it "redirects to the verify's apply show page" do
+        put :update, {:id => verify.to_param, :verify => valid_attributes}
+        expect(response).to redirect_to(apply_path(Verify.first.apply))
+      end
+    end
 
-  #     it "re-renders the 'edit' template" do
-  #       verify = Verify.create! valid_attributes
-  #       put :update, {:id => verify.to_param, :verify => invalid_attributes}, valid_session
-  #       expect(response).to render_template("edit")
-  #     end
-  #   end
-  # end
+    context "with invalid params" do
+      it "assigns the verify as @verify" do
+        put :update, {:id => verify.to_param, :verify => invalid_attributes}
+        expect(assigns(:verify)).to eq(verify)
+      end
+
+      it "re-renders the 'applies/show' template" do
+        put :update, {:id => verify.to_param, :verify => invalid_attributes}
+        expect(response).to render_template("applies/show")
+      end
+    end
+  end
 
 end

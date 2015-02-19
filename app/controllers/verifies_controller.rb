@@ -22,14 +22,22 @@ class VerifiesController < ApplicationController
   def create
     @verify = Verify.new(verify_params)
     # @verify.content.gsub!(/(\r\n)+/){ "<br>" }
-    @verify.save
-    respond_with(@verify,location: ->{apply_path(@verify.apply)})
+    if @verify.save
+      respond_with(@verify,location: ->{apply_path(@verify.apply)})
+    else
+      @apply = @verify.apply
+      render file: 'applies/show'
+    end
   end
 
   def update
     # params[:verify][:content].gsub!(/(\r\n)+/){ "<br>" }
-    @verify.update(verify_params)
-    respond_with(@verify,location: ->{apply_path(@verify.apply)})
+    if @verify.update(verify_params)
+      respond_with(@verify,location: ->{apply_path(@verify.apply)})
+    else
+      @apply = @verify.apply
+      render file: 'applies/show'
+    end
   end
 
   def destroy

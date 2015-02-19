@@ -1,19 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "feedbacks/new", type: :view do
-  before(:each) do
-    assign(:feedback, Feedback.new(
-      :user => nil,
-      :apply => nil,
-      :content => "MyText",
-      :coach => "MyText",
-      :suggestion => "MyText",
-      :population => "MyText",
-      :distribute_advice => "MyText"
-    ))
-  end
+  let(:applier) { Factory :applier }
+  let(:apply) { Factory :apply }
 
   it "renders new feedback form" do
+    distribute = Factory :distribute,apply_id: apply.id
+    @feedback = Feedback.new(user_id: applier.id,apply_id: apply.id)
+
+    sign_in applier
     render
 
     assert_select "form[action=?][method=?]", feedbacks_path, "post" do
@@ -30,7 +25,6 @@ RSpec.describe "feedbacks/new", type: :view do
 
       assert_select "textarea#feedback_population[name=?]", "feedback[population]"
 
-      assert_select "textarea#feedback_distribute_advice[name=?]", "feedback[distribute_advice]"
     end
   end
 end

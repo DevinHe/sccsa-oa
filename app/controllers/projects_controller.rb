@@ -22,13 +22,19 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
-    @project.save
-    respond_with(@project, location: ->{projects_path})
+    if @project.save
+      respond_with(@project, location: ->{projects_path})
+    else
+      render action: 'new'
+    end
   end
 
   def update
-    @project.update(project_params)
-    respond_with(@project)
+    if @project.update(project_params)
+      respond_with(@project)
+    else
+      render action: 'edit'
+    end
   end
 
   def destroy

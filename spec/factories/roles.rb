@@ -8,4 +8,7 @@ FactoryGirl.define do
   factory :role3 do
     name '配送单位'
   end
+  factory :role do
+    sequence(:name){|n| "name#{n}"}
+  end
 end

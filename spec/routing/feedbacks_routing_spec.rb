@@ -4,7 +4,7 @@ RSpec.describe FeedbacksController, type: :routing do
   describe "routing" do
 
     it "routes to #index" do
-      expect(:get => "/feedbacks").to route_to("feedbacks#index")
+      expect(:get => "/feedbacks").to route_to("welcome#error_404",path: "feedbacks")
     end
 
     it "routes to #new" do
@@ -28,7 +28,7 @@ RSpec.describe FeedbacksController, type: :routing do
     end
 
     it "routes to #destroy" do
-      expect(:delete => "/feedbacks/1").to route_to("feedbacks#destroy", :id => "1")
+      expect(:delete => "/feedbacks/1").to route_to("welcome#error_404",path: "feedbacks/1")
     end
 
   end

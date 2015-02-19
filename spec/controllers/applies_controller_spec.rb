@@ -23,23 +23,22 @@ RSpec.describe AppliesController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Apply. As you add validations to Apply, be sure to
   # adjust the attributes here as well.
+  let(:applier) { Factory :applier }
+  let(:category) { Factory :category }
+  let(:project) { Factory :project, category_id: category.id }
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {user_id: applier.id, project_id: project.id, category_id: category.id, requirement: "requirement", site: "site", facilities: "facilities", address: "address", implement_time: Time.now, implement_date: Date.today, p_serial: "SCCSA_test001"}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {user_id: applier.id, project_id: project.id, category_id: category.id, requirement: "", site: "site", facilities: "facilities", address: "address", implement_time: Time.now, implement_date: Date.today, p_serial: "SCCSA_test002"}
   }
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # AppliesController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
-
+  before(:each){ sign_in applier }
   describe "GET #index" do
     it "assigns all applies as @applies" do
       apply = Apply.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {}
       expect(assigns(:applies)).to eq([apply])
     end
   end
@@ -47,14 +46,14 @@ RSpec.describe AppliesController, type: :controller do
   describe "GET #show" do
     it "assigns the requested apply as @apply" do
       apply = Apply.create! valid_attributes
-      get :show, {:id => apply.to_param}, valid_session
+      get :show, {:id => apply.to_param}
       expect(assigns(:apply)).to eq(apply)
     end
   end
 
   describe "GET #new" do
     it "assigns a new apply as @apply" do
-      get :new, {}, valid_session
+      get :new, {}
       expect(assigns(:apply)).to be_a_new(Apply)
     end
   end
@@ -62,7 +61,7 @@ RSpec.describe AppliesController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested apply as @apply" do
       apply = Apply.create! valid_attributes
-      get :edit, {:id => apply.to_param}, valid_session
+      get :edit, {:id => apply.to_param}
       expect(assigns(:apply)).to eq(apply)
     end
   end
@@ -71,30 +70,30 @@ RSpec.describe AppliesController, type: :controller do
     context "with valid params" do
       it "creates a new Apply" do
         expect {
-          post :create, {:apply => valid_attributes}, valid_session
+          post :create, {:apply => valid_attributes}
         }.to change(Apply, :count).by(1)
       end
 
       it "assigns a newly created apply as @apply" do
-        post :create, {:apply => valid_attributes}, valid_session
+        post :create, {:apply => valid_attributes}
         expect(assigns(:apply)).to be_a(Apply)
         expect(assigns(:apply)).to be_persisted
       end
 
       it "redirects to the created apply" do
-        post :create, {:apply => valid_attributes}, valid_session
+        post :create, {:apply => valid_attributes}
         expect(response).to redirect_to(Apply.last)
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved apply as @apply" do
-        post :create, {:apply => invalid_attributes}, valid_session
+        post :create, {:apply => invalid_attributes}
         expect(assigns(:apply)).to be_a_new(Apply)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:apply => invalid_attributes}, valid_session
+        post :create, {:apply => invalid_attributes}
         expect(response).to render_template("new")
       end
     end
@@ -103,39 +102,40 @@ RSpec.describe AppliesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {requirement: "changed requirement"}
       }
 
       it "updates the requested apply" do
         apply = Apply.create! valid_attributes
-        put :update, {:id => apply.to_param, :apply => new_attributes}, valid_session
+        put :update, {:id => apply.to_param, :apply => new_attributes}
         apply.reload
-        skip("Add assertions for updated state")
+        expect(apply.requirement).to  eq("changed requirement")
       end
 
       it "assigns the requested apply as @apply" do
         apply = Apply.create! valid_attributes
-        put :update, {:id => apply.to_param, :apply => valid_attributes}, valid_session
+        put :update, {:id => apply.to_param, :apply => valid_attributes}
         expect(assigns(:apply)).to eq(apply)
       end
 
       it "redirects to the apply" do
         apply = Apply.create! valid_attributes
-        put :update, {:id => apply.to_param, :apply => valid_attributes}, valid_session
-        expect(response).to redirect_to(apply)
+        put :update, {:id => apply.to_param, :apply => valid_attributes}
+        expect(response).to redirect_to("#{apply_url(apply)}?from=again")
       end
     end
 
     context "with invalid params" do
       it "assigns the apply as @apply" do
         apply = Apply.create! valid_attributes
-        put :update, {:id => apply.to_param, :apply => invalid_attributes}, valid_session
+        put :update, {:id => apply.to_param, :apply => invalid_attributes}
         expect(assigns(:apply)).to eq(apply)
       end
 
       it "re-renders the 'edit' template" do
+        sign_in applier
         apply = Apply.create! valid_attributes
-        put :update, {:id => apply.to_param, :apply => invalid_attributes}, valid_session
+        put :update, {:id => apply.to_param, :apply => invalid_attributes}
         expect(response).to render_template("edit")
       end
     end
@@ -145,13 +145,13 @@ RSpec.describe AppliesController, type: :controller do
     it "destroys the requested apply" do
       apply = Apply.create! valid_attributes
       expect {
-        delete :destroy, {:id => apply.to_param}, valid_session
+        delete :destroy, {:id => apply.to_param}
       }.to change(Apply, :count).by(-1)
     end
 
     it "redirects to the applies list" do
       apply = Apply.create! valid_attributes
-      delete :destroy, {:id => apply.to_param}, valid_session
+      delete :destroy, {:id => apply.to_param}
       expect(response).to redirect_to(applies_url)
     end
   end

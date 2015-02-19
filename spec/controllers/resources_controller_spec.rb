@@ -24,11 +24,11 @@ RSpec.describe ResourcesController, type: :controller do
   # Resource. As you add validations to Resource, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {title: "test", attachment: fixture_file_upload('test.txt','text/plain')}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {title: "test", attachment: ''}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -36,122 +36,73 @@ RSpec.describe ResourcesController, type: :controller do
   # ResourcesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  let(:admin) { Factory :admin }
+
   describe "GET #index" do
     it "assigns all resources as @resources" do
-      resource = Resource.create! valid_attributes
-      get :index, {}, valid_session
+      sign_in admin
+      resource = Factory.create :resource
+      get :index
+      expect(response).to be_success
+      expect(response).to render_template("index")
       expect(assigns(:resources)).to eq([resource])
-    end
-  end
-
-  describe "GET #show" do
-    it "assigns the requested resource as @resource" do
-      resource = Resource.create! valid_attributes
-      get :show, {:id => resource.to_param}, valid_session
-      expect(assigns(:resource)).to eq(resource)
     end
   end
 
   describe "GET #new" do
     it "assigns a new resource as @resource" do
-      get :new, {}, valid_session
+      sign_in admin
+      get :new, {}
       expect(assigns(:resource)).to be_a_new(Resource)
     end
   end
 
-  describe "GET #edit" do
-    it "assigns the requested resource as @resource" do
-      resource = Resource.create! valid_attributes
-      get :edit, {:id => resource.to_param}, valid_session
-      expect(assigns(:resource)).to eq(resource)
-    end
-  end
-
   describe "POST #create" do
+    before(:each){ sign_in admin }
     context "with valid params" do
       it "creates a new Resource" do
         expect {
-          post :create, {:resource => valid_attributes}, valid_session
+          post :create, {:resource => valid_attributes}
         }.to change(Resource, :count).by(1)
       end
 
       it "assigns a newly created resource as @resource" do
-        post :create, {:resource => valid_attributes}, valid_session
+        post :create, {:resource => valid_attributes}
         expect(assigns(:resource)).to be_a(Resource)
         expect(assigns(:resource)).to be_persisted
       end
 
       it "redirects to the created resource" do
-        post :create, {:resource => valid_attributes}, valid_session
-        expect(response).to redirect_to(Resource.last)
+        post :create, {:resource => valid_attributes}
+        expect(response).to redirect_to(resources_path)
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved resource as @resource" do
-        post :create, {:resource => invalid_attributes}, valid_session
+        post :create, {:resource => invalid_attributes}
         expect(assigns(:resource)).to be_a_new(Resource)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:resource => invalid_attributes}, valid_session
+        post :create, {:resource => invalid_attributes}
         expect(response).to render_template("new")
       end
     end
   end
 
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested resource" do
-        resource = Resource.create! valid_attributes
-        put :update, {:id => resource.to_param, :resource => new_attributes}, valid_session
-        resource.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "assigns the requested resource as @resource" do
-        resource = Resource.create! valid_attributes
-        put :update, {:id => resource.to_param, :resource => valid_attributes}, valid_session
-        expect(assigns(:resource)).to eq(resource)
-      end
-
-      it "redirects to the resource" do
-        resource = Resource.create! valid_attributes
-        put :update, {:id => resource.to_param, :resource => valid_attributes}, valid_session
-        expect(response).to redirect_to(resource)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the resource as @resource" do
-        resource = Resource.create! valid_attributes
-        put :update, {:id => resource.to_param, :resource => invalid_attributes}, valid_session
-        expect(assigns(:resource)).to eq(resource)
-      end
-
-      it "re-renders the 'edit' template" do
-        resource = Resource.create! valid_attributes
-        put :update, {:id => resource.to_param, :resource => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
-      end
-    end
-  end
-
   describe "DELETE #destroy" do
+    before(:each){ sign_in admin }
     it "destroys the requested resource" do
-      resource = Resource.create! valid_attributes
+      resource = Factory.create :resource
       expect {
-        delete :destroy, {:id => resource.to_param}, valid_session
+        delete :destroy, {:id => resource.to_param}
       }.to change(Resource, :count).by(-1)
     end
 
     it "redirects to the resources list" do
-      resource = Resource.create! valid_attributes
-      delete :destroy, {:id => resource.to_param}, valid_session
+      resource = Factory.create :resource
+      delete :destroy, {:id => resource.to_param}
       expect(response).to redirect_to(resources_url)
     end
   end

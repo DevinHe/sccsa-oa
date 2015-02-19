@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "users/new", type: :view do
+  let(:admin) { Factory :admin }
   before(:each) do
     assign(:user, User.new(
       :name => "MyString",
@@ -13,6 +14,7 @@ RSpec.describe "users/new", type: :view do
   end
 
   it "renders new user form" do
+    sign_in admin
     render
 
     assert_select "form[action=?][method=?]", add_path, "post" do
@@ -20,8 +22,6 @@ RSpec.describe "users/new", type: :view do
       assert_select "input#user_name[name=?]", "user[name]"
 
       assert_select "input#user_unit[name=?]", "user[unit]"
-
-      assert_select "input#user_is_admin[name=?]", "user[is_admin]"
 
     end
   end

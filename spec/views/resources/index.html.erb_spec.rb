@@ -1,22 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe "resources/index", type: :view do
+  let(:admin) { Factory :admin }
   before(:each) do
+    assign(:q,Resource.ransack(q: ''))
     assign(:resources, [
-      Resource.create!(
-        :title => "Title",
-        :attcahment => "Attcahment"
-      ),
-      Resource.create!(
-        :title => "Title",
-        :attcahment => "Attcahment"
-      )
-    ])
+      Factory(:resource),
+      Factory(:resource)
+    ].paginate(per_page: 10,page: 1))
   end
 
   it "renders a list of resources" do
+    sign_in admin
+
     render
-    assert_select "tr>td", :text => "Title".to_s, :count => 2
-    assert_select "tr>td", :text => "Attcahment".to_s, :count => 2
+    assert_select "li", class: "message-time-list", :count => 2
   end
 end

@@ -12,11 +12,11 @@ RSpec.describe ResourcesController, type: :routing do
     end
 
     it "routes to #show" do
-      expect(:get => "/resources/1").to route_to("resources#show", :id => "1")
+      expect(:get => "/resources/1").to route_to("welcome#error_404",path: "resources/1")
     end
 
     it "routes to #edit" do
-      expect(:get => "/resources/1/edit").to route_to("resources#edit", :id => "1")
+      expect(:get => "/resources/1/edit").to route_to("welcome#error_404",path: "resources/1/edit")
     end
 
     it "routes to #create" do
@@ -24,7 +24,7 @@ RSpec.describe ResourcesController, type: :routing do
     end
 
     it "routes to #update" do
-      expect(:put => "/resources/1").to route_to("resources#update", :id => "1")
+      expect(:put => "/resources/1").to route_to("welcome#error_404",path: "resources/1")
     end
 
     it "routes to #destroy" do

@@ -7,7 +7,7 @@ FactoryGirl.define do
     suggestion  "suggestion"
     population  "population"
     distribute_advice "distribute_advice"
-    attachment {fixture_file_upload('test.txt', 'text/plain')}
+    attachment {fixture_file_upload("#{::Rails.root}/spec/fixtures/test.txt", 'text/plain')}
     association :user
     association :apply
   end

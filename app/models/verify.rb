@@ -1,6 +1,6 @@
 class Verify < ActiveRecord::Base
 
-  # validates :is_pass, presence: true
+  validates :apply_id,:user_id, presence: true
 
   belongs_to :apply
   belongs_to :user  # distributor

@@ -3,6 +3,6 @@ FactoryGirl.define do
     content 'content'
     read false
     association :user
-    association :notificationable
+    association :notificationable, :factory => :notice
   end
 end

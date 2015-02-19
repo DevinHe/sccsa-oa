@@ -1,28 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe "notifications/index", type: :view do
+  let(:user) { Factory :user }
+  let(:notification1) { Factory :notification }
+  let(:notification2) { Factory :notification }
   before(:each) do
-    assign(:notifications, [
-      Notification.create!(
-        :user => nil,
-        :content => "Content",
-        :notificationable_type => "Notificationable Type",
-        :notificationable_id => 1
-      ),
-      Notification.create!(
-        :user => nil,
-        :content => "Content",
-        :notificationable_type => "Notificationable Type",
-        :notificationable_id => 1
-      )
-    ])
+    assign(:notifications, [notification1,notification2].paginate(per_page: 10,page: 1))
   end
 
   it "renders a list of notifications" do
+    sign_in user
+
     render
-    assert_select "tr>td", :text => nil.to_s, :count => 2
-    assert_select "tr>td", :text => "Content".to_s, :count => 2
-    assert_select "tr>td", :text => "Notificationable Type".to_s, :count => 2
-    assert_select "tr>td", :text => 1.to_s, :count => 2
+    assert_select "li", :class => "message-time-list", :count => 2
   end
 end

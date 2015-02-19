@@ -23,105 +23,105 @@ RSpec.describe FeedbacksController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Feedback. As you add validations to Feedback, be sure to
   # adjust the attributes here as well.
+  let(:user) { Factory :user }
+  let(:apply) { Factory :apply }
+
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {user_id: user.id, apply_id: apply.id, content: "content", coach: "coach", suggestion: "suggestion", population: "population", attachment: fixture_file_upload('test.txt', 'text/plain')}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {user_id: user.id, apply_id: apply.id, content: "", coach: "", suggestion: "", population: "", attachment: fixture_file_upload('test.txt', 'text/plain')}
   }
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # FeedbacksController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
-
-  describe "GET #index" do
-    it "assigns all feedbacks as @feedbacks" do
-      feedback = Feedback.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:feedbacks)).to eq([feedback])
-    end
-  end
-
   describe "GET #show" do
+    before(:each){ sign_in user }
     it "assigns the requested feedback as @feedback" do
-      feedback = Feedback.create! valid_attributes
-      get :show, {:id => feedback.to_param}, valid_session
+      distribute = Factory :distribute,apply: apply
+      feedback = Factory :feedback,apply: apply
+      get :show, {:id => feedback.to_param}
       expect(assigns(:feedback)).to eq(feedback)
+      expect(assigns(:feedback)).to be_a(Feedback)
     end
   end
 
   describe "GET #new" do
+    before(:each){ sign_in user }
     it "assigns a new feedback as @feedback" do
-      get :new, {}, valid_session
+      get :new, {}
       expect(assigns(:feedback)).to be_a_new(Feedback)
     end
   end
 
   describe "GET #edit" do
+    before(:each){ sign_in user }
     it "assigns the requested feedback as @feedback" do
+      distribute = Factory :distribute,apply: apply
       feedback = Feedback.create! valid_attributes
-      get :edit, {:id => feedback.to_param}, valid_session
+      get :edit, {:id => feedback.to_param}
       expect(assigns(:feedback)).to eq(feedback)
     end
   end
 
   describe "POST #create" do
+    before(:each){ sign_in user }
     context "with valid params" do
+      before(:each){ Factory :distribute,apply: apply }
       it "creates a new Feedback" do
         expect {
-          post :create, {:feedback => valid_attributes}, valid_session
+          post :create, {:feedback => valid_attributes}
         }.to change(Feedback, :count).by(1)
       end
 
       it "assigns a newly created feedback as @feedback" do
-        post :create, {:feedback => valid_attributes}, valid_session
+        post :create, {:feedback => valid_attributes}
         expect(assigns(:feedback)).to be_a(Feedback)
         expect(assigns(:feedback)).to be_persisted
       end
 
       it "redirects to the created feedback" do
-        post :create, {:feedback => valid_attributes}, valid_session
+        post :create, {:feedback => valid_attributes}
         expect(response).to redirect_to(Feedback.last)
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved feedback as @feedback" do
-        post :create, {:feedback => invalid_attributes}, valid_session
+        post :create, {:feedback => invalid_attributes}
         expect(assigns(:feedback)).to be_a_new(Feedback)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:feedback => invalid_attributes}, valid_session
+        post :create, {:feedback => invalid_attributes}
         expect(response).to render_template("new")
       end
     end
   end
 
   describe "PUT #update" do
+    before(:each){ sign_in user }
+    before(:each){ Factory :distribute,apply: apply }
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {content: "changed content"}
       }
 
       it "updates the requested feedback" do
         feedback = Feedback.create! valid_attributes
-        put :update, {:id => feedback.to_param, :feedback => new_attributes}, valid_session
+        put :update, {:id => feedback.to_param, :feedback => new_attributes}
         feedback.reload
-        skip("Add assertions for updated state")
+        expect(feedback.content).to  eq("changed content")
       end
 
       it "assigns the requested feedback as @feedback" do
         feedback = Feedback.create! valid_attributes
-        put :update, {:id => feedback.to_param, :feedback => valid_attributes}, valid_session
+        put :update, {:id => feedback.to_param, :feedback => valid_attributes}
         expect(assigns(:feedback)).to eq(feedback)
       end
 
       it "redirects to the feedback" do
         feedback = Feedback.create! valid_attributes
-        put :update, {:id => feedback.to_param, :feedback => valid_attributes}, valid_session
+        put :update, {:id => feedback.to_param, :feedback => valid_attributes}
         expect(response).to redirect_to(feedback)
       end
     end
@@ -129,31 +129,32 @@ RSpec.describe FeedbacksController, type: :controller do
     context "with invalid params" do
       it "assigns the feedback as @feedback" do
         feedback = Feedback.create! valid_attributes
-        put :update, {:id => feedback.to_param, :feedback => invalid_attributes}, valid_session
+        put :update, {:id => feedback.to_param, :feedback => invalid_attributes}
         expect(assigns(:feedback)).to eq(feedback)
       end
 
       it "re-renders the 'edit' template" do
         feedback = Feedback.create! valid_attributes
-        put :update, {:id => feedback.to_param, :feedback => invalid_attributes}, valid_session
+        put :update, {:id => feedback.to_param, :feedback => invalid_attributes}
         expect(response).to render_template("edit")
       end
     end
   end
 
-  describe "DELETE #destroy" do
-    it "destroys the requested feedback" do
-      feedback = Feedback.create! valid_attributes
-      expect {
-        delete :destroy, {:id => feedback.to_param}, valid_session
-      }.to change(Feedback, :count).by(-1)
-    end
+  # describe "DELETE #destroy" do
+  #   before(:each){ sign_in user }
+  #   it "destroys the requested feedback" do
+  #     feedback = Feedback.create! valid_attributes
+  #     expect {
+  #       delete :destroy, {:id => feedback.to_param}
+  #     }.to change(Feedback, :count).by(-1)
+  #   end
 
-    it "redirects to the feedbacks list" do
-      feedback = Feedback.create! valid_attributes
-      delete :destroy, {:id => feedback.to_param}, valid_session
-      expect(response).to redirect_to(feedbacks_url)
-    end
-  end
+  #   it "redirects to the feedbacks list" do
+  #     feedback = Feedback.create! valid_attributes
+  #     delete :destroy, {:id => feedback.to_param}
+  #     expect(response).to redirect_to(feedbacks_url)
+  #   end
+  # end
 
 end

@@ -12,4 +12,5 @@ RSpec.describe Apply, type: :model do
   it{ should respond_to(:address) }
   it{ should respond_to(:implement_time) }
   it{ should respond_to(:implement_date) }
+  it{ should respond_to(:p_serial) }
 end

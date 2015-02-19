@@ -1,49 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe "applies/index", type: :view do
+  let(:applier) { Factory :applier }
+  let(:apply1) { Factory :apply }
+  let(:apply2) { Factory :apply }
   before(:each) do
-    assign(:applies, [
-      Apply.create!(
-        :user => nil,
-        :project => nil,
-        :category => nil,
-        :requirement => "MyText",
-        :site => "MyText",
-        :facilities => "MyText",
-        :address => "MyText",
-        :is_back => false,
-        :is_pass => false,
-        :is_distribute => false,
-        :attachment => "Attachment"
-      ),
-      Apply.create!(
-        :user => nil,
-        :project => nil,
-        :category => nil,
-        :requirement => "MyText",
-        :site => "MyText",
-        :facilities => "MyText",
-        :address => "MyText",
-        :is_back => false,
-        :is_pass => false,
-        :is_distribute => false,
-        :attachment => "Attachment"
-      )
-    ])
+    assign(:q,Apply.ransack(q: ''))
+    assign(:applies, [apply1,apply2].paginate(per_page: 10,page: 1))
   end
 
   it "renders a list of applies" do
+    sign_in applier
+
     render
-    assert_select "tr>td", :text => nil.to_s, :count => 2
-    assert_select "tr>td", :text => nil.to_s, :count => 2
-    assert_select "tr>td", :text => nil.to_s, :count => 2
-    assert_select "tr>td", :text => "MyText".to_s, :count => 2
-    assert_select "tr>td", :text => "MyText".to_s, :count => 2
-    assert_select "tr>td", :text => "MyText".to_s, :count => 2
-    assert_select "tr>td", :text => "MyText".to_s, :count => 2
-    assert_select "tr>td", :text => false.to_s, :count => 2
-    assert_select "tr>td", :text => false.to_s, :count => 2
-    assert_select "tr>td", :text => false.to_s, :count => 2
-    assert_select "tr>td", :text => "Attachment".to_s, :count => 2
+    assert_select "tr", :count => 3
   end
 end

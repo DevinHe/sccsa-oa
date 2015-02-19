@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "projects/new", type: :view do
+  let(:admin) { Factory :admin }
   before(:each) do
     assign(:project, Project.new(
       :name => "MyString",
@@ -10,6 +11,7 @@ RSpec.describe "projects/new", type: :view do
   end
 
   it "renders new project form" do
+    sign_in admin
     render
 
     assert_select "form[action=?][method=?]", projects_path, "post" do
@@ -18,7 +20,6 @@ RSpec.describe "projects/new", type: :view do
 
       assert_select "input#project_serial[name=?]", "project[serial]"
 
-      assert_select "input#project_category_id[name=?]", "project[category_id]"
     end
   end
 end
