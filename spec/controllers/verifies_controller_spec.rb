@@ -36,124 +36,88 @@ RSpec.describe VerifiesController, type: :controller do
   # VerifiesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all verifies as @verifies" do
-      verify = Verify.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:verifies)).to eq([verify])
-    end
-  end
-
-  describe "GET #show" do
-    it "assigns the requested verify as @verify" do
-      verify = Verify.create! valid_attributes
-      get :show, {:id => verify.to_param}, valid_session
-      expect(assigns(:verify)).to eq(verify)
-    end
-  end
-
-  describe "GET #new" do
-    it "assigns a new verify as @verify" do
-      get :new, {}, valid_session
-      expect(assigns(:verify)).to be_a_new(Verify)
-    end
-  end
+  let(:distributor) { Factory :distributor }
+  let(:verify) { Factory :verify }
 
   describe "GET #edit" do
     it "assigns the requested verify as @verify" do
-      verify = Verify.create! valid_attributes
-      get :edit, {:id => verify.to_param}, valid_session
+      get :edit, {:id => verify.to_param}
       expect(assigns(:verify)).to eq(verify)
     end
   end
 
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Verify" do
-        expect {
-          post :create, {:verify => valid_attributes}, valid_session
-        }.to change(Verify, :count).by(1)
-      end
+  # describe "POST #create" do
+  #   context "with valid params" do
+  #     it "creates a new Verify" do
+  #       expect {
+  #         post :create, {:verify => valid_attributes}, valid_session
+  #       }.to change(Verify, :count).by(1)
+  #     end
 
-      it "assigns a newly created verify as @verify" do
-        post :create, {:verify => valid_attributes}, valid_session
-        expect(assigns(:verify)).to be_a(Verify)
-        expect(assigns(:verify)).to be_persisted
-      end
+  #     it "assigns a newly created verify as @verify" do
+  #       post :create, {:verify => valid_attributes}, valid_session
+  #       expect(assigns(:verify)).to be_a(Verify)
+  #       expect(assigns(:verify)).to be_persisted
+  #     end
 
-      it "redirects to the created verify" do
-        post :create, {:verify => valid_attributes}, valid_session
-        expect(response).to redirect_to(Verify.last)
-      end
-    end
+  #     it "redirects to the created verify" do
+  #       post :create, {:verify => valid_attributes}, valid_session
+  #       expect(response).to redirect_to(Verify.last)
+  #     end
+  #   end
 
-    context "with invalid params" do
-      it "assigns a newly created but unsaved verify as @verify" do
-        post :create, {:verify => invalid_attributes}, valid_session
-        expect(assigns(:verify)).to be_a_new(Verify)
-      end
+  #   context "with invalid params" do
+  #     it "assigns a newly created but unsaved verify as @verify" do
+  #       post :create, {:verify => invalid_attributes}, valid_session
+  #       expect(assigns(:verify)).to be_a_new(Verify)
+  #     end
 
-      it "re-renders the 'new' template" do
-        post :create, {:verify => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
-      end
-    end
-  end
+  #     it "re-renders the 'new' template" do
+  #       post :create, {:verify => invalid_attributes}, valid_session
+  #       expect(response).to render_template("new")
+  #     end
+  #   end
+  # end
 
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+  # describe "PUT #update" do
+  #   context "with valid params" do
+  #     let(:new_attributes) {
+  #       skip("Add a hash of attributes valid for your model")
+  #     }
 
-      it "updates the requested verify" do
-        verify = Verify.create! valid_attributes
-        put :update, {:id => verify.to_param, :verify => new_attributes}, valid_session
-        verify.reload
-        skip("Add assertions for updated state")
-      end
+  #     it "updates the requested verify" do
+  #       verify = Verify.create! valid_attributes
+  #       put :update, {:id => verify.to_param, :verify => new_attributes}, valid_session
+  #       verify.reload
+  #       skip("Add assertions for updated state")
+  #     end
 
-      it "assigns the requested verify as @verify" do
-        verify = Verify.create! valid_attributes
-        put :update, {:id => verify.to_param, :verify => valid_attributes}, valid_session
-        expect(assigns(:verify)).to eq(verify)
-      end
+  #     it "assigns the requested verify as @verify" do
+  #       verify = Verify.create! valid_attributes
+  #       put :update, {:id => verify.to_param, :verify => valid_attributes}, valid_session
+  #       expect(assigns(:verify)).to eq(verify)
+  #     end
 
-      it "redirects to the verify" do
-        verify = Verify.create! valid_attributes
-        put :update, {:id => verify.to_param, :verify => valid_attributes}, valid_session
-        expect(response).to redirect_to(verify)
-      end
-    end
+  #     it "redirects to the verify" do
+  #       verify = Verify.create! valid_attributes
+  #       put :update, {:id => verify.to_param, :verify => valid_attributes}, valid_session
+  #       expect(response).to redirect_to(verify)
+  #     end
+  #   end
 
-    context "with invalid params" do
-      it "assigns the verify as @verify" do
-        verify = Verify.create! valid_attributes
-        put :update, {:id => verify.to_param, :verify => invalid_attributes}, valid_session
-        expect(assigns(:verify)).to eq(verify)
-      end
+  #   context "with invalid params" do
+  #     it "assigns the verify as @verify" do
+  #       verify = Verify.create! valid_attributes
+  #       put :update, {:id => verify.to_param, :verify => invalid_attributes}, valid_session
+  #       expect(assigns(:verify)).to eq(verify)
+  #     end
 
-      it "re-renders the 'edit' template" do
-        verify = Verify.create! valid_attributes
-        put :update, {:id => verify.to_param, :verify => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested verify" do
-      verify = Verify.create! valid_attributes
-      expect {
-        delete :destroy, {:id => verify.to_param}, valid_session
-      }.to change(Verify, :count).by(-1)
-    end
-
-    it "redirects to the verifies list" do
-      verify = Verify.create! valid_attributes
-      delete :destroy, {:id => verify.to_param}, valid_session
-      expect(response).to redirect_to(verifies_url)
-    end
-  end
+  #     it "re-renders the 'edit' template" do
+  #       verify = Verify.create! valid_attributes
+  #       put :update, {:id => verify.to_param, :verify => invalid_attributes}, valid_session
+  #       expect(response).to render_template("edit")
+  #     end
+  #   end
+  # end
 
 end

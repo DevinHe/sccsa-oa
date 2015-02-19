@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Distribute, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:distribute) { Factory :distribute }
+
+  it{ should respond_to(:is_distribute) }
+  it{ should respond_to(:user) }
+  it{ should respond_to(:apply) } 
 end
