@@ -6,12 +6,16 @@ RSpec.describe "users/index", type: :view do
       User.create!(
         :name => "Name",
         :unit => "Unit",
+        :email => "sccsa@gmail.com",
+        :password => "password",
         :is_admin => false,
         :role => 1
       ),
       User.create!(
         :name => "Name1",
         :unit => "Unit",
+        :email => "sccsa1@gmail.com",
+        :password => "password",
         :is_admin => false,
         :role => 1
       )
