@@ -4,12 +4,12 @@ RSpec.describe "users/index", type: :view do
   before(:each) do
     assign(:users, [
       User.create!(
-        :name => "Name",
+        :name => "Name888",
         :unit => "Unit",
         :email => "sccsa@gmail.com",
         :password => "password",
         :is_admin => false,
-        :role => 1
+        :role_id => 1
       ),
       User.create!(
         :name => "Name1",
@@ -17,7 +17,7 @@ RSpec.describe "users/index", type: :view do
         :email => "sccsa1@gmail.com",
         :password => "password",
         :is_admin => false,
-        :role => 1
+        :role_id => 1
       )
     ])
   end

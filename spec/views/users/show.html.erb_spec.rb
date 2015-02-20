@@ -8,7 +8,7 @@ RSpec.describe "users/show", type: :view do
       :password => "password",
       :unit => "Unit",
       :is_admin => false,
-      :role => 1
+      :role_id => 1
     ))
   end
 

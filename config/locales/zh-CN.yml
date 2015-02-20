@@ -212,6 +212,7 @@ zh-CN:
         password_confirmation: 确认密码
         remenber: 记住登录状态
         unit: 组织机构
-        role: 权限
+        role_id: 权限
         is_admin: 是否是管理员
+        email: 邮箱
 

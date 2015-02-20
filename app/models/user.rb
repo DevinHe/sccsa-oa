@@ -4,10 +4,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :name, :unit, :role, :email, :password, presence: true
+  validates :name, :unit, :role_id, :email, :password, presence: true
   validates :name, :email, uniqueness: true
 
   before_save :default_values
+
+  belongs_to :role
 
 
   def admin?
@@ -17,7 +19,6 @@ class User < ActiveRecord::Base
   private
    def default_values
      self.is_admin ||= false
-     self.role ||= 0
    end
 
 

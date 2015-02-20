@@ -8,3 +8,6 @@
 
 User.create!(name: 'sccsa-admin', password: 'sccsapassword', email: 'admin@sccsa.org.cn',
              unit: '上海社区体育协会', is_admin: true)
+Role.create!(name: '无权限')
+Role.create!(name: '社区／俱乐部')
+Role.create!(name: '配送单位')

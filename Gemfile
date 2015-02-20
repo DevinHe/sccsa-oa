@@ -49,3 +49,5 @@ gem 'bootstrap-sass', '~> 3.3.3'
 
 gem 'devise'
 
+gem 'simple_form'
+

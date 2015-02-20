@@ -8,7 +8,7 @@ RSpec.describe "users/new", type: :view do
       :email => "sccsa@gmail.com",
       :password => "password",
       :is_admin => false,
-      :role => 1
+      :role_id => 1
     ))
   end
 
@@ -23,7 +23,7 @@ RSpec.describe "users/new", type: :view do
 
       assert_select "input#user_is_admin[name=?]", "user[is_admin]"
 
-      assert_select "input#user_role[name=?]", "user[role]"
+      # assert_select "input#user_role[name=?]", "user[role]"
     end
   end
 end

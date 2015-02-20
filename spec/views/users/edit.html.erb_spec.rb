@@ -8,7 +8,7 @@ RSpec.describe "users/edit", type: :view do
       :is_admin => false,
       :email => "sccsa@gmail.com",
       :password => "password",
-      :role => 1
+      :role_id => 1
     ))
   end
 
