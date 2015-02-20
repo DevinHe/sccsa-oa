@@ -1,24 +1,23 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>用户名:</strong>
   <%= @user.name %>
 </p>
 
 <p>
-  <strong>Unit:</strong>
+  <strong>组织机构:</strong>
   <%= @user.unit %>
 </p>
 
 <p>
-  <strong>Is admin:</strong>
-  <%= @user.is_admin %>
+  <strong>是否是管理员:</strong>
+  <%= @user.is_admin ? '是' : '否' %>
 </p>
 
 <p>
-  <strong>Role:</strong>
-  <%= @user.role %>
+  <strong>权限:</strong>
+  <%= user_role @user %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to '修改账户信息', edit_user_path(@user) %>

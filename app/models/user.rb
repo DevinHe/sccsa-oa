@@ -10,11 +10,16 @@ class User < ActiveRecord::Base
   before_save :default_values
 
 
+  def admin?
+    self.is_admin
+  end
 
   private
    def default_values
      self.is_admin ||= false
      self.role ||= 0
    end
+
+
 
 end
