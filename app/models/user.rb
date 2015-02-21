@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   validates :name, :unit, :role_id, :email, :password, presence: true
   validates :name, :email, uniqueness: true
 
-  before_save :default_values
+  after_create :default_values
 
   belongs_to :role
 
