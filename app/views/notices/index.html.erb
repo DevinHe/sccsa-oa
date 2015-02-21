@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h3>协会通知</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>主题</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notices.each do |notice| %>
+      <tr>
+        <td><%= link_to notice.title, notice %></td>
+        <% if current_user.admin? %>
+          <td><%= link_to 'Edit', edit_notice_path(notice) %></td>
+          <td><%= link_to 'Destroy', notice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if current_user.admin? %>
+  <%= link_to 'New Notice', new_notice_path %>
+<% end %>

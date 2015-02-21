@@ -10,3 +10,11 @@ User.create!(name: 'sccsa-admin', password: 'sccsapassword', email: 'admin@sccsa
 Role.create!(name: '无权限')
 Role.create!(name: '社区／俱乐部')
 Role.create!(name: '配送单位')
+
+Category.create!(name: '科普健身讲座')
+Category.create!(name: '健身技能培训')
+Category.create!(name: '青少年体育基础培训')
+Category.create!(name: '科学健身宣传品')
+Category.create!(name: '赛事及特色活动组织')
+
+

@@ -12,6 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require kindeditor
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require moment
+//= require moment/zh-cn
+//= require bootstrap-datetimepicker
 //= require_tree .
+
+$(function () {
+    $('.datetimepicker').datetimepicker({locale: 'zh-cn'});
+});

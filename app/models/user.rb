@@ -11,6 +11,12 @@ class User < ActiveRecord::Base
 
   belongs_to :role
 
+  has_many :notices
+  has_many :applies
+  has_many :feedbacks
+  has_many :notifications
+
+
 
   def admin?
     self.is_admin

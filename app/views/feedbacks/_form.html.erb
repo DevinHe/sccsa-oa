@@ -1,0 +1,17 @@
+<%= simple_form_for(@feedback) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :user %>
+    <%= f.association :apply, label: "关联配送申请表" %>
+    <%= f.input :content, label: "配送内容" %>
+    <%= f.input :coach, label: "教练/专家/裁判（姓名）" %>
+    <%= f.input :suggestion, label: "街道工作人员意见" %>
+    <%= f.input :population, label: "受众人数" %>
+    <%= f.input :distribute_advice, label: "配送单位意见" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

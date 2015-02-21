@@ -11,7 +11,86 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150220090129) do
+ActiveRecord::Schema.define(version: 20150221084835) do
+
+  create_table "applies", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "category_id"
+    t.text     "requirement"
+    t.text     "site"
+    t.text     "facilities"
+    t.text     "address"
+    t.datetime "implement_time"
+    t.boolean  "is_back"
+    t.boolean  "is_pass"
+    t.boolean  "is_distribute"
+    t.string   "attachment"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "distributor_id"
+  end
+
+  add_index "applies", ["category_id"], name: "index_applies_on_category_id"
+  add_index "applies", ["project_id"], name: "index_applies_on_project_id"
+  add_index "applies", ["user_id"], name: "index_applies_on_user_id"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "apply_id"
+    t.text     "content"
+    t.text     "coach"
+    t.text     "suggestion"
+    t.text     "population"
+    t.text     "distribute_advice"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "feedbacks", ["apply_id"], name: "index_feedbacks_on_apply_id"
+  add_index "feedbacks", ["user_id"], name: "index_feedbacks_on_user_id"
+
+  create_table "notices", force: :cascade do |t|
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "content"
+    t.string   "notificationable_type"
+    t.integer  "notificationable_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.boolean  "read"
+  end
+
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name"
+    t.string   "serial"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "projects", ["category_id"], name: "index_projects_on_category_id"
+
+  create_table "resources", force: :cascade do |t|
+    t.string   "title"
+    t.string   "attachment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

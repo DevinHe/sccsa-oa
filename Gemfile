@@ -51,3 +51,16 @@ gem 'devise'
 
 gem 'simple_form'
 
+gem 'will_paginate', '~> 3.0.6'
+gem 'mini_magick'
+gem 'rails_kindeditor'
+
+gem 'qiniu-rs'
+
+gem 'carrierwave'
+gem 'carrierwave-qiniu'
+
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
+
+

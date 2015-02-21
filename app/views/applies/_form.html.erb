@@ -1,0 +1,31 @@
+<%= simple_form_for(@apply) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    申报单位:<%= current_user.unit %>
+    申报时间:<%= Time.now.strftime('%F') %>
+
+    <%= f.association :user %>
+    <%= f.association :distributor %>
+    <%= f.association :project, label: "申报项目类别" %>
+    <%= f.association :category, label: "项目具体名称" %>
+    <%= f.input :requirement, label: "居民需求调研情况简介" %>
+    <%= f.input :site, label: "项目实施场地（类型和人数）" %>
+    <%= f.input :facilities, label: "音箱及设备条件" %>
+    <%= f.input :address, label: "实施场地地址" %>
+
+    <%= f.input :implement_time, as: :string, label: "意愿实施时间", input_html: {class: "datetimepicker"} %>
+
+    <%= f.input :is_back %>
+    <%= f.input :is_pass %>
+    <%= f.input :is_distribute %>
+    <%= f.input :attachment %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+
+

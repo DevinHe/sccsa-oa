@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  resources :notifications
+
+  resources :feedbacks
+
+  resources :applies
+
+  resources :resources
+
+  resources :projects
+
+  resources :categories
+
+  resources :notices
+
   devise_for :users
   post 'users/add', to: "users#create", as: :add
   resources :users
