@@ -1,23 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<h3>配送一览</h3>
+<div class="page-header">
+  <h3>配送一览</h3>
+</div>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>User</th>
-      <th>Distributor</th>
-      <th>Project</th>
-      <th>Category</th>
-      <th>Requirement</th>
-      <th>Site</th>
-      <th>Facilities</th>
-      <th>Address</th>
-      <th>Implement time</th>
+      <th>申请时间</th>
+      <th>申请组织</th>
+      <th>申报类别</th>
+      <th>项目名称</th>
+      <th>实施时间</th>
       <th>Is back</th>
       <th>Is pass</th>
       <th>Is distribute</th>
-      <th>Attachment</th>
+      <th>附件下载</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -25,14 +23,10 @@
   <tbody>
     <% @applies.each do |apply| %>
       <tr>
+        <td><%= apply.created_at %></td>
         <td><%= apply.user.unit %></td>
-        <td><%= apply.distributor %></td>
-        <td><%= apply.project.name %></td>
         <td><%= apply.category.name %></td>
-        <td><%= apply.requirement %></td>
-        <td><%= apply.site %></td>
-        <td><%= apply.facilities %></td>
-        <td><%= apply.address %></td>
+        <td><%= apply.project.name %></td>
         <td><%= apply.implement_time %></td>
         <td><%= apply.is_back %></td>
         <td><%= apply.is_pass %></td>
@@ -46,6 +40,3 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Apply', new_apply_path %>

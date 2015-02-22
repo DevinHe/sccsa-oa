@@ -52,6 +52,8 @@ gem 'devise'
 gem 'simple_form'
 
 gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate-bootstrap'
+
 gem 'mini_magick'
 gem 'rails_kindeditor'
 

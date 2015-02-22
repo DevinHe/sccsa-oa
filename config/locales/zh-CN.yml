@@ -215,4 +215,8 @@ zh-CN:
         role_id: 权限
         is_admin: 是否是管理员
         email: 邮箱
+  will_paginate:
+      next_label: "下一页 &#8594;"
+      previous_label: "&#8592; 上一页"
+      page_gap: "&hellip;"
 

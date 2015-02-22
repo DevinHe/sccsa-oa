@@ -3,7 +3,7 @@ class NoticesController < ApplicationController
   respond_to :html, :xml, :json
 
   def index
-    @notices = Notice.all
+    @notices = Notice.paginate(:page => params[:page], :per_page => 10)
     respond_with(@notices)
   end
 

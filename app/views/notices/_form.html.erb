@@ -1,13 +1,17 @@
-<%= simple_form_for(@notice) do |f| %>
+<%= simple_form_for @notice  do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :title, label: '主题' %>
-    <p>内容</p>
+    <div class="form-group">
+      <%= f.input :title, label: '标题', class: "form-control" %>
+    </div>
+    <p><strong>内容</strong></p>
     <%= f.kindeditor :content %>
   </div>
 
+  <br />
+
   <div class="form-actions">
-    <%= f.button :submit, "添加" %>
+    <%= f.button :submit, "提交", class: "btn btn-primary" %>
   </div>
 <% end %>

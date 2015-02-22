@@ -1,27 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Resources</h1>
+<div class="page-header">
+  <h3>资料下载</h3>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% if current_user.admin? %>
+  <div><%= link_to '上传新资料', new_resource_path, class: "btn btn-success" %></div>
+<% end %>
+<br />
 
-  <tbody>
+<div class="row">
+  <ul class="list-unstyled">
     <% @resources.each do |resource| %>
-      <tr>
-        <td><%= link_to resource.title, resource.attachment.url %></td>
-        <td><%= link_to 'Show', resource %></td>
-        <td><%= link_to 'Edit', edit_resource_path(resource) %></td>
-        <td><%= link_to 'Destroy', resource, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <li class="message-time-list">
+        <div class="col-xs-10">
+         <%= link_to resource.title, resource.attachment.url, :target=> "_blank" %>
+        </div>
+
+        <div class="col-xs-2">
+          <% if current_user.admin? %>
+            <%= link_to '删除', resource, class: "btn btn-danger btn-xs", method: :delete, data: { confirm: '确认删除？' } %>
+          <% end %>
+        </div>
+      </li>
     <% end %>
-  </tbody>
-</table>
+  </ul>
+</div>
 
-<br>
+<%= will_paginate @resources, renderer: BootstrapPagination::Rails, class: "will_paginate" %>
 
-<%= link_to 'New Resource', new_resource_path %>
+
+

@@ -1,25 +1,28 @@
 <p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h3>最新通知</h3>
+</div>
 
-<h3>最新通知</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>通知内容</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="row">
+  <ul class="list-unstyled">
     <% @notifications.each do |notification| %>
-      <tr>
-        <td>
-          <%= raw notification.content %><!--<span class="label label-danger">未阅读</span> -->
-          <%= content_tag(:span, "新通知", class: "label label-danger") unless notification.read %>
-        </td>
-        <td><%= link_to 'Destroy', notification, method: :delete, data: { confirm: '确认删除？'} %></td>
-      </tr>
+
+      <li class="message-time-list">
+        <div class="col-xs-10">
+        <%=  notification.created_at.strftime('%F') %>
+        <%=  raw notification.content %><!--<span class="label label-danger">未阅读</span> -->
+        <%= content_tag(:span, "新通知", class: "label label-danger") unless notification.read %>
+        </div>
+        <div class="col-xs-2">
+          <% if current_user.admin? %>
+            <%= link_to 'Destroy', notification, class: "btn btn-danger btn-xs", method: :delete, data: { confirm: '确认删除？'} %>
+          <% end %>
+        </div>
+      </li>
     <% end %>
-  </tbody>
-</table>
-<%= will_paginate @posts %>
+  </ul>
+</div>
+
+
+<%= will_paginate @notifications, renderer: BootstrapPagination::Rails, class: "will_paginate" %>
+
