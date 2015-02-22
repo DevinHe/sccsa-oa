@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Is distribute:</strong>
+  <%= @distribute.is_distribute %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @distribute.user %>
+</p>
+
+<p>
+  <strong>Apply:</strong>
+  <%= @distribute.apply %>
+</p>
+
+<%= link_to 'Edit', edit_distribute_path(@distribute) %> |
+<%= link_to 'Back', distributes_path %>

@@ -5,9 +5,8 @@
     申报单位:<%= current_user.unit %>
     申报时间:<%= Time.now.strftime('%F') %>
 
-    <%= f.association :user %>
-    <%= f.association :distributor %>
-    <%= f.association :category, label: "申报项目类别" %>
+    <%= f.hidden_field :user_id,value: current_user.id %>
+    <%= f.association :category, label: "申报项目类别", as: :radio_buttons %>
     <%= f.association :project, label: "项目具体名称" %>
     <%= f.input :requirement, label: "居民需求调研情况简介" %>
     <%= f.input :site, label: "项目实施场地（类型和人数）" %>
@@ -16,9 +15,6 @@
 
     <%= f.input :implement_time, as: :string, label: "意愿实施时间", input_html: {class: "datetimepicker"} %>
 
-    <%= f.input :is_back %>
-    <%= f.input :is_pass %>
-    <%= f.input :is_distribute %>
     <%= f.input :attachment %>
   </div>
 

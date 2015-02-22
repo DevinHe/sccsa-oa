@@ -6,10 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create!(name: 'sccsa-admin', password: 'sccsapassword', email: 'admin@sccsa.org.cn',unit: '上海社区体育协会', is_admin: true, role_id: '3')
 Role.create!(name: '无权限')
 Role.create!(name: '社区／俱乐部')
 Role.create!(name: '配送单位')
+
+User.create!(name: 'sccsa-admin', password: 'sccsapassword', email: 'admin@sccsa.org.cn',unit: '上海社区体育协会', is_admin: true, role_id: '3')
 
 Category.create!(name: '科普健身讲座')
 Category.create!(name: '健身技能培训')

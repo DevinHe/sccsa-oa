@@ -9,7 +9,7 @@
         <li>
           <%= link_to "协会通知", notices_path %>
         </li>
-        <% unless current_user.admin? %>
+        <% unless current_user.admin? && current_user.distributor? %>
           <li>
             <%= link_to "配送申报", new_apply_path, data: { no_turbolink: true } %>
           </li>

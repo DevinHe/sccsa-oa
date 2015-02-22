@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Is pass:</strong>
+  <%= @verify.is_pass %>
+</p>
+
+<p>
+  <strong>Apply:</strong>
+  <%= @verify.apply %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @verify.content %>
+</p>
+
+<%= link_to 'Edit', edit_verify_path(@verify) %> |
+<%= link_to 'Back', verifies_path %>

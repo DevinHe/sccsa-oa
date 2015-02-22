@@ -10,6 +10,8 @@ class AppliesController < ApplicationController
   def show
     notification = @apply.notifications.unread(current_user.id).first
     notification.update_attribute(:read, true) if notification
+
+    # @verfy = Verify.new({apply_id: @apply.id}) if current_user.admin?
     respond_with(@apply)
   end
 
@@ -43,6 +45,6 @@ class AppliesController < ApplicationController
     end
 
     def apply_params
-      params.require(:apply).permit(:user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :implement_time, :is_back, :is_pass, :is_distribute, :attachment)
+      params.require(:apply).permit(:user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :implement_time, :attachment)
     end
 end

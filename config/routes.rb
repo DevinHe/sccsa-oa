@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :verifies
+
+  resources :distributes
+
   resources :notifications
 
   resources :feedbacks

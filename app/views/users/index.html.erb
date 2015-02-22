@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>用户名</th>
+      <th>Email</th>
       <th>组织机构</th>
       <th>是否是管理员</th>
       <th>权限</th>
@@ -17,6 +18,7 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
+        <td><%= user.email %></td>
         <td><%= user.unit %></td>
         <td><%= user.is_admin ? '是' : '否' %></td>
         <td><%= user.role.name %></td>

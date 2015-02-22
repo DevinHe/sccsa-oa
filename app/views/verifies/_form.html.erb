@@ -1,0 +1,14 @@
+<%= simple_form_for(@verify) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.hidden_field :apply_id, value: @verify.apply_id %>
+    <%= f.input :is_pass %>
+    <%= f.association :user, label_method: :unit, collection: User.where(role_id: 3) %>
+    <%= f.input :content %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

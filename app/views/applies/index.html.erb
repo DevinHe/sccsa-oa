@@ -12,9 +12,6 @@
       <th>申报类别</th>
       <th>项目名称</th>
       <th>实施时间</th>
-      <th>Is back</th>
-      <th>Is pass</th>
-      <th>Is distribute</th>
       <th>附件下载</th>
       <th colspan="3"></th>
     </tr>
@@ -28,9 +25,6 @@
         <td><%= apply.category.name %></td>
         <td><%= apply.project.name %></td>
         <td><%= apply.implement_time %></td>
-        <td><%= apply.is_back %></td>
-        <td><%= apply.is_pass %></td>
-        <td><%= apply.is_distribute %></td>
         <td><%= link_to "申报单下载", apply.attachment.url %></td>
         <td><%= link_to 'Show', apply %></td>
         <td><%= link_to 'Edit', edit_apply_path(apply) %></td>

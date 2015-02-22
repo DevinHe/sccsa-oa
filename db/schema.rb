@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150221084835) do
+ActiveRecord::Schema.define(version: 20150222072821) do
 
   create_table "applies", force: :cascade do |t|
     t.integer  "user_id"
@@ -22,13 +22,9 @@ ActiveRecord::Schema.define(version: 20150221084835) do
     t.text     "facilities"
     t.text     "address"
     t.datetime "implement_time"
-    t.boolean  "is_back"
-    t.boolean  "is_pass"
-    t.boolean  "is_distribute"
     t.string   "attachment"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.integer  "distributor_id"
   end
 
   add_index "applies", ["category_id"], name: "index_applies_on_category_id"
@@ -40,6 +36,17 @@ ActiveRecord::Schema.define(version: 20150221084835) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "distributes", force: :cascade do |t|
+    t.boolean  "is_distribute"
+    t.integer  "user_id"
+    t.integer  "apply_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "distributes", ["apply_id"], name: "index_distributes_on_apply_id"
+  add_index "distributes", ["user_id"], name: "index_distributes_on_user_id"
 
   create_table "feedbacks", force: :cascade do |t|
     t.integer  "user_id"
@@ -120,5 +127,17 @@ ActiveRecord::Schema.define(version: 20150221084835) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["name"], name: "index_users_on_name", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "verifies", force: :cascade do |t|
+    t.boolean  "is_pass"
+    t.integer  "apply_id"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+  end
+
+  add_index "verifies", ["apply_id"], name: "index_verifies_on_apply_id"
+  add_index "verifies", ["user_id"], name: "index_verifies_on_user_id"
 
 end

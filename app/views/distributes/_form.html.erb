@@ -1,0 +1,13 @@
+<%= simple_form_for(@distribute) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.hidden_field :apply_id, value: @distribute.apply_id %>
+    <%= f.input :is_distribute %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

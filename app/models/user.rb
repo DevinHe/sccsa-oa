@@ -6,27 +6,31 @@ class User < ActiveRecord::Base
 
   validates :name, :unit, :role_id, :email, :password, presence: true
   validates :name, :email, uniqueness: true
+  scope :no_admin, ->{ where(is_admin: false) }
 
   after_create :default_values
 
   belongs_to :role
 
-  has_many :notices
-  has_many :applies
-  has_many :feedbacks
-  has_many :notifications
-
+  has_many :notices, dependent: :destroy
+  has_many :applies, dependent: :destroy
+  has_many :feedbacks, dependent: :destroy
+  has_many :notifications, dependent: :destroy
+  has_many :distributes, dependent: :destroy
+  has_many :verifies, dependent: :destroy
 
 
   def admin?
     self.is_admin
   end
 
+  def distributor?
+    self.role_id == 3
+  end
+
   private
    def default_values
      self.is_admin ||= false
    end
-
-
 
 end

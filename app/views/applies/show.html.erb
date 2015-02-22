@@ -2,12 +2,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @apply.user %>
-</p>
-
-<p>
-  <strong>Distributor:</strong>
-  <%= @apply.distributor %>
+  <%= @apply.user.unit %>
 </p>
 
 <p>
@@ -44,26 +39,42 @@
   <strong>Implement time:</strong>
   <%= @apply.implement_time %>
 </p>
-
-<p>
-  <strong>Is back:</strong>
-  <%= @apply.is_back %>
-</p>
-
-<p>
-  <strong>Is pass:</strong>
-  <%= @apply.is_pass %>
-</p>
-
-<p>
-  <strong>Is distribute:</strong>
-  <%= @apply.is_distribute %>
-</p>
-
+<% if @apply.attachment %>
 <p>
   <strong>Attachment:</strong>
-  <%= @apply.attachment %>
+  <%= @apply.attachment.url %>
 </p>
+<% end %>
 
+<% if current_user && current_user == @apply.user %>
 <%= link_to 'Edit', edit_apply_path(@apply) %> |
 <%= link_to 'Back', applies_path %>
+<% end %>
+
+<% if current_user && current_user.admin? && (@apply.verify.nil? || !@apply.verify.is_pass) %>
+<% @verify = Verify.new({apply_id: @apply.id}) %>
+<%= render 'verifies/form' %>
+<% end %>
+
+<% if current_user && current_user.distributor? && @apply.verify && @apply.verify.is_pass %>
+<hr>
+<p>
+  <strong>Is pass:</strong>
+  <%= @apply.verify.is_pass %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @apply.verify.content %>
+</p>
+<hr>
+<% if !@apply.distribute.is_distribute %>
+<% @distribute = Distribute.new({apply_id: @apply.id}) %>
+<%= render 'distributes/form' %>
+<% else %>
+<p>
+  <strong>Is distribute:</strong>
+  <%= @apply.distribute.is_distribute %>
+</p>
+<% end %>
+<% end %>
