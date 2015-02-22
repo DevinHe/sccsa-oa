@@ -43,6 +43,7 @@ group :development, :test do
   gem 'spring'
 
   gem 'rspec-rails', '~> 3.2.0'
+  gem 'better_errors'
 end
 
 gem 'bootstrap-sass', '~> 3.3.3'
@@ -55,7 +56,7 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'will_paginate-bootstrap'
 
 gem 'mini_magick'
-gem 'rails_kindeditor'
+gem 'rails_kindeditor'  # remember in production env:  rake kindeditor:assets
 
 gem 'qiniu-rs'
 
