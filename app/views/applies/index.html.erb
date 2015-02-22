@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Applies</h1>
+<h3>配送一览</h3>
 
 <table>
   <thead>
@@ -25,10 +25,10 @@
   <tbody>
     <% @applies.each do |apply| %>
       <tr>
-        <td><%= apply.user %></td>
+        <td><%= apply.user.unit %></td>
         <td><%= apply.distributor %></td>
-        <td><%= apply.project %></td>
-        <td><%= apply.category %></td>
+        <td><%= apply.project.name %></td>
+        <td><%= apply.category.name %></td>
         <td><%= apply.requirement %></td>
         <td><%= apply.site %></td>
         <td><%= apply.facilities %></td>
@@ -37,7 +37,7 @@
         <td><%= apply.is_back %></td>
         <td><%= apply.is_pass %></td>
         <td><%= apply.is_distribute %></td>
-        <td><%= apply.attachment %></td>
+        <td><%= link_to "申报单下载", apply.attachment.url %></td>
         <td><%= link_to 'Show', apply %></td>
         <td><%= link_to 'Edit', edit_apply_path(apply) %></td>
         <td><%= link_to 'Destroy', apply, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -3,11 +3,12 @@ class NotificationsController < ApplicationController
   respond_to :html, :xml, :json
 
   def index
-    @notifications = Notification.all
+    @notifications = Notification.where(user_id: current_user.id).paginate(:page => params[:page], :per_page => 30)
     respond_with(@notifications)
   end
 
   def show
+
     respond_with(@notification)
   end
 
@@ -27,6 +28,7 @@ class NotificationsController < ApplicationController
 
   def update
     @notification.update(notification_params)
+    @notification.read = true
     respond_with(@notification)
   end
 

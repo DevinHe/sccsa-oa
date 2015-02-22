@@ -21,5 +21,5 @@
 //= require_tree .
 
 $(function () {
-    $('.datetimepicker').datetimepicker({locale: 'zh-cn'});
+    $('.datetimepicker').datetimepicker({locale: 'zh-cn', format: 'YYYY-MM-DD'});
 });

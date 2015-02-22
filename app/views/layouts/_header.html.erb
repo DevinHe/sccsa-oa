@@ -9,9 +9,11 @@
         <li>
           <%= link_to "协会通知", notices_path %>
         </li>
-        <li>
-          <%= link_to "配送申报", new_apply_path %>
-        </li>
+        <% unless current_user.admin? %>
+          <li>
+            <%= link_to "配送申报", new_apply_path, data: { no_turbolink: true } %>
+          </li>
+        <% end %>
         <li>
           <%= link_to "配送查询", applies_path %>
         </li>
@@ -42,14 +44,13 @@
         <% end %>
       </ul>
           <ul class="nav navbar-nav navbar-right">
-            <% length = Notification.where(read: false).count %>
-            <% if length > 0 %>
+            <% length = Notification.unread(current_user.id).count %>
+
               <li>
                 <%= link_to notifications_path do %>
-                  最新通知<%= content_tag(:span, length, class: "badge badge-red") %>
+                  最新通知<%= content_tag(:span, length, class: "badge badge-red") if length > 0 %>
                 <% end %>
               </li>
-            <% end %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">账户管理<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
