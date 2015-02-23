@@ -3,15 +3,18 @@
 <div class="page-header">
   <h3>配送一览</h3>
 </div>
-
+<%= search_form_for @q do |f| %>
+  <%= f.search_field :user_unit_or_category_name_or_project_name_or_implement_time_cont %>
+  <%= f.submit %>
+<% end %>
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>申请时间</th>
-      <th>申请组织</th>
-      <th>申报类别</th>
-      <th>项目名称</th>
-      <th>实施时间</th>
+      <%= content_tag :th, sort_link(@q, :created_at, '申请时间') %>
+      <%= content_tag :th, sort_link(@q, :user_unit, '申请组织') %>
+      <%= content_tag :th, sort_link(@q, :category_name, '申报类别') %>
+      <%= content_tag :th, sort_link(@q, :project_name, '项目名称') %>
+      <%= content_tag :th, sort_link(@q, :implement_time, '实施时间') %>
       <th>附件下载</th>
       <th colspan="3"></th>
     </tr>
@@ -20,15 +23,15 @@
   <tbody>
     <% @applies.each do |apply| %>
       <tr>
-        <td><%= apply.created_at %></td>
+        <td><%= my_time(apply.created_at) %></td>
         <td><%= apply.user.unit %></td>
         <td><%= apply.category.name %></td>
         <td><%= apply.project.name %></td>
-        <td><%= apply.implement_time %></td>
+        <td><%= my_time(apply.implement_time) %></td>
         <td><%= link_to "申报单下载", apply.attachment.url %></td>
-        <td><%= link_to 'Show', apply %></td>
-        <td><%= link_to 'Edit', edit_apply_path(apply) %></td>
-        <td><%= link_to 'Destroy', apply, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '查看', apply %></td>
+        <td><%= link_to '修改', edit_apply_path(apply) %></td>
+        <td><%= link_to '删除', apply, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

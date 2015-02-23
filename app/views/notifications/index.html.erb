@@ -15,7 +15,7 @@
         </div>
         <div class="col-xs-2">
           <% if current_user.admin? %>
-            <%= link_to 'Destroy', notification, class: "btn btn-danger btn-xs", method: :delete, data: { confirm: '确认删除？'} %>
+            <%= link_to '删除', notification, class: "btn btn-danger btn-xs", method: :delete, data: { confirm: '确认删除？'} %>
           <% end %>
         </div>
       </li>

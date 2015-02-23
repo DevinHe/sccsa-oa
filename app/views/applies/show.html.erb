@@ -47,8 +47,8 @@
 <% end %>
 
 <% if current_user && current_user == @apply.user %>
-<%= link_to 'Edit', edit_apply_path(@apply) %> |
-<%= link_to 'Back', applies_path %>
+<%= link_to '修改', edit_apply_path(@apply) %> |
+<%= link_to '列表页', applies_path %>
 <% end %>
 
 <% if current_user && current_user.admin? && (@apply.verify.nil? || !@apply.verify.is_pass) %>

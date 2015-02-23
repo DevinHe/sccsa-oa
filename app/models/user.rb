@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   validates :name, :unit, :role_id, :email, :password, presence: true
   validates :name, :email, uniqueness: true
   scope :no_admin, ->{ where(is_admin: false) }
+  default_scope { order("created_at DESC") }
 
   after_create :default_values
 

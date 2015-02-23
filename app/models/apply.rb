@@ -1,4 +1,7 @@
 class Apply < ActiveRecord::Base
+
+  default_scope { order("applies.created_at DESC") }
+
   belongs_to :user, class_name: "User"
   belongs_to :project
   belongs_to :category

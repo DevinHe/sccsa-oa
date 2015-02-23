@@ -18,9 +18,9 @@
         <td><%= verify.is_pass %></td>
         <td><%= verify.apply %></td>
         <td><%= verify.content %></td>
-        <td><%= link_to 'Show', verify %></td>
-        <td><%= link_to 'Edit', edit_verify_path(verify) %></td>
-        <td><%= link_to 'Destroy', verify, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '查看', verify %></td>
+        <td><%= link_to '修改', edit_verify_path(verify) %></td>
+        <td><%= link_to '删除', verify, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -22,7 +22,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     @category.save
-    respond_with(@category)
+    respond_with(@category, location: ->{categories_path})
   end
 
   def update

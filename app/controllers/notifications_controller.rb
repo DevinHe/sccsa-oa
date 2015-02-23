@@ -8,7 +8,6 @@ class NotificationsController < ApplicationController
   end
 
   def show
-
     respond_with(@notification)
   end
 

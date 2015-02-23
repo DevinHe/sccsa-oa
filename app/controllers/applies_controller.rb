@@ -3,7 +3,14 @@ class AppliesController < ApplicationController
   respond_to :html, :xml, :json
 
   def index
-    @applies = Apply.all
+    if current_user.distributor?
+      @q = Apply.includes(:distribute).where(distributes: {user_id: current_user.id}).ransack(params[:q])
+    elsif current_user.admin?
+      @q = Apply.ransack(params[:q])
+    else
+      @q = Apply.where(user_id: current_user.id).ransack(params[:q])
+    end
+    @applies = @q.result.includes(:user,:category,:project).paginate(:page => params[:page], :per_page => 10)
     respond_with(@applies)
   end
 

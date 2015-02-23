@@ -7,3 +7,4 @@
 <div class="notices-show-content">
   <%= raw @notice.content %>
 </div>
+<%= link_to '修改', edit_notice_path(@notice), class: "btn btn-info btn-xs", data: { no_turbolink: true } %> | <%= link_to '列表页', notices_path %>

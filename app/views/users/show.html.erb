@@ -19,5 +19,6 @@
   <strong>权限:</strong>
   <%= @user.role.name %>
 </p>
-
+<% if cadmin? %>
 <%= link_to '修改账户信息', edit_user_path(@user) %>
+<% end %>

@@ -3,6 +3,8 @@ class Notice < ActiveRecord::Base
 
   validates :title, :content, presence: true
 
+  default_scope { order("created_at DESC") }
+
   after_create :new_notification
   after_update :update_notification
 

@@ -4,7 +4,12 @@
   <h3>资料下载</h3>
 </div>
 
-<% if current_user.admin? %>
+<%= search_form_for @q do |f| %>
+  <%= f.search_field :title_cont %>
+  <%= f.submit %>
+<% end %>
+
+<% if cadmin? %>
   <div><%= link_to '上传新资料', new_resource_path, class: "btn btn-success" %></div>
 <% end %>
 <br />
@@ -18,7 +23,7 @@
         </div>
 
         <div class="col-xs-2">
-          <% if current_user.admin? %>
+          <% if cadmin? %>
             <%= link_to '删除', resource, class: "btn btn-danger btn-xs", method: :delete, data: { confirm: '确认删除？' } %>
           <% end %>
         </div>

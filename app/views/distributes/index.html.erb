@@ -18,9 +18,9 @@
         <td><%= distribute.is_distribute %></td>
         <td><%= distribute.user %></td>
         <td><%= distribute.apply %></td>
-        <td><%= link_to 'Show', distribute %></td>
-        <td><%= link_to 'Edit', edit_distribute_path(distribute) %></td>
-        <td><%= link_to 'Destroy', distribute, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '查看', distribute %></td>
+        <td><%= link_to '修改', edit_distribute_path(distribute) %></td>
+        <td><%= link_to '删除', distribute, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

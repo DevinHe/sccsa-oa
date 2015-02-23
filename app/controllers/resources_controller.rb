@@ -3,7 +3,8 @@ class ResourcesController < ApplicationController
   respond_to :html, :xml, :json
 
   def index
-    @resources = Resource.paginate(:page => params[:page], :per_page => 20)
+    @q = Resource.ransack(params[:q])
+    @resources = @q.result.paginate(:page => params[:page], :per_page => 20)
     respond_with(@resources)
   end
 
@@ -22,7 +23,7 @@ class ResourcesController < ApplicationController
   def create
     @resource = Resource.new(resource_params)
     @resource.save
-    respond_with(@resource)
+    respond_with(@resource,location: ->{resources_path})
   end
 
   def update

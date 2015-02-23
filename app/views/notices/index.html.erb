@@ -4,6 +4,11 @@
   <h3>协会通知</h3>
 </div>
 
+<%= search_form_for @q do |f| %>
+  <%= f.search_field :title_cont %>
+  <%= f.submit %>
+<% end %>
+
 <% if current_user.admin? %>
   <div><%= link_to '新建协会通知', new_notice_path, class: "btn btn-success", data: { no_turbolink: true } %></div>
 <% end %>
@@ -14,10 +19,10 @@
     <% @notices.each do |notice| %>
         <li class="message-time-list">
           <div class="col-xs-10">
-            <%= link_to "#{notice.created_at.strftime('%F')} - #{notice.title}", notice %>
+            <%= link_to "#{my_time(notice.created_at)} - #{notice.title}", notice %>
           </div>
           <div class="col-xs-2">
-            <% if current_user.admin? %>
+            <% if cadmin? %>
               <%= link_to '修改', edit_notice_path(notice), class: "btn btn-primary btn-xs", data: { no_turbolink: true } %> |
               <%= link_to '删除', notice, class: "btn btn-danger btn-xs", method: :delete, data: { confirm: '确认删除?' } %>
             <% end %>
