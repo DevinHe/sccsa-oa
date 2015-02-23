@@ -23,11 +23,11 @@
   <tbody>
     <% @applies.each do |apply| %>
       <tr>
-        <td><%= my_time(apply.created_at) %></td>
+        <td><%= my_date(apply.created_at) %></td>
         <td><%= apply.user.unit %></td>
         <td><%= apply.category.name %></td>
         <td><%= apply.project.name %></td>
-        <td><%= my_time(apply.implement_time) %></td>
+        <td><%= my_date(apply.implement_time) %></td>
         <td><%= link_to "申报单下载", apply.attachment.url %></td>
         <td><%= link_to '查看', apply %></td>
         <td><%= link_to '修改', edit_apply_path(apply) %></td>

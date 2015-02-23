@@ -1,4 +1,4 @@
 <div class="page-header">
-  <h4><strong>欢迎&nbsp;&nbsp;<a href="#"><%= @user.unit %></a>&nbsp;&nbsp;登录上海社区体育配送系统</strong></h4>
-  <p>当前使用者<a href="#"><%= @user.name %></a>，登录时间<%= Time.now.strftime('%F %H:%M') %></p>
+  <h4><strong>欢迎&nbsp;&nbsp;<%= link_to @user.unit, user_path(@user) %>&nbsp;&nbsp;登录上海社区体育配送系统</strong></h4>
+  <p>当前使用者<%= link_to @user.name, user_path(@user) %>，登录时间: <%= my_time(Time.now) %></p>
 </div>

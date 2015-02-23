@@ -17,8 +17,6 @@ class AppliesController < ApplicationController
   def show
     notification = @apply.notifications.unread(current_user.id).first
     notification.update_attribute(:read, true) if notification
-
-    # @verfy = Verify.new({apply_id: @apply.id}) if current_user.admin?
     respond_with(@apply)
   end
 

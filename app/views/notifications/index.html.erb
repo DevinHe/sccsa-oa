@@ -6,10 +6,9 @@
 <div class="row">
   <ul class="list-unstyled">
     <% @notifications.each do |notification| %>
-
       <li class="message-time-list">
         <div class="col-xs-10">
-        <%=  notification.created_at.strftime('%F') %>
+        <%=  my_date(notification.created_at) %>
         <%=  raw notification.content %><!--<span class="label label-danger">未阅读</span> -->
         <%= content_tag(:span, "新通知", class: "label label-danger") unless notification.read %>
         </div>
@@ -22,7 +21,6 @@
     <% end %>
   </ul>
 </div>
-
 
 <%= will_paginate @notifications, renderer: BootstrapPagination::Rails, class: "will_paginate" %>
 

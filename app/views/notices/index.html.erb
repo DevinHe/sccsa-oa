@@ -19,7 +19,7 @@
     <% @notices.each do |notice| %>
         <li class="message-time-list">
           <div class="col-xs-10">
-            <%= link_to "#{my_time(notice.created_at)} - #{notice.title}", notice %>
+            <%= link_to "#{my_date(notice.created_at)} - #{notice.title}", notice %>
           </div>
           <div class="col-xs-2">
             <% if cadmin? %>

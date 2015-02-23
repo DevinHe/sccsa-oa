@@ -1,5 +1,7 @@
 class Apply < ActiveRecord::Base
 
+  validates :user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :implement_time, :attachment, presence: true
+
   default_scope { order("applies.created_at DESC") }
 
   belongs_to :user, class_name: "User"
@@ -22,6 +24,7 @@ class Apply < ActiveRecord::Base
   end
 
   def update_notification
+    admin = User.find(1)
     if self.verify.try(:is_pass) == false
       Notification.notify(admin, "<a href='/applies/#{self.id}'>#{self.user.unit}已重新发送配送申报", self)
     end

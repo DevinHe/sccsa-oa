@@ -2,7 +2,7 @@ class Distribute < ActiveRecord::Base
   belongs_to :user
   belongs_to :apply
 
-  validates :user_id, presence: true
+  validates :user_id, :is_distribute, presence: true
 
   after_create :new_notification
 

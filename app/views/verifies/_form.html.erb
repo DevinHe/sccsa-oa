@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.hidden_field :apply_id, value: @verify.apply_id %>
-    <%= f.input :is_pass %>
+    <%= f.input :is_pass, as: :radio_buttons, collection: [['Yes', true] ,['No', false]], label: false %>
     <%= f.association :user, label_method: :unit, collection: User.where(role_id: 3) %>
     <%= f.input :content %>
   </div>

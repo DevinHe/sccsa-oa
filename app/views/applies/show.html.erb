@@ -49,10 +49,19 @@
 <% if current_user && current_user == @apply.user %>
 <%= link_to '修改', edit_apply_path(@apply) %> |
 <%= link_to '列表页', applies_path %>
+
+<% if @apply.verify && !@apply.verify.is_pass %>
+<hr>
+Reason: <%= @apply.verify.content %>
+<% end %>
 <% end %>
 
 <% if current_user && current_user.admin? && (@apply.verify.nil? || !@apply.verify.is_pass) %>
+<% if @apply.verify %>
+<% @verify = @apply.verify %>
+<% else %>
 <% @verify = Verify.new({apply_id: @apply.id}) %>
+<% end %>
 <%= render 'verifies/form' %>
 <% end %>
 
@@ -68,7 +77,7 @@
   <%= @apply.verify.content %>
 </p>
 <hr>
-<% if !@apply.distribute.is_distribute %>
+<% if @apply.distribute.nil? %>
 <% @distribute = Distribute.new({apply_id: @apply.id}) %>
 <%= render 'distributes/form' %>
 <% else %>
