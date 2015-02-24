@@ -10,30 +10,117 @@
   <%= @feedback.apply %>
 </p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @feedback.content %>
-</p>
+<table class="table table-bordered distribution">
+  <thead>
+  <tr class="text-center active">
+    <th colspan="3" class="text-center"><h4>上海公共体育服务社区配送<br>
+      服务情况反馈表
+    </h4></th>
+  </tr>
+  </thead>
+  <form class="form-horizontal">
+    <tbody>
+    <tr>
+      <td colspan="2">
+        <div class="form-group">
+          <label class="col-xs-4 control-label">申报单位</label>
+          <div class="col-xs-8">
+            徐汇区徐家汇社区体育健身俱乐部 padding
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="form-group">
+          <label class="col-xs-4 control-label">申报日期</label>
+          <div class="col-xs-8">
+            2015年5月8日 padding
+          </div>
+        </div>
+      </td>
 
-<p>
-  <strong>Coach:</strong>
-  <%= @feedback.coach %>
-</p>
-
-<p>
-  <strong>Suggestion:</strong>
-  <%= @feedback.suggestion %>
-</p>
-
-<p>
-  <strong>Population:</strong>
-  <%= @feedback.population %>
-</p>
-
-<p>
-  <strong>Distribute advice:</strong>
-  <%= @feedback.distribute_advice %>
-</p>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <div class="form-group">
+          <label class="col-xs-4 control-label">申报项目类别</label>
+          <div class="col-xs-8">
+            科普健身讲座 padding
+          </div>
+        </div>
+      </td>
+    <tr>
+      <td colspan="3">
+        <div class="form-group">
+          <label class="col-xs-4 control-label">项目具体名称</label>
+          <div class="col-xs-8">
+            中老年人运动讲座 padding
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <div class="form-group">
+          <label class="col-xs-4 control-label">项目编号</label>
+          <div class="col-xs-8">
+            00001 padding
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" class="text-center">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">配送内容</label>
+          <div class="col-sm-8">
+            <%= @feedback.content %>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" class="text-center">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">教练/专家/裁判（姓名）</label>
+          <div class="col-sm-8">
+            <%= @feedback.coach %>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" class="text-center">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">受众人数</label>
+          <div class="col-sm-8">
+            <%= @feedback.population %>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" class="text-center">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">街道工作人员意见</label>
+          <div class="col-sm-8">
+            <%= @feedback.suggestion %>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" class="text-center">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">配送单位意见</label>
+          <div class="col-sm-8">
+            <%= @feedback.distribute_advice %>
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </form>
+</table>
 
 <%= link_to '修改', edit_feedback_path(@feedback) %> |
 <%= link_to '列表页', feedbacks_path %>

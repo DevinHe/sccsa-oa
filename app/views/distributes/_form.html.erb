@@ -3,11 +3,11 @@
 
   <div class="form-inputs">
     <%= f.hidden_field :apply_id, value: @distribute.apply_id %>
-    <%= f.input :is_distribute %>
+    <%= f.input :is_distribute, label: '确认配送' %>
     <%= f.hidden_field :user_id, value: current_user.id %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, '提交' %>
   </div>
 <% end %>

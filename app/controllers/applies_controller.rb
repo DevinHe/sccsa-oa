@@ -3,10 +3,10 @@ class AppliesController < ApplicationController
   respond_to :html, :xml, :json
 
   def index
-    if current_user.distributor?
-      @q = Apply.includes(:distribute).where(distributes: {user_id: current_user.id}).ransack(params[:q])
-    elsif current_user.admin?
+    if current_user.admin?
       @q = Apply.ransack(params[:q])
+    elsif current_user.distributor?
+      @q = Apply.includes(:distribute).where(distributes: {user_id: current_user.id}).ransack(params[:q])
     else
       @q = Apply.where(user_id: current_user.id).ransack(params[:q])
     end

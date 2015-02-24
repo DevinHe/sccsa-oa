@@ -10,6 +10,7 @@ class Apply < ActiveRecord::Base
   has_many :notifications, as: :notificationable, dependent: :destroy
   has_one :verify, dependent: :destroy
   has_one :distribute, dependent: :destroy
+  has_one :feedback, dependent: :destroy
 
   mount_uploader :attachment, AttachmentUploader
 
@@ -20,13 +21,13 @@ class Apply < ActiveRecord::Base
 
   def new_notification
     admin = User.find(1)
-    Notification.notify(admin, "<a href='/applies/#{self.id}'>#{self.user.unit}发送新配送申报", self)
+    Notification.notify(admin, "<a href='/applies/#{self.id}'>#{self.user.unit}发送新配送申报</a>", self)
   end
 
   def update_notification
     admin = User.find(1)
     if self.verify.try(:is_pass) == false
-      Notification.notify(admin, "<a href='/applies/#{self.id}'>#{self.user.unit}已重新发送配送申报", self)
+      Notification.notify(admin, "<a href='/applies/#{self.id}'>#{self.user.unit}已重新发送配送申报</a>", self)
     end
   end
 

@@ -3,12 +3,13 @@
 <div class="page-header">
   <h3>资料下载</h3>
 </div>
-
-<%= search_form_for @q do |f| %>
-  <%= f.search_field :title_cont %>
-  <%= f.submit %>
-<% end %>
-
+<div class="form-inputs form-inline">
+  <%= search_form_for @q do |f| %>
+    <%= f.search_field :title_cont, class: "form-control" %>
+    <%= f.submit "搜索", class: "btn btn-default" %>
+  <% end %>
+</div>
+<br>
 <% if cadmin? %>
   <div><%= link_to '上传新资料', new_resource_path, class: "btn btn-success" %></div>
 <% end %>

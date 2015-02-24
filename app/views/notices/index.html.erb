@@ -3,11 +3,14 @@
 <div class="page-header">
   <h3>协会通知</h3>
 </div>
+<div class="form-inputs form-inline">
+  <%= search_form_for @q do |f| %>
+    <%= f.search_field :title_cont, class: "form-control" %>
+    <%= f.submit"搜索", class: "btn btn-default" %>
+  <% end %>
+</div>
 
-<%= search_form_for @q do |f| %>
-  <%= f.search_field :title_cont %>
-  <%= f.submit %>
-<% end %>
+<br>
 
 <% if current_user.admin? %>
   <div><%= link_to '新建协会通知', new_notice_path, class: "btn btn-success", data: { no_turbolink: true } %></div>
