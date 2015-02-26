@@ -10,12 +10,13 @@
 <body>
 
 <% if user_signed_in? %>
-<%= render "layouts/header" %>
+  <%= render "layouts/header" %>
+<% else %>
+  <%= render "layouts/signin" %>
 <% end %>
 
 <div class="container">
-  <div class="notice"><%= notice %></div>
-  <div class="alert"><%= alert %></div>
+  <%= render "layouts/flash" %>
 
   <%= yield %>
 
