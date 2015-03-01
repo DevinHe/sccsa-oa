@@ -3,8 +3,6 @@ source 'https://ruby.taobao.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -31,11 +29,19 @@ gem 'jbuilder', '~> 2.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+group :development do
+  gem 'capistrano', '~> 3.1'
+  gem 'capistrano-rails', '~> 1.1.0'
+  gem 'capistrano-bundler', '~> 1.1.2'
+  gem 'capistrano-rbenv', "~> 2.0"
+  gem 'capistrano-passenger'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
@@ -44,6 +50,7 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 3.2.0'
   gem 'better_errors'
+
 end
 
 gem 'bootstrap-sass', '~> 3.3.3'
@@ -68,3 +75,4 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 
 # search
 gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.2'
+gem 'mysql2', group: :production
