@@ -8,15 +8,26 @@ class FeedbacksController < ApplicationController
   end
 
   def show
+    notification = @feedback.notifications.unread(current_user.id).first
+    notification.update_attribute(:read, true) if notification
     respond_with(@feedback)
   end
 
   def new
     @feedback = Feedback.new
-    respond_with(@feedback)
+    @feedback.user_id = current_user.id
+    if params[:id]
+      @feedback.apply = Apply.find(params[:id])
+      respond_with(@feedback)
+    else
+      # respond_with(@feedback,location: ->{ applies_path(@feedback) })
+      redirect_to applies_path
+    end
   end
 
   def edit
+    notification = @feedback.notifications.unread(current_user.id).first
+    notification.update_attribute(:read, true) if notification
   end
 
   def create

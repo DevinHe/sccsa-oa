@@ -51,7 +51,7 @@
         <div class="form-group">
           <label class="col-xs-4 control-label">项目编号</label>
           <div class="col-xs-8">
-            00001 padding
+            <%= @apply.project.serial %>
           </div>
         </div>
       </td>
@@ -135,17 +135,30 @@
         <div class="form-group">
           <label class="col-sm-4 control-label">上海社区体育协会</label>
           <div class="col-sm-8">
-            <span class="label label-success label-distribution">审核批准</span>
+            <%= raw(verify_status @apply) %>
           </div>
         </div>
       </td>
     </tr>
+    <% unless @apply.verify.is_pass %>
+    <tr>
+      <td colspan="3">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">申报退回理由:</label>
+          <div class="col-sm-8">
+            <%= @apply.verify.content %>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <% end %>
+    <% if @apply.distribute %>
     <tr>
       <td colspan="3">
         <div class="form-group">
           <label class="col-sm-4 control-label">配送中心</label>
           <div class="col-sm-8">
-            <span class="label label-info label-distribution">确认配送 padding</span>
+            <%= raw(distribute_status @apply) %>
           </div>
         </div>
       </td>
@@ -155,83 +168,15 @@
         <div class="form-group">
           <label class="col-sm-4 control-label">状态</label>
           <div class="col-sm-8">
-            <a href="#">填写反馈 padding | 查看反馈</a>
+            <%= raw(show_feedback_status @apply) %>
           </div>
         </div>
       </td>
     </tr>
+    <% end %>
     </tbody>
   </form>
 </table>
 
-<% if current_user %>
-  <% if current_user == @apply.user %>
-  <%= link_to '修改', edit_apply_path(@apply), 'data-no-turbolink' => true %> |
-  <%= link_to '列表页', applies_path %>
-    <% end %>
 
-  <% if @apply.verify && !@apply.verify.is_pass %>
-    <hr>
-    <span class="label label-warning label-distribution">退回</span>
-    Reason: <%= @apply.verify.content %>
-  <% else %>
-    <hr>
-    <span class="label label-success label-distribution">批准</span>
-    <% if @apply.distribute && @apply.distribute.is_distribute %>
-      <span class="label label-info label-distribution">确认配送</span>
-      <% if @apply.feedback.nil? %>
-        <%= link_to '填写反馈表', new_feedback_path %>
-        <% elsif @apply.feedback && current_user == @apply.verify.user %>
-        <%= link_to '填写反馈表', edit_feedback_path(@apply.feedback) %>
-        <% else %>
-        <%= link_to '查看反馈表', feedback_path(@apply.feedback) %>
-      <% end %>
-    <% else %>
-      <span class="label label-default label-distribution">未配送</span>
-    <% end %>
-  <% end %>
-<% end %>
-
-    <% if current_user && current_user.admin? && (@apply.verify.nil? || !@apply.verify.is_pass) && @apply.notifications.first.user == current_user %>
-    <% if @apply.verify %>
-    <% @verify = @apply.verify %>
-    <% else %>
-    <% @verify = Verify.new({apply_id: @apply.id}) %>
-    <% end %>
-    <%= render 'verifies/form' %>
-    <% end %>
-
-    <% if current_user && current_user.distributor? && @apply.verify && @apply.verify.is_pass %>
-    <hr>
-    <p>
-      <strong>审批状态</strong>
-      <% if @apply.verify.is_pass %>
-        <span class="label label-success label-distribution">批准</span>
-      <% else %>
-        <span class="label label-warning label-distribution">退回</span>
-      <% end %>
-    </p>
-
-    <% unless @apply.verify.content.empty? %>
-    <p>
-      <strong>申报退回理由:</strong>
-      <%= @apply.verify.content %>
-    </p>
-    <% end %>
-
-    <hr>
-    <% if @apply.distribute.nil? %>
-    <% @distribute = Distribute.new({apply_id: @apply.id}) %>
-    <%= render 'distributes/form' %>
-    <% else %>
-    <p>
-      <strong>配送中心状态:</strong>
-      <% if @apply.distribute.is_distribute %>
-        <span class="label label-info label-distribution">确认配送</span>
-      <% else %>
-        <span class="label label-default label-distribution">未配送</span>
-      <% end %>
-    </p>
-  <% end %>
-<% end %>
 

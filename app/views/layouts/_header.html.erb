@@ -9,9 +9,9 @@
         <li>
           <%= link_to "协会通知", notices_path %>
         </li>
-        <% unless cadmin? && cdistributor? %>
+        <% if !cadmin? && !cdistributor? %>
           <li>
-            <%= link_to "配送申报", new_apply_path, data: { no_turbolink: true } %>
+            <%= link_to "配送申报", new_apply_path %>
           </li>
         <% end %>
         <li>

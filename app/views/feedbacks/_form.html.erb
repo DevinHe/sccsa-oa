@@ -1,9 +1,13 @@
 <%= simple_form_for(@feedback) do |f| %>
   <%= f.error_notification %>
-
-    <%= f.association :user %>
-    <%= f.association :apply, label: "关联配送申请表" %>
-
+    <%= f.hidden_field :user_id %>
+    <%= f.hidden_field :apply_id %>
+    <% if cdistributor? %>
+      <% readonly = {readonly: true} %>
+    <% else %>
+      <% readonly = {} %>
+    <% end %>
+    <% apply = @feedback.apply %>
     <table class="table table-bordered distribution">
       <thead>
       <tr class="text-center active">
@@ -19,7 +23,7 @@
             <div class="form-group">
               <label class="col-xs-4 control-label">申报单位</label>
               <div class="col-xs-8">
-                徐汇区徐家汇社区体育健身俱乐部
+                <%= apply.user.unit %>
               </div>
             </div>
           </td>
@@ -27,7 +31,7 @@
             <div class="form-group">
               <label class="col-xs-4 control-label">申报日期</label>
               <div class="col-xs-8">
-                2015年5月8日
+                <%= my_date(apply.created_at) %>
               </div>
             </div>
           </td>
@@ -38,7 +42,7 @@
             <div class="form-group">
               <label class="col-xs-4 control-label">申报项目类别</label>
               <div class="col-xs-8">
-                科普健身讲座
+                <%= apply.category.name %>
               </div>
             </div>
           </td>
@@ -47,7 +51,7 @@
             <div class="form-group">
               <label class="col-xs-4 control-label">项目具体名称</label>
               <div class="col-xs-8">
-                中老年人运动讲座
+                <%= apply.project.name %>
               </div>
             </div>
           </td>
@@ -57,7 +61,7 @@
             <div class="form-group">
               <label class="col-xs-4 control-label">项目编号</label>
               <div class="col-xs-8">
-                00001
+                <%= apply.project.serial %>
               </div>
             </div>
           </td>
@@ -67,7 +71,7 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">配送内容</label>
               <div class="col-sm-8">
-                <%= f.input :content, label: "配送内容" %>
+                <%= f.input :content, label: false, input_html: readonly %>
               </div>
             </div>
           </td>
@@ -77,7 +81,7 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">教练/专家/裁判（姓名）</label>
               <div class="col-sm-8">
-                <%= f.input :coach, label: "教练/专家/裁判（姓名）" %>
+                <%= f.input :coach, label: false, input_html: readonly %>
               </div>
             </div>
           </td>
@@ -87,7 +91,7 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">受众人数</label>
               <div class="col-sm-8">
-                <%= f.input :population, label: "受众人数" %>
+                <%= f.input :population, label: false, input_html: readonly %>
               </div>
             </div>
           </td>
@@ -97,21 +101,23 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">街道工作人员意见</label>
               <div class="col-sm-8">
-                <%= f.input :suggestion, label: "街道工作人员意见" %>
+                <%= f.input :suggestion, label: false, input_html: readonly %>
               </div>
             </div>
           </td>
         </tr>
+        <% if cdistributor? %>
         <tr>
           <td colspan="3" class="text-center">
             <div class="form-group">
               <label class="col-sm-4 control-label">配送单位意见</label>
               <div class="col-sm-8">
-                <%= f.input :distribute_advice, label: "配送单位意见" %>
+                <%= f.input :distribute_advice, label: false %>
               </div>
             </div>
           </td>
         </tr>
+        <% end %>
         <tr>
           <td colspan="3">
             <%= f.button :submit, "提交配送服务情况反馈表", class: "btn btn-primary submit-apply" %>

@@ -1,15 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @feedback.user %>
-</p>
-
-<p>
-  <strong>Apply:</strong>
-  <%= @feedback.apply %>
-</p>
-
+<% apply = @feedback.apply %>
 <table class="table table-bordered distribution">
   <thead>
   <tr class="text-center active">
@@ -25,7 +16,7 @@
         <div class="form-group">
           <label class="col-xs-4 control-label">申报单位</label>
           <div class="col-xs-8">
-            徐汇区徐家汇社区体育健身俱乐部 padding
+            <%= apply.user.unit %>
           </div>
         </div>
       </td>
@@ -33,7 +24,7 @@
         <div class="form-group">
           <label class="col-xs-4 control-label">申报日期</label>
           <div class="col-xs-8">
-            2015年5月8日 padding
+            <%= my_date(apply.created_at) %>
           </div>
         </div>
       </td>
@@ -44,7 +35,7 @@
         <div class="form-group">
           <label class="col-xs-4 control-label">申报项目类别</label>
           <div class="col-xs-8">
-            科普健身讲座 padding
+            <%= apply.category.name %>
           </div>
         </div>
       </td>
@@ -53,7 +44,7 @@
         <div class="form-group">
           <label class="col-xs-4 control-label">项目具体名称</label>
           <div class="col-xs-8">
-            中老年人运动讲座 padding
+            <%= apply.project.name %>
           </div>
         </div>
       </td>
@@ -63,7 +54,7 @@
         <div class="form-group">
           <label class="col-xs-4 control-label">项目编号</label>
           <div class="col-xs-8">
-            00001 padding
+            <%= apply.project.serial %>
           </div>
         </div>
       </td>
@@ -108,6 +99,7 @@
         </div>
       </td>
     </tr>
+    <% if @feedback.distribute_advice.present? %>
     <tr>
       <td colspan="3" class="text-center">
         <div class="form-group">
@@ -118,9 +110,12 @@
         </div>
       </td>
     </tr>
+    <% end %>
     </tbody>
   </form>
 </table>
 
-<%= link_to '修改', edit_feedback_path(@feedback) %> |
-<%= link_to '列表页', feedbacks_path %>
+<% if current_user == @feedback.user || current_user == @feedback.apply.distribute.user %>
+<%= link_to '修改', edit_feedback_path(@feedback) %>
+<% end %>
+<%#= link_to '列表页', feedbacks_path %>

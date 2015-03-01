@@ -28,7 +28,7 @@
         <td><%= feedback.distribute_advice %></td>
         <td><%= link_to '查看', feedback %></td>
         <td><%= link_to '修改', edit_feedback_path(feedback) %></td>
-        <td><%= link_to '删除', feedback, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '删除', feedback, method: :delete, data: { confirm: '你确定要删除吗？' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -20,6 +20,13 @@ class User < ActiveRecord::Base
   has_many :distributes, dependent: :destroy
   has_many :verifies, dependent: :destroy
 
+  def self.current_user
+    Thread.current[:current_user]
+  end
+
+  def self.current_user=(usr)
+    Thread.current[:current_user] = usr
+  end
 
   def admin?
     self.is_admin

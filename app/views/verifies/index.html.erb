@@ -20,7 +20,7 @@
         <td><%= verify.content %></td>
         <td><%= link_to '查看', verify %></td>
         <td><%= link_to '修改', edit_verify_path(verify) %></td>
-        <td><%= link_to '删除', verify, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '删除', verify, method: :delete, data: { confirm: '你确定要删除吗？' } %></td>
       </tr>
     <% end %>
   </tbody>

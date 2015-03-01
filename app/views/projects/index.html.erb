@@ -27,7 +27,7 @@
         <td><%= project.category.name %></td>
         <% if current_user.admin? %>
           <td><%= link_to '修改', edit_project_path(project), class: "btn btn-primary btn-xs" %></td>
-          <td><%= link_to '删除', project, class: "btn btn-danger btn-xs", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to '删除', project, class: "btn btn-danger btn-xs", method: :delete, data: { confirm: '你确定要删除吗？' } %></td>
         <% end %>
       </tr>
     <% end %>
