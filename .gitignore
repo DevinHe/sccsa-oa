@@ -27,3 +27,4 @@ doc/
 .secret
 public/uploads/*
 config/initializers/devise.rb
+config/secrets.yml

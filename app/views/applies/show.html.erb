@@ -6,177 +6,184 @@
     <th colspan="3" class="text-center"><h3>上海市公共体育服务社区配送申报</h3></th>
   </tr>
   </thead>
-  <form class="form-horizontal">
-    <tbody>
-    <tr>
-      <td colspan="2">
-        <div class="form-group">
-          <label class="col-xs-4 control-label">申报单位</label>
-          <div class="col-xs-8">
-            <%= @apply.user.unit %>
-          </div>
+  <tbody>
+  <tr>
+    <td colspan="2">
+      <div class="form-group">
+        <label class="col-xs-4 control-label">申报单位</label>
+        <div class="col-xs-8">
+          <%= @apply.user.unit %>
         </div>
-      </td>
-      <td>
-        <div class="form-group">
-          <label class="col-xs-4 control-label">申报日期</label>
-          <div class="col-xs-8">
-            <%= my_date(Time.now) %>
-          </div>
+      </div>
+    </td>
+    <td>
+      <div class="form-group">
+        <label class="col-xs-4 control-label">申报日期</label>
+        <div class="col-xs-8">
+          <%= my_date(Time.now) %>
         </div>
-      </td>
+      </div>
+    </td>
 
-    </tr>
-    <tr>
-      <td colspan="3">
-        <div class="form-group">
-          <label class="col-xs-4 control-label">申报项目类别</label>
-          <div class="col-xs-8">
-            <%= @apply.category.name %>
-          </div>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div class="form-group">
+        <label class="col-xs-4 control-label">申报项目类别</label>
+        <div class="col-xs-8">
+          <%= @apply.category.name %>
         </div>
-      </td>
-    <tr>
-      <td colspan="3">
-        <div class="form-group">
-          <label class="col-xs-4 control-label">项目具体名称</label>
-          <div class="col-xs-8">
-            <%= @apply.project.name %>
-          </div>
+      </div>
+    </td>
+  <tr>
+    <td colspan="3">
+      <div class="form-group">
+        <label class="col-xs-4 control-label">项目具体名称</label>
+        <div class="col-xs-8">
+          <%= @apply.project.name %>
         </div>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <div class="form-group">
-          <label class="col-xs-4 control-label">项目编号</label>
-          <div class="col-xs-8">
-            <%= @apply.project.serial %>
-          </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div class="form-group">
+        <label class="col-xs-4 control-label">项目编号</label>
+        <div class="col-xs-8">
+          <%= @apply.project.serial %>
         </div>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3" class="text-center active">
-        <label>项目实施计划</label>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <div class="form-group">
-          <label class="col-sm-4 control-label">
-            居民需求<br>调研情况简介
-          </label>
-          <div class="col-sm-8">
-            <%= @apply.requirement %>
-          </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" class="text-center active">
+      <label>项目实施计划</label>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div class="form-group">
+        <label class="col-sm-4 control-label">
+          居民需求<br>调研情况简介
+        </label>
+        <div class="col-sm-8">
+          <%= @apply.requirement %>
         </div>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <div class="form-group">
-          <label class="col-sm-4 control-label">项目实施场地（类型和人数）</label>
-          <div class="col-sm-8">
-            <%= @apply.site %>
-          </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div class="form-group">
+        <label class="col-sm-4 control-label">项目实施场地（类型和人数）</label>
+        <div class="col-sm-8">
+          <%= @apply.site %>
         </div>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <div class="form-group">
-          <label class="col-sm-4 control-label">实施场地地址</label>
-          <div class="col-sm-8">
-            <%= @apply.address %>
-          </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div class="form-group">
+        <label class="col-sm-4 control-label">实施场地地址</label>
+        <div class="col-sm-8">
+          <%= @apply.address %>
         </div>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <div class="form-group">
-          <label class="col-sm-4 control-label">意愿实施时间</label>
-          <div class="col-sm-8">
-            <%= @apply.implement_time %>
-          </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div class="form-group">
+        <label class="col-sm-4 control-label">意愿实施时间</label>
+        <div class="col-sm-8">
+          <%= @apply.implement_time %>
         </div>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <div class="form-group">
-          <label class="col-sm-4 control-label">音箱及设备条件</label>
-          <div class="col-sm-8">
-            <%= @apply.facilities %>
-          </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div class="form-group">
+        <label class="col-sm-4 control-label">音箱及设备条件</label>
+        <div class="col-sm-8">
+          <%= @apply.facilities %>
         </div>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <div class="form-group">
-          <label class="col-sm-4 control-label">下载配送申报</label>
-          <div class="form-group col-sm-8">
-            <% if @apply.attachment %>
-              <%= link_to "申报单下载", @apply.attachment.url %>
-            <% end %>
-          </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div class="form-group">
+        <label class="col-sm-4 control-label">下载配送申报</label>
+        <div class="form-group col-sm-8">
+          <% if @apply.attachment %>
+            <%= link_to "申报单下载", @apply.attachment.url %>
+          <% end %>
         </div>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3" class="text-center active">
-        <label>配送申报提交情况</label>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <div class="form-group">
-          <label class="col-sm-4 control-label">上海社区体育协会</label>
-          <div class="col-sm-8">
-            <%= raw(verify_status @apply) %>
-          </div>
-        </div>
-      </td>
-    </tr>
-    <% unless @apply.verify.is_pass %>
-    <tr>
-      <td colspan="3">
-        <div class="form-group">
-          <label class="col-sm-4 control-label">申报退回理由:</label>
-          <div class="col-sm-8">
-            <%= @apply.verify.content %>
-          </div>
-        </div>
-      </td>
-    </tr>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" class="text-center active">
+      <label>配送申报提交情况</label>
+    </td>
+  </tr>
+  <% if (@apply.verify.nil? || !@apply.verify.is_pass) && @apply.notifications.first.user == current_user %>
+    <% if @apply.verify.nil? %>
+    <% @verify = @apply.verify %>
+    <% else %>
+    <% @verify = Verify.new({apply_id: @apply.id}) %>
     <% end %>
-    <% if @apply.distribute %>
-    <tr>
-      <td colspan="3">
-        <div class="form-group">
-          <label class="col-sm-4 control-label">配送中心</label>
-          <div class="col-sm-8">
-            <%= raw(distribute_status @apply) %>
-          </div>
+    <%= render 'verifies/form' %>
+  <% else %>
+  <tr>
+    <td colspan="3">
+      <div class="form-group">
+        <label class="col-sm-4 control-label">上海社区体育协会</label>
+        <div class="col-sm-8">
+          <%= raw(verify_status @apply) %>
         </div>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <div class="form-group">
-          <label class="col-sm-4 control-label">状态</label>
-          <div class="col-sm-8">
-            <%= raw(show_feedback_status @apply) %>
-          </div>
+      </div>
+    </td>
+  </tr>
+  <% unless @apply.verify.is_pass %>
+  <tr>
+    <td colspan="3">
+      <div class="form-group">
+        <label class="col-sm-4 control-label">申报退回理由:</label>
+        <div class="col-sm-8">
+          <%= @apply.verify.content %>
         </div>
-      </td>
-    </tr>
-    <% end %>
-    </tbody>
-  </form>
+      </div>
+    </td>
+  </tr>
+  <% end %>
+  <% end %>
+  <% if @apply.distribute %>
+  <tr>
+    <td colspan="3">
+      <div class="form-group">
+        <label class="col-sm-4 control-label">配送中心</label>
+        <div class="col-sm-8">
+          <%= raw(distribute_status @apply) %>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div class="form-group">
+        <label class="col-sm-4 control-label">状态</label>
+        <div class="col-sm-8">
+          <%= raw(show_feedback_status @apply) %>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <% else %>
+  <% @distribute = Distribute.new({apply_id: @apply.id}) %>
+  <%= render 'distributes/form' %>
+  <% end %>
+  </tbody>
 </table>
-
-
-

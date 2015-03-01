@@ -12,7 +12,7 @@
 
 <br>
 
-<% if current_user.admin? %>
+<% if cadmin? %>
   <div><%= link_to '新建协会通知', new_notice_path, class: "btn btn-success", data: { no_turbolink: true } %></div>
 <% end %>
 <br />
