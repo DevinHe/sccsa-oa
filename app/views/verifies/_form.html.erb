@@ -1,14 +1,12 @@
 <%= simple_form_for(@verify) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.hidden_field :apply_id, value: @verify.apply_id %>
-    <%= f.input :is_pass, as: :radio_buttons, collection: [['批准', true] ,['退回', false]], label: '审批' %>
-    <%= f.association :user, label_method: :unit, collection: User.where(role_id: 3), include_blank: false, label: '选择配送中心' %>
-    <%= f.input :content, label: '审批退回理由' %>
-  </div>
+  <%= f.hidden_field :apply_id, value: @verify.apply_id %>
+  <%= f.input :is_pass, as: :radio_buttons, collection: [['批准', true] ,['退回', false]], label: '审批', class: "form-group form-control checkbox-inline" %>
+  <%= f.association :user, label_method: :unit, collection: User.where(role_id: 3), label: '选择配送中心', class: "form-group" %>
+  <%= f.input :content, label: '审批退回理由' %>
 
   <div class="form-actions">
-    <%= f.button :submit, "审批发送" %>
+    <%= f.button :submit, "审批发送",id: "verify_btn" %>
   </div>
 <% end %>

@@ -22,7 +22,7 @@ class DistributesController < ApplicationController
   def create
     @distribute = Distribute.new(distribute_params)
     @distribute.save
-    respond_with(@distribute)
+    respond_with(@distribute,location: ->{apply_path(@distribute.apply)})
   end
 
   def update

@@ -1,13 +1,21 @@
-<%= simple_form_for(@distribute) do |f| %>
+<%= simple_form_for(@distribute, class: "form-inline") do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
     <%= f.hidden_field :apply_id, value: @distribute.apply_id %>
-    <%= f.input :is_distribute, label: '确认配送' %>
     <%= f.hidden_field :user_id, value: current_user.id %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, '提交' %>
-  </div>
+    <div class="checkbox">
+      <%= f.input :is_distribute, label: '确认配送', required: false %>
+    </div>
+    <%= f.button :submit, '提交',id: "distribute_btn" %>
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#distribute_btn").on('click',function(){
+      if ($('#distribute_is_distribute:checked').length == 0) {
+        $('#distribute_is_distribute').focus();
+        return false;
+      };
+    });
+  });
+</script>

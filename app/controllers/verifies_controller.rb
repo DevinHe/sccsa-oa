@@ -22,12 +22,12 @@ class VerifiesController < ApplicationController
   def create
     @verify = Verify.new(verify_params)
     @verify.save
-    respond_with(@verify)
+    respond_with(@verify,location: ->{apply_path(@verify.apply)})
   end
 
   def update
     @verify.update(verify_params)
-    respond_with(@verify)
+    respond_with(@verify,location: ->{apply_path(@verify.apply)})
   end
 
   def destroy

@@ -129,14 +129,7 @@
       <label>配送申报提交情况</label>
     </td>
   </tr>
-  <% if (@apply.verify.nil? || !@apply.verify.is_pass) && @apply.notifications.first.user == current_user %>
-    <% if @apply.verify.nil? %>
-    <% @verify = @apply.verify %>
-    <% else %>
-    <% @verify = Verify.new({apply_id: @apply.id}) %>
-    <% end %>
-    <%= render 'verifies/form' %>
-  <% else %>
+  <% if @apply.verify && (!cadmin? || @apply.verify.is_pass) %>
   <tr>
     <td colspan="3">
       <div class="form-group">
@@ -147,7 +140,7 @@
       </div>
     </td>
   </tr>
-  <% unless @apply.verify.is_pass %>
+  <% if @apply.verify && !@apply.verify.is_pass %>
   <tr>
     <td colspan="3">
       <div class="form-group">
@@ -160,6 +153,7 @@
   </tr>
   <% end %>
   <% end %>
+  <% if @apply.verify && @apply.verify.is_pass %>
   <% if @apply.distribute %>
   <tr>
     <td colspan="3">
@@ -181,9 +175,58 @@
       </div>
     </td>
   </tr>
-  <% else %>
-  <% @distribute = Distribute.new({apply_id: @apply.id}) %>
-  <%= render 'distributes/form' %>
+  <% end %>
   <% end %>
   </tbody>
 </table>
+
+<% if current_user == @apply.user && @apply.notifications.first.user == current_user %>
+<%= link_to '重新提交 ', edit_apply_path(@apply) %> | <%= link_to '撤销申报', @apply, method: :delete, data: { confirm: '你确定要撤销吗？' } %>
+<% end %>
+
+<% if (@apply.verify.nil? || !@apply.verify.is_pass) && @apply.notifications.first.user == current_user && cadmin? %>
+  <% if @apply.verify.nil? %>
+  <% @verify = Verify.new({apply_id: @apply.id,is_pass: false}) %>
+  <% else %>
+  <% @verify = @apply.verify %>
+  <% end %>
+  <%= render 'verifies/form' %>
+<% end %>
+<% if @apply.distribute.nil? && @apply.notifications.first.user == current_user && cdistributor? %>
+  <div class="text-center active">
+      <label>配送情况</label>
+  </div>
+  <hr>
+  <% @distribute = Distribute.new({apply_id: @apply.id}) %>
+  <center>
+  <%= render 'distributes/form' %>
+  </center>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    // $('input[name="verify[is_pass]"]').change(function(){
+    //   if ($(this).val()==true) {
+    //     $('#verify_content').prop('required',false);
+    //     $('#verify_user_id').prop('required',true);
+    //   } else {
+    //     $('#verify_user_id').prop('required',false);
+    //     $('#verify_content').prop('required',true);
+    //   }
+    // });
+    $('#verify_btn').on('click',function(){
+      var flag = $('input[name="verify[is_pass]"]:checked').val();
+      if (flag == "true") {
+        if($('#verify_user_id').val() == "") {
+          $('#verify_user_id').focus();
+          return false;
+        }
+      } else{
+        if($('#verify_content').val() == "") {
+          $('#verify_content').focus();
+          return false;
+        }
+      };
+    });
+  });
+</script>

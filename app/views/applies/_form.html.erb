@@ -30,42 +30,56 @@
         </td>
 
       </tr>
-      <!-- <tr class="warning">
+      <tr class="warning">
         <td colspan="3" class="text-center">
           项目申报目标类别为单选（一次申报只能选择1个项目）并相应填写项目名称，编号自动生成
         </td>
-      </tr>  -->
+      </tr>
       <tr>
         <td><label class="control-label">申报项目类别</label></td>
         <td><label class="control-label">项目具体名称</label></td>
         <td><label class="control-label">项目编号</label></td>
       </tr>
-<!--       <%# Category.all.each do |category| %>
+      <% Category.all.each_with_index do |category,idx| %>
       <tr>
         <td>
           <div class="radio">
             <label>
-              <input type="radio" name="apply[category]" id="apply_category"><%#= category.name %>
+              <% if @apply.category.nil? %>
+              <% if idx == 0 %>
+              <%= f.radio_button :category_id,category.id, checked: true  %>
+              <% else %>
+              <%= f.radio_button :category_id,category.id  %>
+              <% end %>
+              <% else %>
+              <%= f.radio_button :category_id,category.id  %>
+              <% end %>
+              <%= category.name %>
             </label>
           </div>
        </td>
         <td>
-          <%#= f.select :project, category.projects.collect { |p| [ p.name, p.id ] },{include_blank: true}, {class: "form-control"} %>
+          <% if idx == 0 %>
+          <%= f.select :project_id, category.projects.collect { |p| [ p.name, p.id ] },{include_blank: true}, {class: "form-control project"} %>
+          <% else %>
+          <%= f.select :project_id, category.projects.collect { |p| [ p.name, p.id ] },{include_blank: true}, {class: "form-control project",disabled: ""} %>
+          <% end %>
         </td>
-        <td></td>
-      </tr>
-      <%# end %> -->
-      <tr>
-        <td>
-          <%= f.association :category, label: false, class: "form-control" %>
-        </td>
-        <td>
-          <%= f.association :project, label: false, class: "form-control" %>
-        </td>
-        <td>
+        <td class="pserial" data-serials="<%= category.projects.map{|e| [e.id,e.serial]} %>">
         </td>
       </tr>
-
+      <% end %>
+      <!-- <tr>
+        <td>
+          <%#= f.association :category, label: false, class: "form-control" %>
+        </td>
+        <td>
+          <%#= f.association :project, label: false, class: "form-control" %>
+        </td>
+        <td>
+        </td>
+      </tr>
+ -->
       <tr>
         <td colspan="3" class="text-center active">
           <label>项目实施计划</label>
@@ -135,7 +149,11 @@
           提交配送申请需同时上传<strong>纸质申请表照片</strong>或<strong>扫描件</strong>
           <div class="form-group">
             <label for="exampleInputFile">上传</label>
+            <% if @apply.attachment %>
             <%= f.input :attachment,label: false %>
+            <% else %>
+            <%= f.input :attachment,@apply.attachment,label: false %>
+            <% end %>
             <p class="help-block">上传格式JPG，PDF</p>
           </div>
         </td>
@@ -154,4 +172,34 @@
 </table>
 <% end %>
 
-
+<script type="text/javascript">
+  $(document).ready(function(){
+      <% if @apply.project %>
+      $('.project').prop('disabled',true);
+      var temp = $('input[name="apply[category_id]"]:checked').closest('td').next()
+      temp.find('.project').prop('disabled',false);
+      temp.next().text('<%= @apply.project.serial %>')
+      <% end %>
+    $('input[name="apply[category_id]"]').on('click',function(){
+      console.log('--------------------gog');
+      $('.project').prop('disabled',true);
+      $(this).closest('td').next().find('.project').prop('disabled',false);
+    });
+    $('.project').on('click',function(){
+      idx = parseInt($(this).val())
+      serial = $(this).parent().next();
+      list = serial.data("serials");
+      if (idx) {
+        $.each(list,function(n,value){
+          if (value[0] == idx) {
+            console.log(value);
+            serial.text(value[1]);
+            return false;
+          }
+        });
+      } else {
+        serial.text('');
+      }
+    });
+  });
+</script>
