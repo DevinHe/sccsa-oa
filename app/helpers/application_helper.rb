@@ -52,7 +52,7 @@ module ApplicationHelper
       if apply.verify.nil?
         "#{link_to '撤销申报', apply, method: :delete, data: { confirm: '你确定要撤销吗？' }}"
       elsif apply.verify.is_pass && apply.feedback.nil?
-        "#{link_to '填写项目反馈', '#{new_feedback_path}?id=#{apply.id}'}"
+        "#{link_to '填写项目反馈', "#{new_feedback_path}?id=#{apply.id}"}"
       elsif apply.verify.is_pass && apply.feedback
         "#{link_to '查看项目反馈', apply.feedback}"
       else
@@ -65,7 +65,7 @@ module ApplicationHelper
 
   def show_feedback_status(apply)
     if apply.feedback.nil? && apply.user_id == current_user.id
-      "#{link_to '填写反馈', '#{new_feedback_path}?id=#{apply.id}'}"
+      "#{link_to '填写反馈', "#{new_feedback_path}?id=#{apply.id}"}"
     elsif apply.feedback && apply.notifications.first.user_id == current_user.id
       "#{link_to '填写反馈', edit_feedback_path(apply.feedback)}"
     elsif apply.feedback

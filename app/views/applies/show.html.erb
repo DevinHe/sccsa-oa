@@ -180,7 +180,7 @@
   </tbody>
 </table>
 
-<% if current_user == @apply.user && @apply.notifications.first.user == current_user %>
+<% if current_user == @apply.user && @apply.notifications.first.user == current_user && !@apply.verify.is_pass %>
 <%= link_to '重新提交 ', edit_apply_path(@apply) %> | <%= link_to '撤销申报', @apply, method: :delete, data: { confirm: '你确定要撤销吗？' } %>
 <% end %>
 
