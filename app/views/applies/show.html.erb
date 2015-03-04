@@ -124,12 +124,19 @@
       </div>
     </td>
   </tr>
+  <% unless @apply.verify.nil? && cadmin? %>
   <tr>
     <td colspan="3" class="text-center active">
+      <% if @apply.verify %>
       <label>配送申报提交情况</label>
+      <% else %>
+      <label class="text-success">上海社区体育协会审核中...请等待通知</label>
+      <% end %>
     </td>
   </tr>
-  <% if @apply.verify && (!cadmin? || @apply.verify.is_pass) %>
+  <% end %>
+  <% unless @apply.notifications.first.user == current_user && cadmin? && !@apply.verify.is_pass %>
+  <% if @apply.verify %>
   <tr>
     <td colspan="3">
       <div class="form-group">
@@ -146,11 +153,19 @@
       <div class="form-group">
         <label class="col-sm-4 control-label">申报退回理由:</label>
         <div class="col-sm-8">
-          <%= @apply.verify.content %>
+          <%= simple_format @apply.verify.content %>
         </div>
       </div>
     </td>
   </tr>
+  <% if params[:from] == "again" %>
+  <tr>
+    <td colspan="3" class="text-center active">
+      <label class="text-success">已将修改提交到上海社区体育协会...请等待通知</label>
+    </td>
+  </tr>
+  <% end %>
+  <% end %>
   <% end %>
   <% end %>
   <% if @apply.verify && @apply.verify.is_pass %>
@@ -181,7 +196,7 @@
 </table>
 
 <% if current_user == @apply.user && @apply.notifications.first.user == current_user && !@apply.verify.is_pass %>
-<%= link_to '重新提交 ', edit_apply_path(@apply) %> | <%= link_to '撤销申报', @apply, method: :delete, data: { confirm: '你确定要撤销吗？' } %>
+<%= link_to '重新提交 ', edit_apply_path(@apply), data: { no_turbolink: true } %> | <%= link_to '撤销申报', @apply, method: :delete, data: { confirm: '你确定要撤销吗？' } %>
 <% end %>
 
 <% if (@apply.verify.nil? || !@apply.verify.is_pass) && @apply.notifications.first.user == current_user && cadmin? %>
@@ -192,7 +207,7 @@
   <% end %>
   <%= render 'verifies/form' %>
 <% end %>
-<% if @apply.distribute.nil? && @apply.notifications.first.user == current_user && cdistributor? %>
+<% if @apply.distribute.nil? && @apply.notifications.first.user == current_user && @apply.verify && @apply.verify.user == current_user %>
   <div class="text-center active">
       <label>配送情况</label>
   </div>

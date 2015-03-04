@@ -36,7 +36,7 @@ class AppliesController < ApplicationController
 
   def update
     @apply.update(apply_params)
-    respond_with(@apply)
+    respond_with(@apply,location: ->{"#{apply_path}?from=again"})
   end
 
   def destroy

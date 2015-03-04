@@ -117,10 +117,21 @@
             </div>
           </td>
         </tr>
+        <script type="text/javascript">
+          $(document).ready(function(){
+            $('#distribute_btn').on('click',function(){
+              var temp = $('#feedback_distribute_advice');
+              if (temp.val() == "") {
+                temp.focus();
+                return false;
+              };
+            });
+          });
+        </script>
         <% end %>
         <tr>
           <td colspan="3">
-            <%= f.button :submit, "提交配送服务情况反馈表", class: "btn btn-primary submit-apply" %>
+            <%= f.button :submit, "提交配送服务情况反馈表", class: "btn btn-primary submit-apply", id: "distribute_btn" %>
           </td>
         </tr>
         </tbody>
@@ -128,3 +139,27 @@
     </table>
 
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#distribute_btn').on('click',function(){
+      var content = $('#feedback_content');
+      var coach = $('#feedback_coach');
+      var population = $('#feedback_population');
+      var suggestion = $('#feedback_suggestion');
+      if (content.val() == "") {
+        content.focus();
+        return false;
+      } else if (coach.val() == ""){
+        coach.focus();
+        return false;
+      } else if (population.val() == ""){
+        population.focus();
+        return false;
+      } else if (suggestion.val() == ""){
+        suggestion.focus();
+        return false;
+      }
+    });
+  });
+</script>

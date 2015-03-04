@@ -51,6 +51,8 @@ module ApplicationHelper
     if apply.user_id == current_user.id
       if apply.verify.nil?
         "#{link_to '撤销申报', apply, method: :delete, data: { confirm: '你确定要撤销吗？' }}"
+      elsif apply.verify.is_pass && apply.feedback.nil? && apply.distribute.nil?
+        "#{link_to '填写项目反馈', "#",style: "point-events:none;cursor:default;color:Gray;"}"
       elsif apply.verify.is_pass && apply.feedback.nil?
         "#{link_to '填写项目反馈', "#{new_feedback_path}?id=#{apply.id}"}"
       elsif apply.verify.is_pass && apply.feedback
@@ -66,12 +68,12 @@ module ApplicationHelper
   def show_feedback_status(apply)
     if apply.feedback.nil? && apply.user_id == current_user.id
       "#{link_to '填写反馈', "#{new_feedback_path}?id=#{apply.id}"}"
-    elsif apply.feedback && apply.notifications.first.user_id == current_user.id
+    elsif apply.feedback && apply.feedback.notifications.first.user_id == current_user.id && !cadmin?
       "#{link_to '填写反馈', edit_feedback_path(apply.feedback)}"
-    elsif apply.feedback
+    elsif apply.feedback && apply.feedback.distribute_advice.present?
       "#{link_to '查看反馈', apply.feedback}"
     else
-      "#{link_to '反馈中...', '#'}"
+      "#{link_to "反馈中...", "#",style: "point-events:none;cursor:default;color:Gray;"}"
     end
   end
 

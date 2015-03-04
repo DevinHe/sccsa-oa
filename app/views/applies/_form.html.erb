@@ -165,7 +165,7 @@
       </tr>
       <tr>
         <td colspan="3">
-          <button type="submit" class="btn btn-primary submit-apply">提交配送申报</button>
+          <button type="submit" class="btn btn-primary submit-apply" id="apply_btn">提交配送申报</button>
         </td>
       </tr>
   </tbody>
@@ -199,6 +199,33 @@
         });
       } else {
         serial.text('');
+      }
+    });
+    $('#apply_btn').on('click',function(){
+      var requirement = $('#apply_requirement');
+      var site = $('#apply_site');
+      var address = $('#apply_address');
+      var implement_time = $('#apply_implement_time');
+      var facilities = $('#apply_facilities');
+      var attachment = $('#apply_attachment');
+      if (requirement.val() == "") {
+        requirement.focus();
+        return false;
+      } else if(site.val() == "") {
+        site.focus();
+        return false;
+      } else if(address.val() == "") {
+        address.focus();
+        return false;
+      } else if(implement_time.val() == "") {
+        implement_time.focus();
+        return false;
+      } else if(facilities.val() == "") {
+        facilities.focus();
+        return false;
+      } else if(attachment.val() == "") {
+        attachment.focus();
+        return false;
       }
     });
   });
