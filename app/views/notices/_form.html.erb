@@ -6,12 +6,22 @@
       <%= f.input :title, label: '标题', class: "form-control" %>
     </div>
     <p><strong>内容</strong></p>
-    <%= f.kindeditor :content %>
+    <%= f.kindeditor :content,editor_id: 'notice_editor' %>
   </div>
 
   <br />
 
   <div class="form-actions">
-    <%= f.button :submit, "提交", class: "btn btn-primary" %>
+    <%= f.button :submit, "提交", class: "btn btn-primary", id: "notice_btn" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#notice_btn').on('click',function(){
+      var title = $('#notice_title')
+      if (title.val() == "") {title.focus();return false;}
+      else if(notice_editor.html() == "") {notice_editor.focus();return false;}
+    })
+  });
+</script>
