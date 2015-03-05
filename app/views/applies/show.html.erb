@@ -135,7 +135,7 @@
     </td>
   </tr>
   <% end %>
-  <% unless @apply.notifications.first.user == current_user && cadmin? && !@apply.verify.is_pass %>
+  <% unless @apply.notifications.first.user == current_user && cadmin? && @apply.verify && !@apply.verify.is_pass %>
   <% if @apply.verify %>
   <tr>
     <td colspan="3">
