@@ -6,7 +6,7 @@ class AppliesController < ApplicationController
     if current_user.admin?
       @q = Apply.ransack(params[:q])
     elsif current_user.distributor?
-      @q = Apply.includes(:distribute).where(distributes: {user_id: current_user.id}).ransack(params[:q])
+      @q = Apply.includes(:verify).where(verifies: {user_id: current_user.id}).ransack(params[:q])
     else
       @q = Apply.where(user_id: current_user.id).ransack(params[:q])
     end

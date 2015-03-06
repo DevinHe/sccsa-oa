@@ -11,9 +11,9 @@ class Verify < ActiveRecord::Base
   private
 
   def new_notification
-    if self.is_pass == false
+    if !self.is_pass
       Notification.notify(self.apply.user, "<a href='/applies/#{self.apply_id}'>#{self.apply.user.unit}配送申报被退回</a>", self.apply)
-    elsif self.is_pass && self.user
+    elsif self.is_pass
       Notification.notify(self.user, "<a href='/applies/#{self.apply_id}'>请给#{self.apply.user.unit}安排配送</a>", self.apply)
     end
   end

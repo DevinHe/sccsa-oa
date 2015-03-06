@@ -22,7 +22,6 @@
       <th>用户名</th>
       <th>Email</th>
       <th>组织机构</th>
-      <th>是否是管理员</th>
       <th>权限</th>
       <th colspan="1">操作</th>
     </tr>
@@ -34,7 +33,6 @@
         <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= user.unit %></td>
-        <td><%= user.is_admin ? '是' : '否' %></td>
         <td><%= user.role.name %></td>
         <td><%= link_to '查看', user %> | <%= link_to '修改', edit_user_path(user) %> | <%= link_to '删除', user, method: :delete, data: { confirm: '你确定要删除吗？' } %></td>
       </tr>

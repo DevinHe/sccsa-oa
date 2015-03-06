@@ -1,24 +1,27 @@
 <p id="notice"><%= notice %></p>
+<div class="well" style="width: 400px;align-self: auto;margin: auto;">
 
-<p>
-  <strong>用户名:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>组织机构:</strong>
-  <%= @user.unit %>
-</p>
-
-<p>
-  <strong>是否是管理员:</strong>
-  <%= @user.is_admin ? '是' : '否' %>
-</p>
-
-<p>
-  <strong>权限:</strong>
-  <%= @user.role.name %>
-</p>
+<div>
+  <div class="col-md-4"><h5><strong>用户名:</strong></h5></div>
+  <div class="col-md-8 text-center"><h5><%= @user.name %></h5></div>
+</div>
+<div>
+  <div class="col-md-4"><h5><strong>组织机构:</strong></h5></div>
+  <div class="col-md-8 text-center"><h5><%= @user.unit %></h5></div>
+</div>
 <% if cadmin? %>
-<%= link_to '修改账户信息', edit_user_path(@user) %>
+<div>
+  <div class="col-md-4"><h5><strong>是否是管理员:</strong></h5></div>
+  <div class="col-md-8 text-center"><h5><%= @user.is_admin ? '是' : '否' %></h5></div>
+</div>
 <% end %>
+<div>
+  <div class="col-md-4"><h5><strong>权限:</strong></h5></div>
+  <div class="col-md-8 text-center"><h5><%= @user.role.name %></h5></div>
+</div>
+
+<% if cadmin? %>
+<%= link_to '修改账户信息', edit_user_path(@user),style: "margin-left:15px;" %>
+<% end %>
+
+</div>
