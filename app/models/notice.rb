@@ -12,13 +12,13 @@ class Notice < ActiveRecord::Base
 
   def new_notification
     User.no_admin.each do |user|
-      Notification.notify(user, "<a href='/notices/#{self.id}'>有新的协会通知", self)
+      Notification.notify(user, "<a href='/notices/#{self.id}'>有新的协会通知</a>", self)
     end
   end
 
   def update_notification
     User.no_admin.each do |user|
-      Notification.notify(user, "<a href='/notices/#{self.id}'>对已发布的协会通知内容进行更新", self)
+      Notification.notify(user, "<a href='/notices/#{self.id}'>对已发布的协会通知内容进行更新</a>", self)
     end
   end
 end
