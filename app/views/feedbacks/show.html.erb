@@ -115,7 +115,7 @@
   </form>
 </table>
 
-<% if current_user == @feedback.user || current_user == @feedback.apply.distribute.user %>
-<%= link_to '修改', edit_feedback_path(@feedback) %>
-<% end %>
+<%# if current_user == @feedback.user || current_user == @feedback.apply.distribute.user %>
+<%#= link_to '修改', edit_feedback_path(@feedback) %>
+<%# end %>
 <%#= link_to '列表页', feedbacks_path %>

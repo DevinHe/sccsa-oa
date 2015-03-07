@@ -58,7 +58,7 @@ module ApplicationHelper
       elsif apply.verify.is_pass && apply.feedback
         "#{link_to '查看项目反馈', apply.feedback}"
       else
-        "#{link_to '重新提交 ', edit_apply_path(apply)} | #{link_to '撤销申报', apply, method: :delete, data: { confirm: '你确定要撤销吗？' }}"
+        "#{link_to '重新提交 ', edit_apply_path(apply), data: { no_turbolink: true }} | #{link_to '撤销申报', apply, method: :delete, data: { confirm: '你确定要撤销吗？' }}"
       end
     else
       show_feedback_status apply
