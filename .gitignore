@@ -28,3 +28,4 @@ doc/
 public/uploads/*
 config/initializers/devise.rb
 config/secrets.yml
+dump.rdb
