@@ -50,7 +50,7 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 3.2.0'
   gem 'better_errors'
-
+  gem 'bullet', '~> 4.14.4'
 end
 
 gem 'bootstrap-sass', '~> 3.3.3'
