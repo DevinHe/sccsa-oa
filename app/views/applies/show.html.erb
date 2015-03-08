@@ -208,14 +208,20 @@
   <%= render 'verifies/form' %>
 <% end %>
 <% if @apply.distribute.nil? && @apply.notifications.first.user == current_user && @apply.verify && @apply.verify.user == current_user %>
-  <div class="text-center active">
-      <label>配送情况</label>
-  </div>
-  <hr>
-  <% @distribute = Distribute.new({apply_id: @apply.id}) %>
-  <center>
-  <%= render 'distributes/form' %>
-  </center>
+
+  <table class="table table-bordered">
+    <tr>
+      <th id="applies-distributes-wide">
+        <label class="col-sm-4 control-label">配送情况</label>
+      </th>
+      <% @distribute = Distribute.new({apply_id: @apply.id}) %>
+      <td>
+        <div class="col-sm-8">
+          <%= render 'distributes/form' %>
+        </div>
+      </td>
+      </tr>
+  </table>
 <% end %>
 
 <script type="text/javascript">

@@ -1,41 +1,45 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<div class="row">
+  <div class="col-xs-4">
+    <%= form_for(@user) do |f| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+      <div class="form-group">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email %><br>
+        <%= f.text_field :email, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password %><br>
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :unit %><br>
+        <%= f.text_field :unit, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :is_admin %><br>
+        <%= f.check_box :is_admin %>
+      </div>
+      <div class="form-group">
+        <%= f.label :role_id %><br>
+        <%= f.select :role_id, Role.all.collect { |p| [p.name, p.id] }  %>
+      </div>
+      <div class="actions">
+        <%= f.submit class: "btn btn-default" %>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :unit %><br>
-    <%= f.text_field :unit %>
-  </div>
-  <div class="field">
-    <%= f.label :is_admin %><br>
-    <%= f.check_box :is_admin %>
-  </div>
-  <div class="field">
-    <%= f.label :role_id %><br>
-    <%= f.select :role_id, Role.all.collect { |p| [p.name, p.id] }  %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

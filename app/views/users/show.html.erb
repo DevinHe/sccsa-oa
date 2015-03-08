@@ -1,26 +1,28 @@
-<div class="well" style="width: 400px;align-self: auto;margin: auto;">
-
-<div>
-  <div class="col-md-4"><h5><strong>用户名:</strong></h5></div>
-  <div class="col-md-8 text-center"><h5><%= @user.name %></h5></div>
-</div>
-<div>
-  <div class="col-md-4"><h5><strong>组织机构:</strong></h5></div>
-  <div class="col-md-8 text-center"><h5><%= @user.unit %></h5></div>
-</div>
-<% if cadmin? %>
-<div>
-  <div class="col-md-4"><h5><strong>是否是管理员:</strong></h5></div>
-  <div class="col-md-8 text-center"><h5><%= @user.is_admin ? '是' : '否' %></h5></div>
-</div>
-<% end %>
-<div>
-  <div class="col-md-4"><h5><strong>权限:</strong></h5></div>
-  <div class="col-md-8 text-center"><h5><%= @user.role.name %></h5></div>
-</div>
-
-<% if cadmin? %>
-<%= link_to '修改账户信息', edit_user_path(@user),style: "margin-left:15px;" %>
-<% end %>
-
-</div>
+<table class="table table-bordered">
+  <tbody>
+  <tr>
+    <th scope="row">用户名:</th>
+    <td><%= @user.name %></td>
+  </tr>
+  <tr>
+    <th scope="row">组织机构:</th>
+    <td><%= @user.unit %></td>
+  </tr>
+  <tr>
+    <th scope="row">是否是管理员:</th>
+    <td><%= @user.is_admin ? '是' : '否' %></td>
+  </tr>
+  <tr>
+    <th scope="row">权限:</th>
+    <td><%= @user.role.name %></td>
+  </tr>
+  <% if cadmin? %>
+    <tr>
+      <th scope="row">修改账户:</th>
+      <td>
+          <%= link_to '修改账户信息', edit_user_path(@user) %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
