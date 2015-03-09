@@ -3,7 +3,15 @@
 <div class="page-header">
   <h3>申报类别</h3>
 </div>
-
+<div class="form-inputs form-inline">
+  <%= search_form_for @q do |f| %>
+    <div class="form-group">
+      <%= f.search_field :name_cont, class: "form-control", placeholder: "输入类别名称" %>
+    </div>
+    <%= f.submit "搜索", class: "btn btn-default" %>
+  <% end %>
+</div>
+<br>
 <% if current_user.admin? %>
   <div><%= link_to '新增申报类别项目', new_category_path, class: "btn btn-success" %></div>
 <% end %>
@@ -23,9 +31,9 @@
           <%= link_to '删除', category, class: "btn btn-danger btn-xs", method: :delete, data: { confirm: '确认删除？' } %>
           <% end %>
         </div>
-
       </li>
     <% end %>
   </ul>
 </div>
+<%= will_paginate @categories, renderer: BootstrapPagination::Rails, class: "will_paginate" %>
 

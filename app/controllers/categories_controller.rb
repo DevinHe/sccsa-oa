@@ -3,7 +3,8 @@ class CategoriesController < ApplicationController
   respond_to :html, :xml, :json
 
   def index
-    @categories = Category.all
+    @q = Category.ransack(params[:q])
+    @categories = @q.result.paginate(:page => params[:page], :per_page => 30)
     respond_with(@categories)
   end
 

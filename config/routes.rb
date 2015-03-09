@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
-  resources :verifies
+  resources :verifies, only: [:create,:update,:edit]
 
-  resources :distributes
+  resources :distributes, only: [:create]
 
-  resources :notifications
+  resources :notifications, only: [:index]
 
-  resources :feedbacks
+  resources :feedbacks, only: [:create,:update,:edit]
 
   resources :applies
 
-  resources :resources
+  resources :resources, except: [:show,:edit,:update]
 
   resources :projects
 
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   post 'users/add', to: "users#create", as: :add
-  resources :users
+  resources :users, except: [:create]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
