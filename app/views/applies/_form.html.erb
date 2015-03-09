@@ -40,7 +40,7 @@
         <td><label class="control-label">项目具体名称</label></td>
         <td><label class="control-label">项目编号</label></td>
       </tr>
-      <% Category.all.each_with_index do |category,idx| %>
+      <% Category.includes(:projects).all.each_with_index do |category,idx| %>
       <tr>
         <td>
           <div class="radio">
@@ -69,17 +69,6 @@
         </td>
       </tr>
       <% end %>
-      <!-- <tr>
-        <td>
-          <%#= f.association :category, label: false, class: "form-control" %>
-        </td>
-        <td>
-          <%#= f.association :project, label: false, class: "form-control" %>
-        </td>
-        <td>
-        </td>
-      </tr>
- -->
       <tr>
         <td colspan="3" class="text-center active">
           <label>项目实施计划</label>
@@ -149,11 +138,12 @@
           提交配送申请需同时上传<strong>纸质申请表照片</strong>或<strong>扫描件</strong>
           <div class="form-group">
             <label for="exampleInputFile">上传</label>
-            <% if @apply.attachment %>
-            <%= f.input :attachment,label: false %>
-            <% else %>
-            <%= f.input :attachment,@apply.attachment,label: false %>
+            <% if @apply.attachment.url %>
+            <br>
+            已上传文件: <%= link_to(@apply.attachment.file.filename, @apply.attachment.url) %>
+            <%= f.check_box :remove_attachment %>删除
             <% end %>
+            <%= f.input :attachment,label: false %>
             <p class="help-block">上传格式JPG，PDF</p>
           </div>
         </td>
@@ -223,7 +213,10 @@
       } else if(facilities.val() == "") {
         facilities.focus();
         return false;
-      } else if(attachment.val() == "") {
+      } else if(attachment.val() == "" && !$('#apply_remove_attachment')) {
+        attachment.focus();
+        return false;
+      } else if(attachment.val() == "" && $('#apply_remove_attachment').prop("checked")) {
         attachment.focus();
         return false;
       }
