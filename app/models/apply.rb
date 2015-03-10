@@ -33,3 +33,23 @@ class Apply < ActiveRecord::Base
 
 
 end
+
+#------------------------------------------------------------------------------
+# Apply
+#
+# Name                           SQL Type             Null    Default Primary
+# ------------------------------ -------------------- ------- ------- -------
+# id                             INTEGER              false           true   
+# user_id                        integer              true            false  
+# project_id                     integer              true            false  
+# category_id                    integer              true            false  
+# requirement                    text                 true            false  
+# site                           text                 true            false  
+# facilities                     text                 true            false  
+# address                        text                 true            false  
+# implement_time                 text                 true            false  
+# attachment                     varchar              true            false  
+# created_at                     datetime             false           false  
+# updated_at                     datetime             false           false  
+#
+#------------------------------------------------------------------------------

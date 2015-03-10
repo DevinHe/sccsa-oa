@@ -17,3 +17,17 @@ class Distribute < ActiveRecord::Base
   end
 
 end
+
+#------------------------------------------------------------------------------
+# Distribute
+#
+# Name                           SQL Type             Null    Default Primary
+# ------------------------------ -------------------- ------- ------- -------
+# id                             INTEGER              false           true   
+# is_distribute                  boolean              true            false  
+# user_id                        integer              true            false  
+# apply_id                       integer              true            false  
+# created_at                     datetime             false           false  
+# updated_at                     datetime             false           false  
+#
+#------------------------------------------------------------------------------

@@ -48,6 +48,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    annotate_models (0.0.3)
     arel (6.0.0)
     autoprefixer-rails (5.1.6)
       execjs
@@ -258,6 +259,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate_models
   better_errors
   bootstrap-sass (~> 3.3.3)
   bootstrap3-datetimepicker-rails (~> 4.0.0)

@@ -20,3 +20,19 @@ class Notification < ActiveRecord::Base
   end
 
 end
+
+#------------------------------------------------------------------------------
+# Notification
+#
+# Name                           SQL Type             Null    Default Primary
+# ------------------------------ -------------------- ------- ------- -------
+# id                             INTEGER              false           true   
+# user_id                        integer              true            false  
+# content                        varchar              true            false  
+# notificationable_type          varchar              true            false  
+# notificationable_id            integer              true            false  
+# created_at                     datetime             false           false  
+# updated_at                     datetime             false           false  
+# read                           boolean              true            false  
+#
+#------------------------------------------------------------------------------

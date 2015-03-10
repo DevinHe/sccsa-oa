@@ -26,3 +26,18 @@ class Verify < ActiveRecord::Base
     end
   end
 end
+
+#------------------------------------------------------------------------------
+# Verify
+#
+# Name                           SQL Type             Null    Default Primary
+# ------------------------------ -------------------- ------- ------- -------
+# id                             INTEGER              false           true   
+# is_pass                        boolean              true            false  
+# apply_id                       integer              true            false  
+# content                        text                 true            false  
+# created_at                     datetime             false           false  
+# updated_at                     datetime             false           false  
+# user_id                        integer              true            false  
+#
+#------------------------------------------------------------------------------
