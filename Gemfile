@@ -52,6 +52,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'bullet', '~> 4.14.4'
   gem "annotate_models"
+  gem 'pry-rails'
 end
 
 gem 'bootstrap-sass', '~> 3.3.3'
@@ -66,10 +67,10 @@ gem 'will_paginate-bootstrap'
 gem 'mini_magick'
 gem 'rails_kindeditor'  # remember in production env:  rake kindeditor:assets
 
-gem 'qiniu-rs'
+# gem 'qiniu-rs'
 
 gem 'carrierwave'
-gem 'carrierwave-qiniu'
+# gem 'carrierwave-qiniu'
 
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
@@ -77,3 +78,5 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 # search
 gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.2'
 gem 'mysql2', group: :production
+
+gem 'settingslogic'
