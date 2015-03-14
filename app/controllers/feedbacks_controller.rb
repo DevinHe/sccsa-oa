@@ -28,6 +28,9 @@ class FeedbacksController < ApplicationController
   def edit
     notification = @feedback.notifications.unread(current_user.id).first
     notification.update_attribute(:read, true) if notification
+    if @feedback.distribute_advice.present?
+      redirect_to @feedback
+    end
   end
 
   def create
