@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301043645) do
+ActiveRecord::Schema.define(version: 20150314091931) do
 
   create_table "applies", force: :cascade do |t|
     t.integer  "user_id"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20150301043645) do
     t.text     "facilities"
     t.text     "address"
     t.text     "implement_time"
-    t.string   "attachment"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
@@ -58,6 +57,7 @@ ActiveRecord::Schema.define(version: 20150301043645) do
     t.text     "distribute_advice"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.string   "attachment"
   end
 
   add_index "feedbacks", ["apply_id"], name: "index_feedbacks_on_apply_id"

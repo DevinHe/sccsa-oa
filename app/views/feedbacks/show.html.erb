@@ -99,6 +99,20 @@
         </div>
       </td>
     </tr>
+    <tr>
+      <td colspan="3" class="text-center">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">附件</label>
+          <div class="col-sm-8">
+            <% if @feedback.attachment.present? %>
+              <%= link_to "下载", @feedback.attachment.url %>
+            <% else %>
+            <span class="text-muted">无</span>
+            <% end %>
+          </div>
+        </div>
+      </td>
+    </tr>
     <% if @feedback.distribute_advice.present? %>
     <tr>
       <td colspan="3" class="text-center">

@@ -110,18 +110,6 @@
       </div>
     </td>
   </tr>
-  <tr>
-    <td colspan="3">
-      <div class="form-group">
-        <label class="col-sm-4 control-label">下载配送申报</label>
-        <div class="form-group col-sm-8">
-          <% if @apply.attachment %>
-            <%= link_to "申报单下载", @apply.attachment.url %>
-          <% end %>
-        </div>
-      </div>
-    </td>
-  </tr>
   <% unless @apply.verify.nil? && cadmin? %>
   <tr>
     <td colspan="3" class="text-center active">

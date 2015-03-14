@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :notifications, only: [:index]
 
-  resources :feedbacks
+  resources :feedbacks, except: [:index]
 
   resources :applies
 

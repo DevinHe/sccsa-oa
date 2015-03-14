@@ -50,6 +50,6 @@ class AppliesController < ApplicationController
     end
 
     def apply_params
-      params.require(:apply).permit(:user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :implement_time, :attachment, :remove_attachment)
+      params.require(:apply).permit(:user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :implement_time)
     end
 end

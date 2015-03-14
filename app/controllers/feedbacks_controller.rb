@@ -52,6 +52,6 @@ class FeedbacksController < ApplicationController
     end
 
     def feedback_params
-      params.require(:feedback).permit(:user_id, :apply_id, :content, :coach, :suggestion, :population, :distribute_advice)
+      params.require(:feedback).permit(:user_id, :apply_id, :content, :coach, :suggestion, :population, :distribute_advice, :attachment, :remove_attachment)
     end
 end
