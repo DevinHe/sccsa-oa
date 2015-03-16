@@ -22,3 +22,16 @@ class Notice < ActiveRecord::Base
     end
   end
 end
+
+#------------------------------------------------------------------------------
+# Notice
+#
+# Name                           SQL Type             Null    Default Primary
+# ------------------------------ -------------------- ------- ------- -------
+# id                             INTEGER              false           true   
+# title                          varchar              true            false  
+# content                        text                 true            false  
+# created_at                     datetime             false           false  
+# updated_at                     datetime             false           false  
+#
+#------------------------------------------------------------------------------

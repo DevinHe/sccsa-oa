@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @q = User.ransack(params[:q])
-    @users = @q.result.paginate(:page => params[:page], :per_page => 30)
+    @users = @q.result.includes(:role).paginate(:page => params[:page], :per_page => 30)
   end
 
   # GET /users/1

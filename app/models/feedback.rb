@@ -2,9 +2,11 @@ class Feedback < ActiveRecord::Base
   belongs_to :user
   belongs_to :apply
   has_many :notifications, as: :notificationable, dependent: :destroy
-
+  validates :content,:coach,:suggestion,:population,:attachment, presence: true
   after_create :new_notification
   after_update :update_notification
+
+  mount_uploader :attachment, AttachmentUploader
 
   private
 
@@ -21,3 +23,21 @@ class Feedback < ActiveRecord::Base
     end
   end
 end
+
+#------------------------------------------------------------------------------
+# Feedback
+#
+# Name                           SQL Type             Null    Default Primary
+# ------------------------------ -------------------- ------- ------- -------
+# id                             INTEGER              false           true
+# user_id                        integer              true            false
+# apply_id                       integer              true            false
+# content                        text                 true            false
+# coach                          text                 true            false
+# suggestion                     text                 true            false
+# population                     text                 true            false
+# distribute_advice              text                 true            false
+# created_at                     datetime             false           false
+# updated_at                     datetime             false           false
+#
+#------------------------------------------------------------------------------

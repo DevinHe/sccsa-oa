@@ -1,6 +1,6 @@
 class Apply < ActiveRecord::Base
 
-  validates :user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :implement_time, :attachment, presence: true
+  validates :user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :implement_time, presence: true
 
   default_scope { order("applies.created_at DESC") }
 
@@ -11,8 +11,6 @@ class Apply < ActiveRecord::Base
   has_one :verify, dependent: :destroy
   has_one :distribute, dependent: :destroy
   has_one :feedback, dependent: :destroy
-
-  mount_uploader :attachment, AttachmentUploader
 
   after_create :new_notification
   after_update :update_notification
@@ -33,3 +31,22 @@ class Apply < ActiveRecord::Base
 
 
 end
+
+#------------------------------------------------------------------------------
+# Apply
+#
+# Name                           SQL Type             Null    Default Primary
+# ------------------------------ -------------------- ------- ------- -------
+# id                             INTEGER              false           true
+# user_id                        integer              true            false
+# project_id                     integer              true            false
+# category_id                    integer              true            false
+# requirement                    text                 true            false
+# site                           text                 true            false
+# facilities                     text                 true            false
+# address                        text                 true            false
+# implement_time                 text                 true            false
+# created_at                     datetime             false           false
+# updated_at                     datetime             false           false
+#
+#------------------------------------------------------------------------------

@@ -40,7 +40,7 @@
         <td><label class="control-label">项目具体名称</label></td>
         <td><label class="control-label">项目编号</label></td>
       </tr>
-      <% Category.all.each_with_index do |category,idx| %>
+      <% Category.includes(:projects).all.each_with_index do |category,idx| %>
       <tr>
         <td>
           <div class="radio">
@@ -69,17 +69,6 @@
         </td>
       </tr>
       <% end %>
-      <!-- <tr>
-        <td>
-          <%#= f.association :category, label: false, class: "form-control" %>
-        </td>
-        <td>
-          <%#= f.association :project, label: false, class: "form-control" %>
-        </td>
-        <td>
-        </td>
-      </tr>
- -->
       <tr>
         <td colspan="3" class="text-center active">
           <label>项目实施计划</label>
@@ -139,27 +128,6 @@
       </tr>
       <tr>
         <td colspan="3" class="text-center active">
-          <label>配送申报上传</label>
-        </td>
-      </tr>
-
-      <tr>
-        <td colspan="3">
-          注意：<br>
-          提交配送申请需同时上传<strong>纸质申请表照片</strong>或<strong>扫描件</strong>
-          <div class="form-group">
-            <label for="exampleInputFile">上传</label>
-            <% if @apply.attachment %>
-            <%= f.input :attachment,label: false %>
-            <% else %>
-            <%= f.input :attachment,@apply.attachment,label: false %>
-            <% end %>
-            <p class="help-block">上传格式JPG，PDF</p>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="3" class="text-center active">
           <label>配送申报发送</label>
         </td>
       </tr>
@@ -207,7 +175,7 @@
       var address = $('#apply_address');
       var implement_time = $('#apply_implement_time');
       var facilities = $('#apply_facilities');
-      var attachment = $('#apply_attachment');
+
       if (requirement.val() == "") {
         requirement.focus();
         return false;
@@ -222,9 +190,6 @@
         return false;
       } else if(facilities.val() == "") {
         facilities.focus();
-        return false;
-      } else if(attachment.val() == "") {
-        attachment.focus();
         return false;
       }
     });

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <table class="table table-bordered distribution">
   <thead>
   <tr class="text-center active">
@@ -108,18 +106,6 @@
         <label class="col-sm-4 control-label">音箱及设备条件</label>
         <div class="col-sm-8">
           <%= @apply.facilities %>
-        </div>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="3">
-      <div class="form-group">
-        <label class="col-sm-4 control-label">下载配送申报</label>
-        <div class="form-group col-sm-8">
-          <% if @apply.attachment %>
-            <%= link_to "申报单下载", @apply.attachment.url %>
-          <% end %>
         </div>
       </div>
     </td>

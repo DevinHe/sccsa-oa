@@ -10,7 +10,7 @@ class AppliesController < ApplicationController
     else
       @q = Apply.where(user_id: current_user.id).ransack(params[:q])
     end
-    @applies = @q.result.includes(:user,:category,:project).paginate(:page => params[:page], :per_page => 10)
+    @applies = @q.result.includes(:user,:category,:project,:verify,:distribute,:feedback).paginate(:page => params[:page], :per_page => 10)
     respond_with(@applies)
   end
 
@@ -50,6 +50,6 @@ class AppliesController < ApplicationController
     end
 
     def apply_params
-      params.require(:apply).permit(:user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :implement_time, :attachment)
+      params.require(:apply).permit(:user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :implement_time)
     end
 end

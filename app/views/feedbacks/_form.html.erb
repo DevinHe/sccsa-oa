@@ -110,6 +110,39 @@
         <tr>
           <td colspan="3" class="text-center">
             <div class="form-group">
+              <label class="col-sm-4 control-label">附件</label>
+              <div class="col-sm-8">
+                <% if @feedback.attachment %>
+                  <%= link_to "下载", @feedback.attachment.url %>
+                <% else %>
+                  <%= link_to "无", "#" , class: "text-muted" %>
+                <% end %>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <% else %>
+        <tr>
+          <td colspan="3" >
+            注意：<br>
+            提交反馈表需同时上传<strong>纸质反馈表照片</strong>或<strong>扫描件</strong>
+            <div class="form-group">
+              <label for="exampleInputFile">上传</label>
+              <% if @feedback.attachment.url %>
+              <br>
+              已上传文件: <%= link_to(@feedback.attachment.file.filename, @feedback.attachment.url) %>
+              <%= f.check_box :remove_attachment %>删除
+              <% end %>
+              <%= f.input :attachment,label: false %>
+              <p class="help-block">上传格式JPG，PDF</p>
+            </div>
+          </td>
+        </tr>
+        <% end %>
+        <% if cdistributor? %>
+        <tr>
+          <td colspan="3" class="text-center">
+            <div class="form-group">
               <label class="col-sm-4 control-label">配送单位意见</label>
               <div class="col-sm-8">
                 <%= f.input :distribute_advice, label: false %>
@@ -147,6 +180,8 @@
       var coach = $('#feedback_coach');
       var population = $('#feedback_population');
       var suggestion = $('#feedback_suggestion');
+      var attachment = $('#feedback_attachment');
+      var remove_attachment = $('#feedback_remove_attachment');
       if (content.val() == "") {
         content.focus();
         return false;
@@ -158,6 +193,12 @@
         return false;
       } else if (suggestion.val() == ""){
         suggestion.focus();
+        return false;
+      } else if(attachment.val() == "" && remove_attachment.length == 0) {
+        attachment.focus();
+        return false;
+      } else if(attachment.val() == "" && $('#feedback_remove_attachment').prop("checked")) {
+        attachment.focus();
         return false;
       }
     });

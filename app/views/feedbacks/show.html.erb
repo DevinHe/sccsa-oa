@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <% apply = @feedback.apply %>
 <table class="table table-bordered distribution">
@@ -95,6 +95,20 @@
           <label class="col-sm-4 control-label">街道工作人员意见</label>
           <div class="col-sm-8">
             <%= @feedback.suggestion %>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" class="text-center">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">附件</label>
+          <div class="col-sm-8">
+            <% if @feedback.attachment.present? %>
+              <%= link_to "下载", @feedback.attachment.url %>
+            <% else %>
+            <span class="text-muted">无</span>
+            <% end %>
           </div>
         </div>
       </td>

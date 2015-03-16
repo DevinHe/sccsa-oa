@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <div class="page-header">
   <h3>显示所有用户</h3>
@@ -19,10 +19,10 @@
 <table class="table table-hover apply-index">
   <thead>
     <tr>
-      <th>用户名</th>
-      <th>Email</th>
-      <th>组织机构</th>
-      <th>权限</th>
+      <%= content_tag :th, sort_link(@q, :name, '用户名') %>
+      <%= content_tag :th, sort_link(@q, :email, 'Email') %>
+      <%= content_tag :th, sort_link(@q, :unit, '组织机构') %>
+      <%= content_tag :th, sort_link(@q, :role_name, '权限') %>
       <th colspan="1">操作</th>
     </tr>
   </thead>

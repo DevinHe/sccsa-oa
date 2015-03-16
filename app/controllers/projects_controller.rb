@@ -3,7 +3,8 @@ class ProjectsController < ApplicationController
   respond_to :html, :xml, :json
 
   def index
-    @projects = Project.all
+    @q = Project.ransack(params[:q])
+    @projects = @q.result.includes(:category).paginate(:page => params[:page], :per_page => 30)
     respond_with(@projects)
   end
 
