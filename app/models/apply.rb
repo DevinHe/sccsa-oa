@@ -15,6 +15,10 @@ class Apply < ActiveRecord::Base
   after_create :new_notification
   after_update :update_notification
 
+  def self.distributor
+    self.distribute.user.unit
+  end
+
   private
 
   def new_notification

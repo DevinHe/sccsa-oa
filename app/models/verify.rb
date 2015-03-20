@@ -14,6 +14,7 @@ class Verify < ActiveRecord::Base
     if !self.is_pass
       Notification.notify(self.apply.user, "<a href='/applies/#{self.apply_id}'>#{self.apply.user.unit}配送申报被退回</a>", self.apply)
     elsif self.is_pass
+      Notification.notify(self.apply.user, "<a href='/applies/#{self.apply_id}'>您的申请已获批准，正在等待配送中...</a>", self.apply)
       Notification.notify(self.user, "<a href='/applies/#{self.apply_id}'>请给#{self.apply.user.unit}安排配送</a>", self.apply)
     end
   end
@@ -22,6 +23,7 @@ class Verify < ActiveRecord::Base
     if self.is_pass == false
       Notification.notify(self.apply.user, "<a href='/applies/#{self.apply_id}'>#{self.apply.user.unit}配送申报被退回</a>", self.apply)
     elsif self.is_pass && self.user
+      Notification.notify(self.apply.user, "<a href='/applies/#{self.apply_id}'>您的申请已获批准，正在等待配送中...</a>", self.apply)
       Notification.notify(self.user, "<a href='/applies/#{self.apply_id}'>请给#{self.apply.user.unit}安排配送</a>", self.apply)
     end
   end
@@ -32,12 +34,12 @@ end
 #
 # Name                           SQL Type             Null    Default Primary
 # ------------------------------ -------------------- ------- ------- -------
-# id                             INTEGER              false           true   
-# is_pass                        boolean              true            false  
-# apply_id                       integer              true            false  
-# content                        text                 true            false  
-# created_at                     datetime             false           false  
-# updated_at                     datetime             false           false  
-# user_id                        integer              true            false  
+# id                             INTEGER              false           true
+# is_pass                        boolean              true            false
+# apply_id                       integer              true            false
+# content                        text                 true            false
+# created_at                     datetime             false           false
+# updated_at                     datetime             false           false
+# user_id                        integer              true            false
 #
 #------------------------------------------------------------------------------
