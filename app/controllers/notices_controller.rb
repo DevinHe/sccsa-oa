@@ -9,9 +9,11 @@ class NoticesController < ApplicationController
   end
 
   def show
-    notification = @notice.notifications.unread(current_user.id).first
-    notification.update_attribute(:read, true) if notification
-
+    if params[:from]
+      notification = Notification.find(params[:from])
+      # notification = @notice.notifications.unread(current_user.id).first
+      notification.update_attribute(:read, true) if notification
+    end
     respond_with(@notice)
   end
 

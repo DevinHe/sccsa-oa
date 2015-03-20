@@ -15,8 +15,11 @@ class AppliesController < ApplicationController
   end
 
   def show
-    notification = @apply.notifications.unread(current_user.id).first
-    notification.update_attribute(:read, true) if notification
+    if params[:from] && params[:from] != 'again'
+      notification = Notification.find(params[:from])
+      # notification = @apply.notifications.unread(current_user.id).first
+      notification.update_attribute(:read, true) if notification
+    end
     respond_with(@apply)
   end
 

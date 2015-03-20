@@ -8,8 +8,11 @@ class FeedbacksController < ApplicationController
   end
 
   def show
-    notification = @feedback.notifications.unread(current_user.id).first
-    notification.update_attribute(:read, true) if notification
+    if params[:from]
+      notification = Notification.find(params[:from])
+      # notification = @feedback.notifications.unread(current_user.id).first
+      notification.update_attribute(:read, true) if notification
+    end
     respond_with(@feedback)
   end
 
