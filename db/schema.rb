@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150314091931) do
+ActiveRecord::Schema.define(version: 20150321063045) do
 
   create_table "applies", force: :cascade do |t|
     t.integer  "user_id"
@@ -24,9 +24,12 @@ ActiveRecord::Schema.define(version: 20150314091931) do
     t.text     "implement_time"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "p_serial"
+    t.date     "implement_date"
   end
 
   add_index "applies", ["category_id"], name: "index_applies_on_category_id"
+  add_index "applies", ["p_serial"], name: "index_applies_on_p_serial", unique: true
   add_index "applies", ["project_id"], name: "index_applies_on_project_id"
   add_index "applies", ["user_id"], name: "index_applies_on_user_id"
 

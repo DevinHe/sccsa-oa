@@ -33,7 +33,9 @@ class AppliesController < ApplicationController
 
   def create
     @apply = Apply.new(apply_params)
-    @apply.save
+    @apply.save!
+    @apply.p_serial = "SCCSA_#{@apply.id}"
+    @apply.save!
     respond_with(@apply)
   end
 
@@ -53,6 +55,6 @@ class AppliesController < ApplicationController
     end
 
     def apply_params
-      params.require(:apply).permit(:user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :implement_time)
+      params.require(:apply).permit(:user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :implement_time, :p_serial)
     end
 end

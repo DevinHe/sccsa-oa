@@ -108,6 +108,34 @@
       </tr>
       <tr>
         <td colspan="3">
+        <style type="text/css" media="screen">
+          .dropdown-menu {
+            top: 20 !important;
+            left: 20 !important;
+            height: 320px !important;
+            width: 100% !important;
+            margin-top: 0;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0;
+          }
+        </style>
+          <div class="form-group">
+              <label class="col-sm-4 control-label">意愿实施日期</label>
+              <div class="form-group col-sm-8">
+                <%#= f.text_field :implement_date, label: false, class: "datetimepicker form-control",autocomplete: "off",placeholder: "请点击..." %>
+                <div class='input-group date datetimepicker'>
+                  <input type='text' class="form-control" name="apply[implement_date]" id="apply_implement_date" />
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+                </div>
+              </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
           <div class="form-group">
               <label class="col-sm-4 control-label">意愿实施时间</label>
               <div class="form-group col-sm-8">
@@ -174,6 +202,7 @@
       var site = $('#apply_site');
       var address = $('#apply_address');
       var implement_time = $('#apply_implement_time');
+      var implement_date = $('#apply_implement_date');
       var facilities = $('#apply_facilities');
 
       if (requirement.val() == "") {
@@ -184,6 +213,9 @@
         return false;
       } else if(address.val() == "") {
         address.focus();
+        return false;
+      } else if(implement_date.val() == "") {
+        implement_date.focus();
         return false;
       } else if(implement_time.val() == "") {
         implement_time.focus();
