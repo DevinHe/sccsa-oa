@@ -18,7 +18,7 @@
       <%= content_tag :th, sort_link(@q, :user_unit, '申请组织') %>
       <%= content_tag :th, sort_link(@q, :category_name, '申报类别') %>
       <%= content_tag :th, sort_link(@q, :project_name, '项目名称') %>
-      <th>实施时间</th>
+
       <th>社区体育反馈</th>
       <th>配送中心反馈</th>
       <th colspan="1">操作</th>
@@ -29,10 +29,10 @@
     <% @applies.each do |apply| %>
       <tr>
         <td><%= link_to my_index_date(apply.created_at), apply %></td>
-        <td><%= link_to apply.user.unit, apply %></td>
+        <td><%= link_to apply.user.unit, apply, class: "applies-font-size" %></td>
         <td><%= link_to apply.category.name, apply %></td>
         <td><%= link_to apply.project.name, apply %></td>
-        <td><%= apply.implement_time %></td>
+
         <td>
           <%= raw (verify_status apply) %>
         </td>
