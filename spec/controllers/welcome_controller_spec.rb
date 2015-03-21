@@ -8,9 +8,9 @@ RSpec.describe WelcomeController, type: :controller do
       sign_in user
       get :home
       expect(response).to have_http_status(:success)
-      expect(response.body).to match(/登录上海社区体育配送系统/)
-      expect(response.body).to match(Regexp.new(user.unit))
-      expect(response.body).to match(Regexp.new(user.name))
+      # expect(response.body).to match(/登录上海社区体育配送系统/)
+      # expect(response.body).to match(Regexp.new(user.unit))
+      # expect(response.body).to match(Regexp.new(user.name))
     end
 
     it "should not allow anonymous access" do

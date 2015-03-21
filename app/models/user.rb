@@ -13,7 +13,6 @@ class User < ActiveRecord::Base
 
   belongs_to :role
 
-  has_many :notices, dependent: :destroy
   has_many :applies, dependent: :destroy
   has_many :feedbacks, dependent: :destroy
   has_many :notifications, dependent: :destroy
