@@ -36,11 +36,22 @@ RSpec.describe UsersController, type: :controller do
   # UsersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  let(:user) { Factory :user }
+  let(:admin) { Factory :admin }
+
+  before(:each) { sign_in user }
+
   describe "GET #index" do
     it "assigns all users as @users" do
       user = User.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:users)).to eq([user])
+    end
+
+    it "should have a index action" do
+      # get :index
+      # expect(response).to have_http_status(:success)
+      # expect(response).to be_success
     end
   end
 

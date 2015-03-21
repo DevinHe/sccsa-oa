@@ -53,6 +53,8 @@ group :development, :test do
   gem 'bullet', '~> 4.14.4'
   gem "annotate_models"
   gem 'pry-rails'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
 end
 
 gem 'bootstrap-sass', '~> 3.3.3'
