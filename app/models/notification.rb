@@ -5,7 +5,7 @@ class Notification < ActiveRecord::Base
   validates :read, default: false
   validates :notificationable_type, :notificationable_id, :user_id, presence: true
 
-  default_scope { order("created_at DESC") }
+  default_scope { order("id DESC") }
 
   scope :unread, ->(user_id){ where(read: false, user_id: user_id) } #一个用户的未读信息
 
