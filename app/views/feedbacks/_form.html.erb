@@ -116,7 +116,7 @@
           </td>
         </tr>
         <% if cdistributor? %>
-        <tr>
+        <tr class="hidden-print">
           <td colspan="3" class="text-center">
             <div class="form-group">
               <label class="col-sm-4 control-label">附件</label>
@@ -131,7 +131,7 @@
           </td>
         </tr>
         <% else %>
-        <tr>
+        <tr class="hidden-print">
           <td colspan="3" >
             注意：<br>
             提交反馈表需同时上传<strong>纸质反馈表照片</strong>或<strong>扫描件</strong>
@@ -171,11 +171,31 @@
           });
         </script>
         <% end %>
-        <tr>
+        <tr class="hidden-print">
           <td colspan="3">
             <%= f.button :submit, "提交配送服务情况反馈表", class: "btn btn-primary submit-apply", id: "distribute_btn" %>
           </td>
         </tr>
+
+        <tr>
+          <td colspan="2">
+            <div class="form-group">
+              <label class="col-xs-8 control-label">申报单位签字/盖章区</label>
+              <div class="col-xs-4 stamp">
+
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="form-group">
+              <label class="col-xs-8 control-label">配送单位意见，签字/盖章区</label>
+              <div class="col-xs-4 stamp">
+
+              </div>
+            </div>
+          </td>
+        </tr>
+
         </tbody>
       </form>
     </table>
