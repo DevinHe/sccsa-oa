@@ -1,3 +1,5 @@
+my_smtp = Rails.application.config_for(:my_smtp)
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -76,4 +78,21 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.default_url_options = { :host => my_smtp["host"] }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: my_smtp["address"],
+    port: my_smtp["port"],
+    domain: my_smtp["domain"],
+    user_name: my_smtp["user_name"],
+    password: my_smtp["password"],
+    authentication: :login
+  }
+  config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[SCCSA]",
+    :sender_address => my_smtp["sender_address"],
+    :exception_recipients => my_smtp["sender_address"]
+  }
 end

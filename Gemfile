@@ -81,4 +81,5 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.2'
 gem 'mysql2', group: :production
 
-gem 'settingslogic'
+# gem 'settingslogic'
+gem 'exception_notification'
