@@ -10,9 +10,9 @@ Role.create!(name: '无权限')
 Role.create!(name: '社区／俱乐部')
 Role.create!(name: '配送单位')
 
-User.create!(name: 'sccsa-admin', password: '11111111', email: 'admin@sccsa.org.cn',unit: '上海社区体育协会', is_admin: true, role_id: '3')
-User.create!(name: 'test1', password: '11111111', email: 'test1@sccsa.org.cn',unit: '上海社区体育协会', is_admin: true, role_id: '2')
-User.create!(name: 'test2', password: '11111111', email: 'test2@sccsa.org.cn',unit: '上海社区体育协会', is_admin: true, role_id: '3')
+# User.create!(name: 'sccsa-admin', password: '11111111', unit: '上海社区体育协会', is_admin: true, role_id: '3')
+# User.create!(name: 'test1', password: '11111111',unit: '上海社区体育协会', is_admin: true, role_id: '2')
+# User.create!(name: 'test2', password: '11111111',unit: '上海社区体育协会', is_admin: true, role_id: '3')
 
 Category.create!(name: '科普健身讲座')
 Category.create!(name: '健身技能培训')
