@@ -83,3 +83,4 @@ gem 'mysql2', group: :production
 
 # gem 'settingslogic'
 gem 'exception_notification'
+gem 'newrelic_rpm'

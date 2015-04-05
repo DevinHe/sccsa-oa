@@ -30,4 +30,5 @@ public/assets/*
 config/initializers/devise.rb
 config/secrets.yml
 config/my_smtp.yml
+config/newrelic.yml
 dump.rdb
