@@ -26,6 +26,8 @@ doc/
 .idea
 .secret
 public/uploads/*
+public/assets/*
 config/initializers/devise.rb
 config/secrets.yml
+config/my_smtp.yml
 dump.rdb
