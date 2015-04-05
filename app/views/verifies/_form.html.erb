@@ -24,5 +24,23 @@
   </div>
 <% end %>
 
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#verify_btn').on('click',function(){
+      var flag = $('input[name="verify[is_pass]"]:checked').val();
+      if (flag == "true") {
+        if($('#verify_user_id').val() == "") {
+          $('#verify_user_id').focus();
+          return false;
+        }
+      } else{
+        if($('#verify_content').val() == "") {
+          $('#verify_content').focus();
+          return false;
+        }
+      };
+    });
+  });
+</script>
 
 

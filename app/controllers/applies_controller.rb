@@ -25,6 +25,11 @@ class AppliesController < ApplicationController
 
   def new
     @apply = Apply.new
+    if params[:pid]
+      project = Project.find(params[:pid])
+      @apply.project = project
+      @apply.category = project.category
+    end
     respond_with(@apply)
   end
 
@@ -56,6 +61,6 @@ class AppliesController < ApplicationController
     end
 
     def apply_params
-      params.require(:apply).permit(:user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :implement_date,:implement_time, :p_serial)
+      params.require(:apply).permit(:user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :contacts, :address_name, :phone,:implement_time, :p_serial)
     end
 end

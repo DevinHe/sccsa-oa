@@ -1,12 +1,13 @@
 class Apply < ActiveRecord::Base
 
-  validates :user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :implement_time, :implement_date, presence: true
+  validates :user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :implement_time, :address_name, :contacts, :phone, presence: true
 
   default_scope { order("applies.created_at DESC") }
 
   belongs_to :user, class_name: "User"
   belongs_to :project
   belongs_to :category
+
   has_many :notifications, as: :notificationable, dependent: :destroy
   has_one :verify, dependent: :destroy
   has_one :distribute, dependent: :destroy

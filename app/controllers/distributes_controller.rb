@@ -41,6 +41,6 @@ class DistributesController < ApplicationController
     end
 
     def distribute_params
-      params.require(:distribute).permit(:is_distribute, :user_id, :apply_id)
+      params.require(:distribute).permit(:is_distribute, :user_id, :apply_id, :coaches, :phone)
     end
 end

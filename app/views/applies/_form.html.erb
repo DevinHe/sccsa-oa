@@ -78,10 +78,10 @@
         <td colspan="3">
           <div class="form-group">
               <label class="col-sm-4 control-label">
-              居民需求<br>调研情况简介
+              参与者年龄
               </label>
               <div class="col-sm-8">
-                <%= f.input :requirement, label: false, as: :text, input_html: {class: "form-control", rows: 3} %>
+                <%= f.input :requirement, label: false, as: :text, input_html: {class: "form-control", rows: 3}, placeholder: "（如：老年群体为主、青少年群体为主、白领为主、所有年龄层等）" %>
               </div>
           </div>
         </td>
@@ -89,9 +89,19 @@
       <tr>
         <td colspan="3">
           <div class="form-group">
-              <label class="col-sm-4 control-label">项目实施场地（类型和人数）</label>
+              <label class="col-sm-4 control-label">参与人数</label>
               <div class="col-sm-8">
-                <%= f.input :site, label: false, as: :text, input_html: {class: "form-control", rows: 3} %>
+                <%= f.input :site, label: false, as: :text, input_html: {class: "form-control", rows: 3}, placeholder: "（讲座参与数不少于50人、技能参与数不少于20人）" %>
+              </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <div class="form-group">
+              <label class="col-sm-4 control-label">实施场地名称</label>
+              <div class="col-sm-8">
+                <%= f.input :address_name, label: false, as: :text, input_html: {class: "form-control", rows: 3}, placeholder: "（如：xxx社区活动中心会议室、xxx学校室内篮球馆等）" %>
               </div>
           </div>
         </td>
@@ -101,7 +111,7 @@
           <div class="form-group">
               <label class="col-sm-4 control-label">实施场地地址</label>
               <div class="col-sm-8">
-                <%= f.input :address, label: false, as: :text, input_html: {class: "form-control", rows: 3} %>
+                <%= f.input :address, label: false, as: :text, input_html: {class: "form-control", rows: 3}, placeholder: "（如：xxx路xxx号xxx单位xx楼xxx室）" %>
               </div>
           </div>
         </td>
@@ -121,11 +131,10 @@
           }
         </style>
           <div class="form-group">
-              <label class="col-sm-4 control-label">意愿实施日期</label>
+              <label class="col-sm-4 control-label">意愿实施时间</label>
               <div class="form-group col-sm-8">
-                <%#= f.text_field :implement_date, label: false, class: "datetimepicker form-control",autocomplete: "off",placeholder: "请点击..." %>
                 <div class='input-group date datetimepicker'>
-                  <input type='text' class="form-control" name="apply[implement_date]" id="apply_implement_date" />
+                  <input type='text' class="form-control" name="apply[implement_time]" id="apply_implement_time" />
                   <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                   </span>
@@ -137,9 +146,9 @@
       <tr>
         <td colspan="3">
           <div class="form-group">
-              <label class="col-sm-4 control-label">意愿实施时间</label>
-              <div class="form-group col-sm-8">
-                <%= f.input :implement_time, label: false, input_html: {class: "form-control",rows: 3,autocomplete: "off"} %>
+              <label class="col-sm-4 control-label">需要讲师/教练自备物品</label>
+              <div class="col-sm-8">
+                 <%= f.input :facilities, label: false, input_html: {class: "form-control ",rows: 3}, placeholder: "（如：ppt/上课道具--木兰剑/没有请填写‘无’）" %>
               </div>
           </div>
         </td>
@@ -147,9 +156,19 @@
       <tr>
         <td colspan="3">
           <div class="form-group">
-              <label class="col-sm-4 control-label">音箱及设备条件</label>
-              <div class="col-sm-8">
-                 <%= f.input :facilities, label: false, input_html: {class: "form-control ",rows: 3} %>
+              <label class="col-sm-4 control-label">联系人</label>
+              <div class="form-group col-sm-8">
+                <%= f.input :contacts, label: false, input_html: {class: "form-control",autocomplete: "off"} %>
+              </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <div class="form-group">
+              <label class="col-sm-4 control-label">联系电话</label>
+              <div class="form-group col-sm-8">
+                <%= f.input :phone, label: false, input_html: {class: "form-control",autocomplete: "off"} %>
               </div>
           </div>
         </td>
@@ -172,7 +191,7 @@
   $(document).ready(function(){
       <% if @apply.project %>
       $('.project').prop('disabled',true);
-      var temp = $('input[name="apply[category_id]"]:checked').closest('td').next()
+      var temp = $('input[name="apply[category_id]"]:checked').closest('td').next();
       temp.find('.project').prop('disabled',false);
       temp.next().text('<%= @apply.project.serial %>')
       <% end %>
@@ -200,10 +219,12 @@
     $('#apply_btn').on('click',function(){
       var requirement = $('#apply_requirement');
       var site = $('#apply_site');
+      var address_name = $('#apply_address_name');
       var address = $('#apply_address');
       var implement_time = $('#apply_implement_time');
-      var implement_date = $('#apply_implement_date');
       var facilities = $('#apply_facilities');
+      var contacts = $('#apply_contacts');
+      var phone = $('#apply_phone');
 
       if (requirement.val() == "") {
         requirement.focus();
@@ -211,17 +232,23 @@
       } else if(site.val() == "") {
         site.focus();
         return false;
+      } else if(address_name.val() == "") {
+        address_name.focus();
+        return false;
       } else if(address.val() == "") {
         address.focus();
-        return false;
-      } else if(implement_date.val() == "") {
-        implement_date.focus();
         return false;
       } else if(implement_time.val() == "") {
         implement_time.focus();
         return false;
       } else if(facilities.val() == "") {
         facilities.focus();
+        return false;
+      } else if(contacts.val() == "") {
+        contacts.focus();
+        return false;
+      } else if(phone.val() == "") {
+        phone.focus();
         return false;
       }
     });

@@ -23,18 +23,22 @@
     <%= content_tag :th, sort_link(@q, :name, '项目名称') %>
     <%= content_tag :th, sort_link(@q, :serial, '项目编号') %>
     <%= content_tag :th, sort_link(@q, :category_name, '申报类别') %>
-    <th colspan="1">操作</th>
+    <% if cadmin? %>
+      <th colspan="1">操作</th>
+    <% end -%>
   </tr>
   </thead>
 
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><%= project.name %></td>
-        <td><%= project.serial %></td>
+        <td><%= link_to project.name, project %></td>
+        <td><%= link_to project.serial, project %></td>
         <td><%= project.category.name %></td>
-        <% if current_user.admin? %>
+        <% if cadmin? %>
           <td><%= link_to '修改', edit_project_path(project), class: "btn btn-primary btn-xs" %> | <%= link_to '删除', project, class: "btn btn-danger btn-xs", method: :delete, data: { confirm: '你确定要删除吗？' } %></td>
+        <% elsif capplier? %>
+          <td><%= link_to '申报',"#{new_apply_path}?pid=#{project.id}",data: { no_turbolink: true } %></td>
         <% end %>
       </tr>
     <% end %>

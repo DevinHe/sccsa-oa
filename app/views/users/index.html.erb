@@ -7,7 +7,7 @@
 <div class="form-inputs form-inline">
   <%= search_form_for @q do |f| %>
     <div class="form-group">
-      <%= f.search_field :name_or_email_or_unit_cont, class: "form-control" %>
+      <%= f.search_field :name_or_unit_cont, class: "form-control" %>
     </div>
     <%= f.submit "搜索", class: "btn btn-default" %>
   <% end %>
@@ -20,7 +20,6 @@
   <thead>
     <tr>
       <%= content_tag :th, sort_link(@q, :name, '用户名') %>
-      <%= content_tag :th, sort_link(@q, :email, 'Email') %>
       <%= content_tag :th, sort_link(@q, :unit, '组织机构') %>
       <%= content_tag :th, sort_link(@q, :role_name, '权限') %>
       <th colspan="1">操作</th>
@@ -31,7 +30,6 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
-        <td><%= user.email %></td>
         <td><%= user.unit %></td>
         <td><%= user.role.name %></td>
         <td><%= link_to '查看', user %> | <%= link_to '修改', edit_user_path(user) %> | <%= link_to '删除', user, method: :delete, data: { confirm: '你确定要删除吗？' } %></td>

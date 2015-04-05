@@ -7,10 +7,10 @@
       <%= f.input :is_distribute, label: '确认配送', required: false %>
 
       <div class="form-group">
-        <input type="text" class="form-control" id="exampleInputName2" placeholder="教练姓名">
+        <%= f.input :coaches, label: false,class: "form-control", placeholder: "配送师资姓名" %>
       </div>
       <div class="form-group">
-        <input type="text" class="form-control" id="exampleInputEmail2" placeholder="联系电话">
+        <%= f.input :phone, label: false, class: "form-control", placeholder: "联系电话" %>
       </div>
 
     </div>
@@ -23,7 +23,13 @@
       if ($('#distribute_is_distribute:checked').length == 0) {
         $('#distribute_is_distribute').focus();
         return false;
-      };
+      } else if ($('#distribute_coaches').val() == "") {
+        $('#distribute_coaches').focus();
+        return false;
+      } else if ($('#distribute_phone').val() == "") {
+        $('#distribute_phone').focus();
+        return false;
+      }
     });
   });
 </script>

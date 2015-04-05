@@ -176,7 +176,7 @@
             <%= f.button :submit, "提交配送服务情况反馈表", class: "btn btn-primary submit-apply", id: "distribute_btn" %>
           </td>
         </tr>
-
+        <% unless params[:action] == "edit" %>
         <tr>
           <td colspan="2">
             <div class="form-group">
@@ -195,7 +195,7 @@
             </div>
           </td>
         </tr>
-
+        <% end -%>
         </tbody>
       </form>
     </table>

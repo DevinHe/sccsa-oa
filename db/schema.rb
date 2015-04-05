@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321063045) do
+ActiveRecord::Schema.define(version: 20150405111307) do
 
   create_table "applies", force: :cascade do |t|
     t.integer  "user_id"
@@ -21,11 +21,13 @@ ActiveRecord::Schema.define(version: 20150321063045) do
     t.text     "site"
     t.text     "facilities"
     t.text     "address"
-    t.text     "implement_time"
+    t.datetime "implement_time"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "p_serial"
-    t.date     "implement_date"
+    t.string   "address_name"
+    t.string   "contacts"
+    t.string   "phone"
   end
 
   add_index "applies", ["category_id"], name: "index_applies_on_category_id"
@@ -45,6 +47,8 @@ ActiveRecord::Schema.define(version: 20150321063045) do
     t.integer  "apply_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "coaches"
+    t.string   "phone"
   end
 
   add_index "distributes", ["apply_id"], name: "index_distributes_on_apply_id"
@@ -91,9 +95,26 @@ ActiveRecord::Schema.define(version: 20150321063045) do
     t.integer  "category_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "description"
   end
 
   add_index "projects", ["category_id"], name: "index_projects_on_category_id"
+
+  create_table "questionnaires", force: :cascade do |t|
+    t.text     "content"
+    t.string   "coaches"
+    t.string   "population"
+    t.datetime "start_time"
+    t.string   "situation"
+    t.text     "other"
+    t.string   "coache_sitution"
+    t.string   "coache_other"
+    t.integer  "distribute_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "questionnaires", ["distribute_id"], name: "index_questionnaires_on_distribute_id"
 
   create_table "resources", force: :cascade do |t|
     t.string   "title"
@@ -114,7 +135,6 @@ ActiveRecord::Schema.define(version: 20150321063045) do
     t.boolean  "is_admin",               default: false, null: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
-    t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -127,7 +147,6 @@ ActiveRecord::Schema.define(version: 20150321063045) do
     t.integer  "role_id"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["name"], name: "index_users_on_name", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 

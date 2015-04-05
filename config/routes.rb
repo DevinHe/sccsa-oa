@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :questionnaires, only: [:new, :create, :show]
+
   resources :verifies, only: [:create,:update,:edit]
 
   resources :distributes, only: [:create]

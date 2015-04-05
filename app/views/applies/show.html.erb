@@ -72,7 +72,7 @@
     <td colspan="3">
       <div class="form-group">
         <label class="col-sm-4 control-label">
-          居民需求<br>调研情况简介
+          参与者年龄
         </label>
         <div class="col-sm-8">
           <%= @apply.requirement %>
@@ -83,9 +83,19 @@
   <tr>
     <td colspan="3">
       <div class="form-group">
-        <label class="col-sm-4 control-label">项目实施场地（类型和人数）</label>
+        <label class="col-sm-4 control-label">参与人数</label>
         <div class="col-sm-8">
           <%= @apply.site %>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div class="form-group">
+        <label class="col-sm-4 control-label">实施场地名称</label>
+        <div class="col-sm-8">
+          <%= @apply.address_name %>
         </div>
       </div>
     </td>
@@ -103,19 +113,9 @@
   <tr>
     <td colspan="3">
       <div class="form-group">
-        <label class="col-sm-4 control-label">意愿实施日期</label>
-        <div class="col-sm-8">
-          <%= my_date(@apply.implement_date) %>
-        </div>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="3">
-      <div class="form-group">
         <label class="col-sm-4 control-label">意愿实施时间</label>
         <div class="col-sm-8">
-          <%= @apply.implement_time %>
+          <%= my_time(@apply.implement_time) %>
         </div>
       </div>
     </td>
@@ -123,9 +123,29 @@
   <tr>
     <td colspan="3">
       <div class="form-group">
-        <label class="col-sm-4 control-label">音箱及设备条件</label>
+        <label class="col-sm-4 control-label">需要讲师/教练自备物品</label>
         <div class="col-sm-8">
           <%= @apply.facilities %>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div class="form-group">
+        <label class="col-sm-4 control-label">联系人</label>
+        <div class="col-sm-8">
+          <%= @apply.contacts %>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div class="form-group">
+        <label class="col-sm-4 control-label">联系电话</label>
+        <div class="col-sm-8">
+          <%= @apply.phone %>
         </div>
       </div>
     </td>
@@ -184,10 +204,10 @@
           <%= raw(distribute_status @apply) %>
         </div>
         <div class="col-sm-2">
-          教练姓名：王李力
+          教练姓名：<%= @apply.distribute.coaches %>
         </div>
         <div class="col-sm-4">
-          联系电话：15800733886
+          联系电话：<%= @apply.distribute.phone %>
         </div>
       </div>
     </td>
@@ -236,31 +256,3 @@
       </tr>
   </table>
 <% end %>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    // $('input[name="verify[is_pass]"]').change(function(){
-    //   if ($(this).val()==true) {
-    //     $('#verify_content').prop('required',false);
-    //     $('#verify_user_id').prop('required',true);
-    //   } else {
-    //     $('#verify_user_id').prop('required',false);
-    //     $('#verify_content').prop('required',true);
-    //   }
-    // });
-    $('#verify_btn').on('click',function(){
-      var flag = $('input[name="verify[is_pass]"]:checked').val();
-      if (flag == "true") {
-        if($('#verify_user_id').val() == "") {
-          $('#verify_user_id').focus();
-          return false;
-        }
-      } else{
-        if($('#verify_content').val() == "") {
-          $('#verify_content').focus();
-          return false;
-        }
-      };
-    });
-  });
-</script>

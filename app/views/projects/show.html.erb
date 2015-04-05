@@ -1,19 +1,28 @@
-
-
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
-
-<p>
-  <strong>Serial:</strong>
-  <%= @project.serial %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @project.category.name %>
-</p>
-
-<%= link_to '修改', edit_project_path(@project) %> |
-<%= link_to '列表页', projects_path %>
+<table class="table table-bordered">
+  <tbody>
+  <tr>
+    <th class="row col-md-2">项目具体名称:</th>
+    <td><%= @project.name %></td>
+  </tr>
+  <tr>
+    <th class="row col-md-2">项目编号:</th>
+    <td><%= @project.serial %></td>
+  </tr>
+  <tr>
+    <th class="row col-md-2">项目类别:</th>
+    <td><%= @project.category.name %></td>
+  </tr>
+  <tr>
+    <th class="row col-md-2">详细介绍:</th>
+    <td><%= @project.description %></td>
+  </tr>
+  <% if cadmin? %>
+    <tr>
+      <th class="row col-md-2">操作:</th>
+      <td>
+          <%= link_to '修改项目信息', edit_project_path(@project) %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Questionnaires</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Coaches</th>
+      <th>Population</th>
+      <th>Start time</th>
+      <th>Situation</th>
+      <th>Other</th>
+      <th>Coache sitution</th>
+      <th>Coache other</th>
+      <th>Distribute</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questionnaires.each do |questionnaire| %>
+      <tr>
+        <td><%= questionnaire.content %></td>
+        <td><%= questionnaire.coaches %></td>
+        <td><%= questionnaire.population %></td>
+        <td><%= questionnaire.start_time %></td>
+        <td><%= questionnaire.situation %></td>
+        <td><%= questionnaire.other %></td>
+        <td><%= questionnaire.coache_sitution %></td>
+        <td><%= questionnaire.coache_other %></td>
+        <td><%= questionnaire.distribute %></td>
+        <td><%= link_to 'Show', questionnaire %></td>
+        <td><%= link_to 'Edit', edit_questionnaire_path(questionnaire) %></td>
+        <td><%= link_to 'Destroy', questionnaire, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Questionnaire', new_questionnaire_path %>

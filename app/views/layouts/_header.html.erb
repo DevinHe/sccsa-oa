@@ -1,6 +1,6 @@
 <!-- Fixed navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
+  <div class="">
     <div class="navbar-header">
       <%= link_to "上海市公共体育服务配送系统", root_path, class: "navbar-brand" %>
     </div>
@@ -28,9 +28,8 @@
                 <li>
                   <%= link_to "申报项目类别", categories_path %>
                 </li>
-
                 <li>
-                  <%= link_to "项目具体名称", projects_path %>
+                  <%= link_to "配送项目一览", projects_path %>
                 </li>
                 <li>
                   <%= link_to "创建通知", new_notice_path, data: { no_turbolink: true } %>
@@ -41,7 +40,11 @@
               <% end %>
             </ul>
           </li>
-        <% end %>
+        <% else %>
+          <li>
+            <%= link_to "配送项目", projects_path %>
+          </li>
+        <% end -%>
       </ul>
           <ul class="nav navbar-nav navbar-right">
             <% length = Notification.unread(current_user.id).count %>

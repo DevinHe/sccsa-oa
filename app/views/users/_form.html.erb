@@ -18,10 +18,6 @@
         <%= f.text_field :name, class: "form-control" %>
       </div>
       <div class="form-group">
-        <%= f.label :email %><br>
-        <%= f.text_field :email, class: "form-control" %>
-      </div>
-      <div class="form-group">
         <%= f.label :password %><br>
         <%= f.password_field :password, class: "form-control" %>
       </div>
@@ -38,8 +34,19 @@
         <%= f.select :role_id, Role.all.collect { |p| [p.name, p.id] }  %>
       </div>
       <div class="actions">
-        <%= f.submit class: "btn btn-default" %>
+        <%= f.submit class: "btn btn-default update_btn" %>
       </div>
     <% end %>
   </div>
 </div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('input.update_btn').on('click', function(){
+      var password = $('#user_password');
+      if (password.val() == "") {
+        password.focus();
+        return false;
+      };
+    });
+  });
+</script>

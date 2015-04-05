@@ -6,17 +6,19 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# Role.create!(name: '无权限')
-# Role.create!(name: '社区／俱乐部')
-# Role.create!(name: '配送单位')
+Role.create!(name: '无权限')
+Role.create!(name: '社区／俱乐部')
+Role.create!(name: '配送单位')
 
-# User.create!(name: 'sccsa-admin', password: 'sccsapassword', email: 'admin@sccsa.org.cn',unit: '上海社区体育协会', is_admin: true, role_id: '3')
+User.create!(name: 'sccsa-admin', password: '11111111', email: 'admin@sccsa.org.cn',unit: '上海社区体育协会', is_admin: true, role_id: '3')
+User.create!(name: 'test1', password: '11111111', email: 'test1@sccsa.org.cn',unit: '上海社区体育协会', is_admin: true, role_id: '2')
+User.create!(name: 'test2', password: '11111111', email: 'test2@sccsa.org.cn',unit: '上海社区体育协会', is_admin: true, role_id: '3')
 
-# Category.create!(name: '科普健身讲座')
-# Category.create!(name: '健身技能培训')
-# Category.create!(name: '青少年体育基础培训')
-# Category.create!(name: '科学健身宣传品')
-# Category.create!(name: '赛事及特色活动组织')
+Category.create!(name: '科普健身讲座')
+Category.create!(name: '健身技能培训')
+Category.create!(name: '青少年体育基础培训')
+Category.create!(name: '科学健身宣传品')
+Category.create!(name: '赛事及特色活动组织')
 
 Project.create(category_id: 1,name:'健身苑器材使用方法',serial:'A001-TY')
 Project.create(category_id: 1,name:'日常健身项目的指导与练习方法',serial:'A002-TY')

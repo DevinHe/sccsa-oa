@@ -1,0 +1,104 @@
+<table class="table table-bordered distribution">
+  <thead>
+  <tr class="text-center active">
+    <th colspan="3" class="text-center"><h4>上海公共体育服务社区配送<br>
+      服务情况问询表
+    </h4></th>
+  </tr>
+  </thead>
+  <form class="form-horizontal">
+    <tbody>
+    <tr>
+      <td colspan="3">
+        <div class="form-group">
+          <center><strong>街道镇/俱乐部问询内容</strong></center>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3"  class="text-center">
+        <div class="form-group">
+          <label class="col-xs-4 control-label">配送内容</label>
+          <div class="col-xs-8">
+            <%= @questionnaire.content %>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3"  class="text-center">
+        <div class="form-group">
+          <label class="col-xs-4 control-label">教练/专家（姓名）</label>
+          <div class="col-xs-8">
+            <%= @questionnaire.coaches %>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3"  class="text-center">
+        <div class="form-group">
+          <label class="col-xs-4 control-label">受众人数</label>
+          <div class="col-xs-8">
+            <%= @questionnaire.population %>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3"  class="text-center">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">培训起止时间</label>
+            <div class="form-group col-sm-8">
+              <%= my_index_time(@questionnaire.start_time) %>
+            </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3"  class="text-center">
+        <div class="form-group">
+          <label class="col-xs-4 control-label">授课情况</label>
+          <div class="col-xs-8">
+            <%= @questionnaire.situation %>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3"  class="text-center">
+        <div class="form-group">
+          <label class="col-xs-4 control-label">其他</label>
+          <div class="col-xs-8">
+            <%= @questionnaire.other %>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <center><strong>教练/专家问询内容</strong></center>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3"  class="text-center">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">上课情况</label>
+          <div class="col-sm-8">
+            <%= @questionnaire.coache_sitution %>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" class="text-center">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">其他</label>
+          <div class="col-sm-8">
+            <%= @questionnaire.coache_other %>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </form>
+</table>
