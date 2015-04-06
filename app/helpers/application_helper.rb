@@ -81,17 +81,19 @@ module ApplicationHelper
       status += "#{link_to '填写反馈', edit_feedback_path(apply.feedback)}"
     elsif apply.feedback && apply.feedback.distribute_advice.present?
       status += "#{link_to '查看反馈', apply.feedback}"
-    elsif apply.feedback && apply.feedback.distribute_advice.empty?
+    elsif apply.feedback && apply.feedback.distribute_advice.nil?
       status += "#{link_to '反馈中...', apply.feedback}"
     else
       status += "#{link_to "反馈中...", "#",style: "point-events:none;cursor:default;color:Gray;"}"
     end
-    if current_user.id == apply.distribute.user_id && apply.distribute.questionnaire.nil?
-      status += " | #{link_to '填写问询',"#{new_questionnaire_path}?did=#{apply.distribute.id}" }"
-    elsif apply.distribute.questionnaire.present? && cdistributor?
-      status += " | #{link_to '查看问询',"#{questionnaire_path(apply.distribute.questionnaire.id)}" }"
-    elsif apply.distribute.questionnaire.nil? && cdistributor?
-      status += " | #{link_to "问询中...", "#",style: "point-events:none;cursor:default;color:Gray;"}"
+    if apply.distribute
+      if current_user.id == apply.distribute.user_id && apply.distribute.questionnaire.nil?
+        status += " | #{link_to '填写问询',"#{new_questionnaire_path}?did=#{apply.distribute.id}" }"
+      elsif apply.distribute.questionnaire.present? && cdistributor?
+        status += " | #{link_to '查看问询',"#{questionnaire_path(apply.distribute.questionnaire.id)}" }"
+      elsif apply.distribute.questionnaire.nil? && cdistributor?
+        status += " | #{link_to "问询中...", "#",style: "point-events:none;cursor:default;color:Gray;"}"
+      end
     end
     status
   end
