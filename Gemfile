@@ -84,3 +84,6 @@ gem 'mysql2', group: :production
 # gem 'settingslogic'
 gem 'exception_notification'
 gem 'newrelic_rpm'
+
+# mailer
+gem 'postmark-rails', '~> 0.10.0'
