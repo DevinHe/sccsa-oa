@@ -14,7 +14,7 @@
   </tr>
   <tr>
     <th class="row col-md-2">详细介绍:</th>
-    <td><%= @project.description %></td>
+    <td><%= simple_format @project.description %></td>
   </tr>
   <% if cadmin? %>
     <tr>
