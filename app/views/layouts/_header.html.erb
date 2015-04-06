@@ -1,6 +1,6 @@
 <!-- Fixed navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="">
+  <div class="container">
     <div class="navbar-header">
       <%= link_to "上海市公共体育服务配送系统", root_path, class: "navbar-brand" %>
     </div>
@@ -8,6 +8,9 @@
       <ul class="nav navbar-nav">
         <li>
           <%= link_to "协会通知", notices_path %>
+        </li>
+        <li>
+          <%= link_to "配送项目", projects_path, data: { no_turbolink: true } %>
         </li>
         <% if !cadmin? && !cdistributor? %>
           <li>
@@ -20,9 +23,6 @@
         <li>
           <%= link_to "资料下载", resources_path %>
         </li>
-        <li>
-          <%= link_to "配送项目", projects_path, data: { no_turbolink: true } %>
-        </li>
 
         <% if current_user.admin? %>
           <li class="dropdown">
@@ -33,11 +33,15 @@
                   <%= link_to "申报项目类别", categories_path %>
                 </li>
                 <li>
+                  <%= link_to "新增项目", new_project_path %>
+                </li>
+                <li>
                   <%= link_to "创建通知", new_notice_path, data: { no_turbolink: true } %>
                 </li>
                 <li>
                   <%= link_to "上传附件", new_resource_path %>
                 </li>
+                
               <% end %>
             </ul>
           </li>

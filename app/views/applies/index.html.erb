@@ -33,7 +33,7 @@
 
   <tbody>
     <% @applies.each do |apply| %>
-      <tr>
+      <tr class= "applies-font-size">
         <td><%= link_to my_index_date(apply.created_at), apply %></td>
         <td><%= link_to apply.user.unit, apply, class: "applies-font-size" %></td>
         <td><%= link_to apply.category.name, apply %></td>
