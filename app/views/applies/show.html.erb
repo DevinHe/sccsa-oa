@@ -75,7 +75,7 @@
           参与者年龄
         </label>
         <div class="col-sm-8">
-          <%= @apply.requirement %>
+          <%= simple_format @apply.requirement %>
         </div>
       </div>
     </td>
@@ -85,7 +85,7 @@
       <div class="form-group">
         <label class="col-sm-4 control-label">参与人数</label>
         <div class="col-sm-8">
-          <%= @apply.site %>
+          <%= simple_format @apply.site %>
         </div>
       </div>
     </td>
@@ -95,7 +95,7 @@
       <div class="form-group">
         <label class="col-sm-4 control-label">实施场地名称</label>
         <div class="col-sm-8">
-          <%= @apply.address_name %>
+          <%= simple_format @apply.address_name %>
         </div>
       </div>
     </td>
@@ -105,7 +105,7 @@
       <div class="form-group">
         <label class="col-sm-4 control-label">实施场地地址</label>
         <div class="col-sm-8">
-          <%= @apply.address %>
+          <%= simple_format @apply.address %>
         </div>
       </div>
     </td>
@@ -125,7 +125,7 @@
       <div class="form-group">
         <label class="col-sm-4 control-label">需要讲师/教练自备物品</label>
         <div class="col-sm-8">
-          <%= @apply.facilities %>
+          <%= simple_format @apply.facilities %>
         </div>
       </div>
     </td>

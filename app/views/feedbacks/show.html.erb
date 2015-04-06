@@ -74,7 +74,7 @@
         <div class="form-group">
           <label class="col-sm-4 control-label">配送内容</label>
           <div class="col-sm-8">
-            <%= @feedback.content %>
+            <%= simple_format @feedback.content %>
           </div>
         </div>
       </td>
@@ -84,7 +84,7 @@
         <div class="form-group">
           <label class="col-sm-4 control-label">教练/专家/裁判（姓名）</label>
           <div class="col-sm-8">
-            <%= @feedback.coach %>
+            <%= simple_format @feedback.coach %>
           </div>
         </div>
       </td>
@@ -94,7 +94,7 @@
         <div class="form-group">
           <label class="col-sm-4 control-label">受众人数</label>
           <div class="col-sm-8">
-            <%= @feedback.population %>
+            <%= simple_format @feedback.population %>
           </div>
         </div>
       </td>
@@ -104,7 +104,7 @@
         <div class="form-group">
           <label class="col-sm-4 control-label">街道工作人员意见</label>
           <div class="col-sm-8">
-            <%= @feedback.suggestion %>
+            <%= simple_format @feedback.suggestion %>
           </div>
         </div>
       </td>
@@ -129,7 +129,7 @@
         <div class="form-group">
           <label class="col-sm-4 control-label">配送单位意见</label>
           <div class="col-sm-8">
-            <%= @feedback.distribute_advice %>
+            <%= simple_format @feedback.distribute_advice %>
           </div>
         </div>
       </td>
