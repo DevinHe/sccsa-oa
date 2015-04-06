@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "sccsa_exception@126.com"
+  default from: "huopo125@163.com"
   layout 'mailer'
 end
