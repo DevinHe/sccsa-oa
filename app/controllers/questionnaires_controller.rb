@@ -38,7 +38,7 @@ class QuestionnairesController < ApplicationController
 
   private
     def set_questionnaire
-      @questionnaire = Questionnaire.find(params[:id])
+      @questionnaire = Questionnaire.includes(distribute:[:apply]).find(params[:id])
     end
 
     def questionnaire_params
