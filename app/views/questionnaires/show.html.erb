@@ -28,7 +28,7 @@
         <div class="form-group">
           <label class="col-xs-4 control-label">配送内容</label>
           <div class="col-xs-8">
-            <%= @questionnaire.content %>
+            <%= simple_format @questionnaire.content %>
           </div>
         </div>
       </td>
@@ -38,7 +38,7 @@
         <div class="form-group">
           <label class="col-xs-4 control-label">教练/专家（姓名）</label>
           <div class="col-xs-8">
-            <%= @questionnaire.coaches %>
+            <%= simple_format @questionnaire.coaches %>
           </div>
         </div>
       </td>
@@ -48,7 +48,7 @@
         <div class="form-group">
           <label class="col-xs-4 control-label">受众人数</label>
           <div class="col-xs-8">
-            <%= @questionnaire.population %>
+            <%= simple_format @questionnaire.population %>
           </div>
         </div>
       </td>
@@ -58,7 +58,7 @@
         <div class="form-group">
             <label class="col-sm-4 control-label">培训起止时间</label>
             <div class="form-group col-sm-8">
-              <%= my_index_time(@questionnaire.start_time) %>
+              <%= simple_format @questionnaire.start_time %>
             </div>
         </div>
       </td>
@@ -68,7 +68,7 @@
         <div class="form-group">
           <label class="col-xs-4 control-label">授课情况</label>
           <div class="col-xs-8">
-            <%= @questionnaire.situation %>
+            <%= simple_format @questionnaire.situation %>
           </div>
         </div>
       </td>
@@ -78,7 +78,7 @@
         <div class="form-group">
           <label class="col-xs-4 control-label">其他</label>
           <div class="col-xs-8">
-            <%= @questionnaire.other %>
+            <%= simple_format @questionnaire.other %>
           </div>
         </div>
       </td>
@@ -93,7 +93,7 @@
         <div class="form-group">
           <label class="col-sm-4 control-label">上课情况</label>
           <div class="col-sm-8">
-            <%= @questionnaire.coache_sitution %>
+            <%= simple_format @questionnaire.coache_sitution %>
           </div>
         </div>
       </td>
@@ -103,7 +103,7 @@
         <div class="form-group">
           <label class="col-sm-4 control-label">其他</label>
           <div class="col-sm-8">
-            <%= @questionnaire.coache_other %>
+            <%= simple_format @questionnaire.coache_other %>
           </div>
         </div>
       </td>

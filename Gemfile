@@ -41,7 +41,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
+  # gem 'sqlite3'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
@@ -79,7 +79,7 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 
 # search
 gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.2'
-gem 'mysql2', group: :production
+gem 'mysql2'
 
 # gem 'settingslogic'
 gem 'exception_notification'
