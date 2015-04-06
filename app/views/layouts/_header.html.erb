@@ -15,13 +15,13 @@
           </li>
         <% end %>
         <li>
-          <%= link_to "配送查询", applies_path %>
+          <%= link_to "配送查询", applies_path, data: { no_turbolink: true } %>
         </li>
         <li>
           <%= link_to "资料下载", resources_path %>
         </li>
         <li>
-          <%= link_to "配送项目", projects_path %>
+          <%= link_to "配送项目", projects_path, data: { no_turbolink: true } %>
         </li>
 
         <% if current_user.admin? %>

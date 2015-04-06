@@ -50,27 +50,10 @@
         </tr>
         <tr>
           <td colspan="3">
-          <style type="text/css" media="screen">
-            .dropdown-menu {
-              top: 20 !important;
-              left: 20 !important;
-              height: 320px !important;
-              width: 100% !important;
-              margin-top: 0;
-              -webkit-border-radius: 0;
-              -moz-border-radius: 0;
-              border-radius: 0;
-            }
-          </style>
             <div class="form-group">
                 <label class="col-sm-4 control-label">培训起止时间</label>
                 <div class="form-group col-sm-8">
-                  <div class='input-group date datetimepicker'>
-                    <input type='text' class="form-control" name="questionnaire[start_time]" id="questionnaire_start_time" />
-                    <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                  </div>
+                  <%= f.input :start_time, label: false, input_html: {class: "form-control"} %>
                 </div>
             </div>
           </td>

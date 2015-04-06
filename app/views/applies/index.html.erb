@@ -38,7 +38,7 @@
         <td><%= link_to apply.user.unit, apply, class: "applies-font-size" %></td>
         <td><%= link_to apply.category.name, apply %></td>
         <td><%= link_to apply.project.name, apply %></td>
-        <td><%= my_index_time(apply.implement_time) %></td>
+        <td><%= my_index_date(apply.implement_time) rescue "格式错误" %></td>
         <td>
           <%= raw (verify_status apply) %>
         </td>

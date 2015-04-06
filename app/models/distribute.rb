@@ -2,7 +2,7 @@ class Distribute < ActiveRecord::Base
   belongs_to :user
   belongs_to :apply
 
-  has_one :questionnaire
+  has_one :questionnaire, dependent: :destroy
 
   validates :user_id, :is_distribute, :coaches, :phone, presence: true
 
