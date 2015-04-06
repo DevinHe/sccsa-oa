@@ -80,20 +80,14 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { :host => my_smtp["host"] }
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :postmark
+  config.action_mailer.postmark_settings = { :api_token => my_smtp["api_token"] }
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.smtp_settings = {
-    address: my_smtp["address"],
-    port: my_smtp["port"],
-    domain: my_smtp["domain"],
-    user_name: my_smtp["user_name"],
-    password: my_smtp["password"],
-    authentication: :login
-  }
   config.middleware.use ExceptionNotification::Rack,
   :email => {
     :email_prefix => "[SCCSA]",
     :sender_address => my_smtp["sender_address"],
-    :exception_recipients => my_smtp["sender_address"]
+    :exception_recipients => my_smtp["recipient"]
   }
+
 end
