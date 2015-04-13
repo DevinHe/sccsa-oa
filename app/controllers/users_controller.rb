@@ -66,6 +66,10 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
+      if params[:id].to_i == 0
+        redirect_to root_url
+        return
+      end
       @user = User.find(params[:id])
     end
 

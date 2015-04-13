@@ -78,5 +78,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  match "*path",via: :all, to: "welcome#error_404"
+  match "*path",via: :all, to: "welcome#error_404", format: false
 end
