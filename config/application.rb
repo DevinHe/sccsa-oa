@@ -37,3 +37,5 @@ module SccsaOa
     end
   end
 end
+
+GC::Profiler.enable
