@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
            handler: [:erb], status: status, layout: 'application'
   end
 
+  rescue_from ActionController::InvalidAuthenticityToken do |exception|
+    redirect_to new_user_session_path, alert: "请先登录。"
+  end
+
   private
 
   def set_current_user
