@@ -209,7 +209,6 @@
       var coach = $('#feedback_coach');
       var population = $('#feedback_population');
       var suggestion = $('#feedback_suggestion');
-      var attachment = $('#feedback_attachment');
       var remove_attachment = $('#feedback_remove_attachment');
       if (content.val() == "") {
         content.focus();
@@ -222,12 +221,6 @@
         return false;
       } else if (suggestion.val() == ""){
         suggestion.focus();
-        return false;
-      } else if(attachment.val() == "" && remove_attachment.length == 0) {
-        attachment.focus();
-        return false;
-      } else if(attachment.val() == "" && $('#feedback_remove_attachment').prop("checked")) {
-        attachment.focus();
         return false;
       }
     });

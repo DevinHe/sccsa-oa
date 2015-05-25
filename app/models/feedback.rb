@@ -2,7 +2,7 @@ class Feedback < ActiveRecord::Base
   belongs_to :user
   belongs_to :apply
   has_many :notifications, as: :notificationable, dependent: :destroy
-  validates :content,:coach,:suggestion,:population,:attachment, presence: true
+  validates :content,:coach,:suggestion,:population, presence: true
   after_create :new_notification
   after_update :update_notification
 

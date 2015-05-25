@@ -9,7 +9,7 @@
   </thead>
   <%= simple_form_for(@apply, defaults: {input_html: {class: 'form-horizontal'}}) do |f| %>
   <%= f.error_notification %>
-  <%= f.hidden_field :user_id,value: current_user.id %>
+  <%= f.hidden_field :user_id,value: current_user.id unless cadmin? %>
   <tbody>
       <tr>
         <td>
@@ -147,9 +147,9 @@
       <tr>
         <td colspan="3">
           <div class="form-group">
-              <label class="col-sm-4 control-label">需要讲师/教练自备物品</label>
+              <label class="col-sm-4 control-label">需要讲师/需要项目/教练自备物品</label>
               <div class="col-sm-8">
-                 <%= f.input :facilities, label: false, input_html: {class: "form-control ",rows: 3}, placeholder: "（如：ppt/上课道具--木兰剑/没有请填写‘无’）" %>
+                 <%= f.input :facilities, label: false, input_html: {class: "form-control ",rows: 3}, placeholder: "（如：老师的姓名：王XX / 系统内没显示的项目：门球 / 物品：ppt、木兰剑等上课道具等）" %>
               </div>
           </div>
         </td>

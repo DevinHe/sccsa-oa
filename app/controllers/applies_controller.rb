@@ -17,7 +17,6 @@ class AppliesController < ApplicationController
   def show
     if params[:from] && params[:from] != 'again'
       notification = Notification.find(params[:from])
-      # notification = @apply.notifications.unread(current_user.id).first
       notification.update_attribute(:read, true) if notification
     end
     respond_with(@apply)
