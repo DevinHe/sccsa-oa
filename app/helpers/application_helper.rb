@@ -77,7 +77,7 @@ module ApplicationHelper
     status = ""
     if apply.feedback.nil? && apply.user_id == current_user.id
       status += "#{link_to '填写反馈', "#{new_feedback_path}?id=#{apply.id}"}"
-    elsif apply.feedback && apply.feedback.notifications.first && apply.feedback.notifications.first.user_id == current_user.id && apply.verify.user_id == current_user.id && apply.feedback.distribute_advice.nil?
+    elsif apply.feedback && apply.feedback.notifications.first && apply.feedback.notifications.first.user_id == current_user.id && apply.verify && apply.verify.user_id == current_user.id && apply.feedback.distribute_advice.nil?
       status += "#{link_to '填写反馈', edit_feedback_path(apply.feedback)}"
     elsif apply.feedback && apply.feedback.distribute_advice.present?
       status += "#{link_to '查看反馈', apply.feedback}"
