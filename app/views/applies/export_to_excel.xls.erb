@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workbook xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40" xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office">
+  <Worksheet ss:Name="Sheet1">
+  <Table>
+    <Row>
+      <% @headers.each do |header| %>
+      <Cell>
+        <Data ss:Type="String"><%= header %></Data>
+      </Cell>
+      <% end %>
+    </Row>
+    <% @applies.each do |apply| %>
+    <Row>
+      <% @headers.each_with_index do |header, index| %>
+      <Cell>
+        <Data ss:Type="String">
+          <%=
+          case index
+          when 0
+            ''
+          when 1
+            apply.user.unit rescue ''
+          when 2
+            my_index_date(apply.created_at) rescue ''
+          when 3
+            my_index_date(apply.implement_time) rescue ''
+          when 4
+            apply.p_serial rescue ''
+          when 5
+            apply.category.name rescue ''
+          when 6
+            apply.project.name  rescue ''
+          when 7
+            apply.project.serial  rescue ''
+          when 8
+            apply.requirement  rescue ''
+          when 9
+            apply.site  rescue ''
+          when 10
+            apply.address_name  rescue ''
+          when 11
+            apply.address  rescue ''
+          when 12
+            apply.facilities  rescue ''
+          when 13
+            apply.contacts  rescue ''
+          when 14
+            apply.phone  rescue ''
+          when 15
+            apply.distribute.coaches  rescue ''
+          when 16
+            apply.distribute.phone  rescue ''
+          when 17
+            apply.feedback.population  rescue ''
+          when 18
+            apply.feedback.suggestion  rescue ''
+          when 19
+            apply.feedback.distribute_advice  rescue ''
+          when 20
+            '已问询' if apply.distribute.questionnaire  rescue '未问询'
+          when 21
+            ''
+          end
+          %>
+        </Data>
+      </Cell>
+      <% end %>
+    </Row>
+    <% end %>
+  </Table>
+  </Worksheet>
+</Workbook>

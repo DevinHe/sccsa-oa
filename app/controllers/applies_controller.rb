@@ -1,3 +1,4 @@
+# encoding: utf-8
 class AppliesController < ApplicationController
   before_action :set_apply, only: [:show, :edit, :update, :destroy]
   respond_to :html, :xml, :json
@@ -54,6 +55,14 @@ class AppliesController < ApplicationController
     respond_with(@apply)
   end
 
+  def export_to_excel
+    @headers = ["序号", "申报单位", "申报日期", "意愿实施时间", "配送ID", "申报项目类别", "项目名称", "项目编号", "参与者年龄", "参与人数", "实施场地名称", "实施场地地址", "需要讲师/教练自备物品", "申报单位联系人", "申报单位联系电话", "教练姓名", "教练联系电话", "实际受众人数", "街道工作人员意见", "配送单位意见", "问询", "备注"]
+    @applies = Apply.all
+    respond_to do |format|
+      format.csv {send_data csv_infos}
+    end
+  end
+
   private
     def set_apply
       @apply = Apply.find(params[:id])
@@ -61,5 +70,134 @@ class AppliesController < ApplicationController
 
     def apply_params
       params.require(:apply).permit(:user_id, :project_id, :category_id, :requirement, :site, :facilities, :address, :contacts, :address_name, :phone,:implement_time, :p_serial)
+    end
+
+    def xls_infos
+      output = '<?xml version="1.0" encoding="UTF-8"?><Workbook xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40" xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office"><Worksheet ss:Name="Sheet1"><Table>'
+      output << "<Row>"
+      @headers.each do |header|
+        output << "<Cell><Data ss:Type=\"String\">#{header}</Data></Cell>"
+      end
+      output << "</Row>"
+      @applies.each do |apply|
+        output << "<Row>"
+        @headers.each_with_index do |header, index|
+          output << '<Cell><Data ss:Type="String">'
+          result =  case index
+                    when 0
+                      ''
+                    when 1
+                      apply.user.unit rescue ''
+                    when 2
+                      my_index_date(apply.created_at) rescue ''
+                    when 3
+                      my_index_date(apply.implement_time) rescue ''
+                    when 4
+                      apply.p_serial rescue ''
+                    when 5
+                      apply.category.name rescue ''
+                    when 6
+                      apply.project.name  rescue ''
+                    when 7
+                      apply.project.serial  rescue ''
+                    when 8
+                      apply.requirement  rescue ''
+                    when 9
+                      apply.site  rescue ''
+                    when 10
+                      apply.address_name  rescue ''
+                    when 11
+                      apply.address  rescue ''
+                    when 12
+                      apply.facilities  rescue ''
+                    when 13
+                      apply.contacts  rescue ''
+                    when 14
+                      apply.phone  rescue ''
+                    when 15
+                      apply.distribute.coaches  rescue ''
+                    when 16
+                      apply.distribute.phone  rescue ''
+                    when 17
+                      apply.feedback.population  rescue ''
+                    when 18
+                      apply.feedback.suggestion  rescue ''
+                    when 19
+                      apply.feedback.distribute_advice  rescue ''
+                    when 20
+                      '已问询' if apply.distribute.questionnaire  rescue '未问询'
+                    when 21
+                      ''
+                    end
+          output << "#{result}"
+          output << "</Data></Cell>"
+        end
+        output << "</Row>"
+      end
+      output << '</Table></Worksheet></Workbook>'
+    end
+
+    def csv_infos
+      output = @headers.join(',')
+      output << "\r\n"
+      @applies.each do |apply|
+        temp = ''
+        @headers.each_with_index do |header, index|
+          result =  case index
+                    when 0
+                      ""
+                    when 1
+                      apply.user.unit rescue ""
+                    when 2
+                      apply.created_at.strftime('%Y/%m/%d') rescue ""
+                    when 3
+                      apply.implement_time.strftime('%Y/%m/%d') rescue ""
+                    when 4
+                      apply.p_serial rescue ""
+                    when 5
+                      apply.category.name rescue ""
+                    when 6
+                      apply.project.name  rescue ""
+                    when 7
+                      apply.project.serial.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                    when 8
+                      apply.requirement.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                    when 9
+                      apply.site.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                    when 10
+                      apply.address_name.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                    when 11
+                      apply.address.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                    when 12
+                      apply.facilities.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                    when 13
+                      apply.contacts.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                    when 14
+                      apply.phone.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                    when 15
+                      apply.distribute.coaches.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                    when 16
+                      apply.distribute.phone.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                    when 17
+                      apply.feedback.population.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                    when 18
+                      apply.feedback.suggestion.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                    when 19
+                      apply.feedback.distribute_advice.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                    when 20
+                      '已问询' if apply.distribute.questionnaire  rescue '未问询'
+                    when 21
+                      ""
+                    end
+          if index > 0
+            temp += ",#{result}"
+          else
+            temp += "#{result}"
+          end
+        end
+        output << temp
+        output << "\r\n"
+      end
+      output
     end
 end

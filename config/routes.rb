@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :questionnaires, only: [:new, :create, :show]
 
   resources :verifies, only: [:create,:update,:edit]
@@ -9,7 +10,11 @@ Rails.application.routes.draw do
 
   resources :feedbacks, except: [:index,:destroy]
 
-  resources :applies
+  resources :applies do
+    collection do
+      get '/export_to_excel', to: 'applies#export_to_excel'
+    end
+  end
 
   resources :resources, except: [:show,:edit,:update]
 

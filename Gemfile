@@ -87,3 +87,4 @@ gem 'newrelic_rpm'
 
 # mailer
 gem 'postmark-rails', '~> 0.10.0'
+gem "to_xls"                  # 导出xls文件
