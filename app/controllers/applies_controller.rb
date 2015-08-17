@@ -57,9 +57,9 @@ class AppliesController < ApplicationController
 
   def export_to_excel
     @headers = ["序号", "申报单位", "申报日期", "意愿实施时间", "配送ID", "申报项目类别", "项目名称", "项目编号", "参与者年龄", "参与人数", "实施场地名称", "实施场地地址", "需要讲师/教练自备物品", "申报单位联系人", "申报单位联系电话", "教练姓名", "教练联系电话", "实际受众人数", "街道工作人员意见", "配送单位意见", "问询", "备注"]
-    @applies = Apply.all
     respond_to do |format|
       format.csv {send_data csv_infos}
+      # format.xls
     end
   end
 
@@ -140,7 +140,7 @@ class AppliesController < ApplicationController
     def csv_infos
       output = @headers.join(',')
       output << "\r\n"
-      @applies.each do |apply|
+      Apply.includes(:user,:category,:project,:verify,:distribute,:feedback).find_each do |apply|
         temp = ''
         @headers.each_with_index do |header, index|
           result =  case index
@@ -151,7 +151,7 @@ class AppliesController < ApplicationController
                     when 2
                       apply.created_at.strftime('%Y/%m/%d') rescue ""
                     when 3
-                      apply.implement_time.strftime('%Y/%m/%d') rescue ""
+                      apply.implement_time.strftime('%Y/%m/%d %H:%M') rescue ""
                     when 4
                       apply.p_serial rescue ""
                     when 5
@@ -159,31 +159,31 @@ class AppliesController < ApplicationController
                     when 6
                       apply.project.name  rescue ""
                     when 7
-                      apply.project.serial.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                      apply.project.serial.gsub(",", "，").gsub("\r\n","，")  rescue ""
                     when 8
-                      apply.requirement.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                      apply.requirement.gsub(",", "，").gsub("\r\n","，")  rescue ""
                     when 9
-                      apply.site.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                      apply.site.gsub(",", "，").gsub("\r\n","，")  rescue ""
                     when 10
-                      apply.address_name.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                      apply.address_name.gsub(",", "，").gsub("\r\n","，")  rescue ""
                     when 11
-                      apply.address.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                      apply.address.gsub(",", "，").gsub("\r\n","，")  rescue ""
                     when 12
-                      apply.facilities.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                      apply.facilities.gsub(",", "，").gsub("\r\n","，")  rescue ""
                     when 13
-                      apply.contacts.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                      apply.contacts.gsub(",", "，").gsub("\r\n","，")  rescue ""
                     when 14
-                      apply.phone.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                      apply.phone.gsub(",", "，").gsub("\r\n","，")  rescue ""
                     when 15
-                      apply.distribute.coaches.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                      apply.distribute.coaches.gsub(",", "，").gsub("\r\n","，")  rescue ""
                     when 16
-                      apply.distribute.phone.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                      apply.distribute.phone.gsub(",", "，").gsub("\r\n","，")  rescue ""
                     when 17
-                      apply.feedback.population.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                      apply.feedback.population.gsub(",", "，").gsub("\r\n","，")  rescue ""
                     when 18
-                      apply.feedback.suggestion.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                      apply.feedback.suggestion.gsub(",", "，").gsub("\r\n","，")  rescue ""
                     when 19
-                      apply.feedback.distribute_advice.gsub(",", "、").gsub("\r\n","、")  rescue ""
+                      apply.feedback.distribute_advice.gsub(",", "，").gsub("\r\n","，")  rescue ""
                     when 20
                       '已问询' if apply.distribute.questionnaire  rescue '未问询'
                     when 21
