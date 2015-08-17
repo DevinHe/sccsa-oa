@@ -59,7 +59,7 @@ class AppliesController < ApplicationController
     @headers = ["序号", "申报单位", "申报日期", "意愿实施时间", "配送ID", "申报项目类别", "项目名称", "项目编号", "参与者年龄", "参与人数", "实施场地名称", "实施场地地址", "需要讲师/教练自备物品", "申报单位联系人", "申报单位联系电话", "教练姓名", "教练联系电话", "实际受众人数", "街道工作人员意见", "配送单位意见", "问询", "备注"]
     respond_to do |format|
       format.csv {send_data csv_infos}
-      # format.xls
+      format.xls {send_data xls_infos, :filename => 'sccsa.xls'}
     end
   end
 
@@ -73,25 +73,21 @@ class AppliesController < ApplicationController
     end
 
     def xls_infos
-      output = '<?xml version="1.0" encoding="UTF-8"?><Workbook xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40" xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office"><Worksheet ss:Name="Sheet1"><Table>'
-      output << "<Row>"
-      @headers.each do |header|
-        output << "<Cell><Data ss:Type=\"String\">#{header}</Data></Cell>"
-      end
-      output << "</Row>"
-      @applies.each do |apply|
-        output << "<Row>"
+      book = Spreadsheet::Workbook.new
+      sheet1 = book.create_worksheet
+      sheet1.row(0).concat @headers
+      rowId = 1
+      Apply.includes(:user,:category,:project,:verify,:distribute,:feedback).find_each do |apply|
         @headers.each_with_index do |header, index|
-          output << '<Cell><Data ss:Type="String">'
           result =  case index
                     when 0
                       ''
                     when 1
                       apply.user.unit rescue ''
                     when 2
-                      my_index_date(apply.created_at) rescue ''
+                      apply.created_at.strftime('%Y/%m/%d') rescue ""
                     when 3
-                      my_index_date(apply.implement_time) rescue ''
+                      apply.implement_time.strftime('%Y/%m/%d %H:%M') rescue ""
                     when 4
                       apply.p_serial rescue ''
                     when 5
@@ -129,12 +125,13 @@ class AppliesController < ApplicationController
                     when 21
                       ''
                     end
-          output << "#{result}"
-          output << "</Data></Cell>"
+          sheet1[rowId, index] = result
         end
-        output << "</Row>"
+        rowId += 1
       end
-      output << '</Table></Worksheet></Workbook>'
+      io = StringIO.new('')
+      book.write(io)
+      io.string
     end
 
     def csv_infos
