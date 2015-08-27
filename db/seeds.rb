@@ -10,7 +10,7 @@ Role.create!(name: '无权限')
 Role.create!(name: '社区／俱乐部')
 Role.create!(name: '配送单位')
 
-User.create!(name: 'sccsa-admin', password: '11111111', unit: '上海社区体育协会', is_admin: true, role_id: '3')
+User.create!(name: 'sccsa-admin-test', password: '11111111', unit: '上海社区体育协会', is_admin: true, role_id: '3')
 User.create!(name: 'test1', password: '11111111',unit: '上海社区／俱乐部', is_admin: false, role_id: '2')
 User.create!(name: 'test2', password: '11111111',unit: '上海配送单位', is_admin: false, role_id: '3')
 
